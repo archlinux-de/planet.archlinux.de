@@ -1,0 +1,6 @@
+cache/*
+htdocs/*.xml
+htdocs/index.html
+*.pyc
+*.tmplc
+*~
