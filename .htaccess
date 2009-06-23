@@ -1,0 +1,22 @@
+# Replace index
+
+IndexOptions DescriptionWidth=80
+IndexOptions +SuppressHTMLPreamble
+IndexIgnore header.html footer.html index.atom
+HeaderName /code/venus/header.html
+ReadmeName /code/venus/footer.html
+
+AddDefaultCharset utf-8
+
+# Redirect missing tgz and zip files to tarify.cgi
+
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-s
+RewriteRule (.*)\.tgz$ tarify.cgi?dir=$1
+
+RewriteCond %{REQUEST_FILENAME} !-s
+RewriteRule (.*)\.zip$ tarify.cgi?dir=$1
+
+RewriteCond %{REQUEST_FILENAME} !-s
+RewriteRule (.*).atom$ bzr-feed.cgi?dir=$1
