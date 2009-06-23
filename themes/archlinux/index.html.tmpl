@@ -10,6 +10,11 @@
 		<meta name="robots" content="noindex,nofollow" />
 		<link rel="shortcut icon" href="favicon.ico" />
 		<link rel="stylesheet" href="arch.css" />
+		<style type="text/css">
+			<!--
+			img {max-width:600px;}
+			-->
+		</style>
 		<TMPL_IF feedtype>
 		<link rel="alternate" href="<TMPL_VAR feed ESCAPE="HTML">" title="<TMPL_VAR channel_title_plain ESCAPE="HTML">" type="application/<TMPL_VAR feedtype>+xml" />
 		</TMPL_IF>
