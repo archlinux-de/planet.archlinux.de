@@ -13,12 +13,17 @@ well formed XHTML.
 Todo:
   * extension elements
 """
-import re, time, hashlib, sgmllib
+import re, time, sgmllib
 from xml.sax.saxutils import escape
 from xml.dom import minidom, Node
-from html5lib import liberalxmlparser
+from html5lib import html5parser
 from html5lib.treebuilders import dom
 import planet, config
+
+try:
+  from hashlib import md5
+except:
+  from md5 import new as md5
 
 illegal_xml_chars = re.compile("[\x01-\x08\x0B\x0C\x0E-\x1F]")
 
@@ -68,14 +73,14 @@ def id(xentry, entry):
         entry_id = entry.link
     elif entry.has_key("title") and entry.title:
         entry_id = (entry.title_detail.base + "/" +
-            hashlib.md5(entry.title).hexdigest())
+            md5(entry.title).hexdigest())
     elif entry.has_key("summary") and entry.summary:
         entry_id = (entry.summary_detail.base + "/" +
-            hashlib.md5(entry.summary).hexdigest())
+            md5(entry.summary).hexdigest())
     elif entry.has_key("content") and entry.content:
 
         entry_id = (entry.content[0].base + "/" + 
-            hashlib.md5(entry.content[0].value).hexdigest())
+            md5(entry.content[0].value).hexdigest())
     else:
         return
 
@@ -159,7 +164,7 @@ def content(xentry, name, detail, bozo):
             bozo=1
 
     if detail.type.find('xhtml')<0 or bozo:
-        parser = liberalxmlparser.XHTMLParser(tree=dom.TreeBuilder)
+        parser = html5parser.HTMLParser(tree=dom.TreeBuilder)
         html = parser.parse(xdiv % detail.value, encoding="utf-8")
         for body in html.documentElement.childNodes:
             if body.nodeType != Node.ELEMENT_NODE: continue
