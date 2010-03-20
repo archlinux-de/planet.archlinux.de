@@ -4,3 +4,4 @@ htdocs/index.html
 *.pyc
 *.tmplc
 *~
+config.ini
