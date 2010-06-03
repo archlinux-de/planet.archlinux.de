@@ -45,7 +45,6 @@
 	<div id="content">
 		<div id="left-wrapper">
 		<div id="left">
-			<img src="akregator.png" style="position:absolute; top:160px; right:410px;" alt="" />
 			<div id="news">
 				<h3><TMPL_VAR name></h3>
 				<TMPL_LOOP Items>
@@ -61,18 +60,10 @@
 		</div>
 		<div id="right">
 			<div class="box">
-				<h3>Dein Blog bei planet.archlinux.de</h3>
+				<h4>Dein Blog bei planet.archlinux.de</h4>
 				Wenn auch Du Dein Blog bei planet.archlinux.de
 				hinzufügen möchtest, melde Dich einfach
 				bei <a href="mailto:pierre@archlinux.de">pierre@archlinux.de</a>
-				<!-- <h4>planet.archlinux.de abonieren</h4>
-				<ul style="list-style-type:none">
-					<li style="font-size:small"><img src="rss.png" alt="(feed)" style="border:none" /></a>&nbsp;<a href="rss20.xml">RSS 2.0</a>
-					<li style="font-size:small"><img src="rss.png" alt="(feed)" style="border:none" /></a>&nbsp;<a href="rss10.xml">RSS 1.0</a>
-					<li style="font-size:small"><img src="rss.png" alt="(feed)" style="border:none" /></a>&nbsp;<a href="atom.xml">ATOM 1.0</a>
-					<li style="font-size:small"><img src="rss.png" alt="(feed)" style="border:none" /></a>&nbsp;<a href="foafroll.xml">FOAF</a>
-					<li style="font-size:small"><img src="rss.png" alt="(feed)" style="border:none" /></a>&nbsp;<a href="opml.xml">OPML</a>
-				</ul> -->
 			</div>
 			<div id="sidebar">
 				<h4>Abonierte Quellen</h4>
@@ -81,9 +72,14 @@
 					<li><a href="<TMPL_VAR url ESCAPE="HTML">"><img src="rss.png" alt="(feed)" style="border:none" /></a>&nbsp;<a href="<TMPL_VAR link ESCAPE="HTML">"><TMPL_VAR name></a></li>
 				</TMPL_LOOP>
 				</ul>
-				<div style="font-size:x-small;text-align:right;">
-					Letzte Aktualisierung: <TMPL_VAR date>
-				</div>
+				<h4>Feeds</h4>
+				<ul>
+					<li><img src="rss.png" alt="(feed)" style="border:none" /></a>&nbsp;<a href="atom.xml">ATOM 1.0</a>
+					<li><img src="rss.png" alt="(feed)" style="border:none" /></a>&nbsp;<a href="rss20.xml">RSS 2.0</a>
+					<li><img src="rss.png" alt="(feed)" style="border:none" /></a>&nbsp;<a href="rss10.xml">RSS 1.0</a>
+					<li><img src="rss.png" alt="(feed)" style="border:none" /></a>&nbsp;<a href="foafroll.xml">FOAF</a>
+					<li><img src="rss.png" alt="(feed)" style="border:none" /></a>&nbsp;<a href="opml.xml">OPML</a>
+				</ul>
 			</div>
 		</div>
 		<div id="footer">
