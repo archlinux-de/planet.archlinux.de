@@ -4,7 +4,8 @@
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<title><TMPL_VAR name></title>
 	<meta name="robots" content="noindex,nofollow" />
-	<link rel="stylesheet" media="screen" href="arch.css?v=2" />
+	<link rel="stylesheet" media="screen" href="arch.css?v=3" />
+	<link rel="stylesheet" media="screen" href="archnavbar.css?v=1" />
 	<link rel="shortcut icon" href="favicon.ico" />
 	<style type="text/css">
 		<!--
@@ -28,32 +29,43 @@
 </head>
 <body>
 <body>
-	<img id="logo" src="images/logo.png" alt ="Arch Linux" />
-	<div id="site-menu">
-		<ul>
-			<li><a href="https://wiki.archlinux.de/title/Spenden">Spenden</a></li>
-			<li><a href="https://www.archlinux.de/?page=Packages">Pakete</a></li>
-			<li><a href="https://wiki.archlinux.de/">Wiki</a></li>
-			<li><a href="https://forum.archlinux.de/?page=Forums;id=20">Forum</a></li>
-			<li class="selected">Start</li>
+	<div id="archnavbar" class="anb-planet">
+		<div id="archnavbarlogo"><h1><a href="https://planet.archlinux.de/">Arch Linux</a></h1></div>
+		<div id="archnavbarmenu">
+		<ul id="archnavbarlist">
+			<li id="anb-start"><a href="https://www.archlinux.de/?page=Start">Start</a></li>
+			<li id="anb-packages"><a href="https://www.archlinux.de/?page=Packages">Pakete</a></li>
+			<li id="anb-forum"><a href="https://bbs.archlinux.de/">Forum</a></li>
+			<li id="anb-wiki"><a href="https://wiki.archlinux.de/">Wiki</a></li>
+			<li id="anb-download"><a href="https://wiki.archlinux.de/title/Download">Download</a></li>
+			<li id="anb-spenden"><a href="https://wiki.archlinux.de/title/Spenden">Spenden</a></li>
 		</ul>
-	</div>
-	<div id="main-menu">
-		<ul>
-			<li><a href="https://www.archlinux.de/">Aktuelles</a></li>
-			<li><a href="https://wiki.archlinux.de/title/Download">Herunterladen</a></li>
-			<li><a href="https://wiki.archlinux.de/title/Bugs">Bugs</a></li>
-			<li class="selected">Planet</li>
-		</ul>
+		</div>
 	</div>
 	<div id="content">
+		<div id="left-wrapper">
+		<div id="left">
+			<img src="akregator.png" style="position:absolute; top:160px; right:410px;" alt="" />
+			<div id="news">
+				<h3><TMPL_VAR name></h3>
+				<TMPL_LOOP Items>
+				<h4><a href="<TMPL_VAR link ESCAPE="HTML">"><TMPL_VAR title></a></h4>
+				<p class="date"><TMPL_VAR date></p>
+				<p><TMPL_VAR content></p>
+				<div style="font-size:x-small;text-align:right;">
+					<TMPL_IF author><TMPL_VAR author>@</TMPL_IF><a href="<TMPL_VAR channel_link ESCAPE="HTML">"><TMPL_VAR channel_name></a>
+				</div>
+				</TMPL_LOOP>
+			</div>
+		</div>
+		</div>
 		<div id="right">
-			<div class="greybox">
+			<div class="box">
 				<h3>Dein Blog bei planet.archlinux.de</h3>
 				Wenn auch Du Dein Blog bei planet.archlinux.de
 				hinzufügen möchtest, melde Dich einfach
 				bei <a href="mailto:pierre@archlinux.de">pierre@archlinux.de</a>
-				<!-- <h3>planet.archlinux.de abonieren</h3>
+				<!-- <h4>planet.archlinux.de abonieren</h4>
 				<ul style="list-style-type:none">
 					<li style="font-size:small"><img src="rss.png" alt="(feed)" style="border:none" /></a>&nbsp;<a href="rss20.xml">RSS 2.0</a>
 					<li style="font-size:small"><img src="rss.png" alt="(feed)" style="border:none" /></a>&nbsp;<a href="rss10.xml">RSS 1.0</a>
@@ -62,50 +74,19 @@
 					<li style="font-size:small"><img src="rss.png" alt="(feed)" style="border:none" /></a>&nbsp;<a href="opml.xml">OPML</a>
 				</ul> -->
 			</div>
-			<div class="greybox">
-				<h3>Abonierte Quellen</h3>
-				<ul style="list-style-type:none">
+			<div id="sidebar">
+				<h4>Abonierte Quellen</h4>
+				<ul>
 				<TMPL_LOOP Channels>
-					<li style="font-size:small">
-					<a href="<TMPL_VAR url ESCAPE="HTML">"><img src="rss.png" alt="(feed)" style="border:none" /></a>&nbsp;<a href="<TMPL_VAR link ESCAPE="HTML">"><TMPL_VAR name></a>
-					</li>
+					<li><a href="<TMPL_VAR url ESCAPE="HTML">"><img src="rss.png" alt="(feed)" style="border:none" /></a>&nbsp;<a href="<TMPL_VAR link ESCAPE="HTML">"><TMPL_VAR name></a></li>
 				</TMPL_LOOP>
 				</ul>
 				<div style="font-size:x-small;text-align:right;">
 					Letzte Aktualisierung: <TMPL_VAR date>
 				</div>
 			</div>
-			<div class="greybox">
-				<h3>Planetarium</h3>
-				<ul>
-					<li style="font-size:small">
-						<a href="http://planet.archlinux.org/">planet.archlinux.org</a>
-					</li>
-					<li style="font-size:small">
-						<a href="http://www.archlinux.it/planet/">www.archlinux.it/planet</a>
-					</li>
-					<li style="font-size:small">
-						<a href="http://planet.archlinux.fr/">planet.archlinux.fr</a>
-					</li>
-					<li style="font-size:small">
-						<a href="http://planeta.archlinux-br.org/">planeta.archlinux-br.org</a>
-					</li>
-				</ul>
-			</div>
 		</div>
-		<img src="akregator.png" style="position:absolute; top:160px; right:410px;" alt="" />
-		<div id="left">
-			<h2><TMPL_VAR name></h2>
-			<TMPL_LOOP Items>
-			<span style="float:right; font-size:x-small;padding-top:14px"><TMPL_VAR date></span>
-			<h3><a href="<TMPL_VAR link ESCAPE="HTML">"><TMPL_VAR title></a></h3>
-			<p><TMPL_VAR content></p>
-			<div style="font-size:x-small;text-align:right;">
-				<TMPL_IF author><TMPL_VAR author>@</TMPL_IF><a href="<TMPL_VAR channel_link ESCAPE="HTML">"><TMPL_VAR channel_name></a>
-			</div>
-			</TMPL_LOOP>
-		</div>
-		<div id="foot">
+		<div id="footer">
 			<a href="https://wiki.archlinux.de/?title=wiki.archlinux.de:Datenschutz">Datenschutz</a> &ndash;
 			<a href="https://wiki.archlinux.de/?title=wiki.archlinux.de:Impressum">Impressum</a>
 		</div>
