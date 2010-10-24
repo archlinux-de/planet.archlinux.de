@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 import os, sys, ConfigParser, shutil, glob
 venus_base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0,venus_base)

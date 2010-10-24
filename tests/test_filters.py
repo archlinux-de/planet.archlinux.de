@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 import unittest, xml.dom.minidom
 from planet import shell, config, logger

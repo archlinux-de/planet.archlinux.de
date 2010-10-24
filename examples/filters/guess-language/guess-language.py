@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 """A filter to guess languages.
 
 This filter guesses whether an Atom entry is written

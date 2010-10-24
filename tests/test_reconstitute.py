@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 import unittest, os, sys, glob, new, re, StringIO, time
 from planet import feedparser

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 import glob, unittest, os, sys
 
 # python 2.2 accomodations
