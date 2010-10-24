@@ -25,7 +25,7 @@ try:
 except:
   from md5 import new as md5
 
-illegal_xml_chars = re.compile("[\x01-\x08\x0B\x0C\x0E-\x1F]")
+illegal_xml_chars = re.compile("[\x01-\x08\x0B\x0C\x0E-\x1F]", re.UNICODE)
 
 def createTextElement(parent, name, value):
     """ utility function to create a child element with the specified text"""
@@ -35,6 +35,7 @@ def createTextElement(parent, name, value):
             value=value.decode('utf-8')
         except:
             value=value.decode('iso-8859-1')
+    value = illegal_xml_chars.sub(invalidate, value)
     xdoc = parent.ownerDocument
     xelement = xdoc.createElement(name)
     xelement.appendChild(xdoc.createTextNode(value))
@@ -43,7 +44,7 @@ def createTextElement(parent, name, value):
 
 def invalidate(c): 
     """ replace invalid characters """
-    return '<acronym title="U+%s">\xef\xbf\xbd</acronym>' % \
+    return u'<abbr title="U+%s">\ufffd</abbr>' % \
         ('000' + hex(ord(c.group(0)))[2:])[-4:]
 
 def ncr2c(value):
@@ -102,6 +103,8 @@ def links(xentry, entry):
             xlink.setAttribute('type', link.get('type'))
         if link.has_key('rel'):
             xlink.setAttribute('rel', link.get('rel',None))
+        if link.has_key('title'):
+            xlink.setAttribute('title', link.get('title'))
         if link.has_key('length'):
             xlink.setAttribute('length', link.get('length'))
         xentry.appendChild(xlink)
@@ -177,6 +180,9 @@ def content(xentry, name, detail, bozo):
                     if len(div.childNodes) == 1 and \
                         div.firstChild.nodeType == Node.TEXT_NODE:
                         data = div.firstChild
+                        if illegal_xml_chars.search(data.data):
+                            data = xdoc.createTextNode(
+                                illegal_xml_chars.sub(invalidate, data.data))
                     else:
                         data = div
                         xcontent.setAttribute('type', 'xhtml')
@@ -225,6 +231,10 @@ def source(xsource, source, bozo, format):
     for contributor in source.get('contributors',[]):
         author(xsource, 'contributor', contributor)
 
+    if not source.has_key('links') and source.has_key('href'): #rss
+        source['links'] = [{ 'href': source.get('href') }]
+        if source.has_key('title'): 
+            source['links'][0]['title'] = source.get('title')
     links(xsource, source)
 
     content(xsource, 'rights', source.get('rights_detail',None), bozo)
@@ -294,6 +304,21 @@ def reconstitute(feed, entry):
     if entry.has_key('geo_lat') and \
         entry.has_key('geo_long'):
         location(xentry, (float)(entry.get('geo_long',None)), (float)(entry.get('geo_lat',None)))
+    if entry.has_key('georss_point'):
+        coordinates = re.split('[,\s]', entry.get('georss_point'))
+        location(xentry, (float)(coordinates[1]), (float)(coordinates[0]))
+    elif entry.has_key('georss_line'):
+        coordinates = re.split('[,\s]', entry.get('georss_line'))
+        location(xentry, (float)(coordinates[1]), (float)(coordinates[0]))
+    elif entry.has_key('georss_circle'):
+        coordinates = re.split('[,\s]', entry.get('georss_circle'))
+        location(xentry, (float)(coordinates[1]), (float)(coordinates[0]))
+    elif entry.has_key('georss_box'):
+        coordinates = re.split('[,\s]', entry.get('georss_box'))
+        location(xentry, ((float)(coordinates[1])+(float)(coordinates[3]))/2, ((float)(coordinates[0])+(float)(coordinates[2]))/2)
+    elif entry.has_key('georss_polygon'):
+        coordinates = re.split('[,\s]', entry.get('georss_polygon'))
+        location(xentry, (float)(coordinates[1]), (float)(coordinates[0]))
 
     # author / contributor
     author_detail = entry.get('author_detail',{})
