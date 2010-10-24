@@ -219,6 +219,7 @@ def template_info(source):
     output['link'] = config.link()
     output['owner_name'] = config.owner_name()
     output['owner_email'] = config.owner_email()
+    output['pubsubhubbub_hub'] = config.pubsubhubbub_hub()
     if config.feed():
         output['feed'] = config.feed()
         output['feedtype'] = config.feed().find('rss')>=0 and 'rss' or 'atom'
@@ -255,8 +256,10 @@ def run(script, doc, output_file=None, options={}):
         tp.set(key, value)
 
     if output_file:
+        basename = os.path.basename(output_file)
         reluri = os.path.splitext(os.path.basename(output_file))[0]
         tp.set('url', urlparse.urljoin(config.link(),reluri))
+        tp.set('fullurl', urlparse.urljoin(config.link(),basename))
 
         output = open(output_file, "w")
         output.write(tp.process(template))

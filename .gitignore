@@ -1,7 +1,9 @@
+*.tmplc
+.DS_Store
+*.pluginc
+*.pyc
 cache/*
 htdocs/*.xml
 htdocs/index.html
-*.pyc
-*.tmplc
 *~
 config.ini

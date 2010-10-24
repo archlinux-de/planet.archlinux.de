@@ -105,6 +105,8 @@ def __init__():
     define_planet('output_theme', '')
     define_planet('output_dir', 'output')
     define_planet('spider_threads', 0) 
+    define_planet('pubsubhubbub_hub', '')
+    define_planet_list('pubsubhubbub_feeds', 'atom.xml rss10.xml rss20.xml')
 
     define_planet_int('new_feed_items', 0) 
     define_planet_int('feed_timeout', 20)
@@ -303,7 +305,7 @@ def downloadReadingList(list, orig_config, callback, use_cache=True, re_read=Tru
 
 def http_cache_directory():
     if parser.has_option('Planet', 'http_cache_directory'):
-        os.path.join(cache_directory(), 
+        return os.path.join(cache_directory(), 
             parser.get('Planet', 'http_cache_directory'))
     else:
         return os.path.join(cache_directory(), "cache")
@@ -315,9 +317,16 @@ def cache_sources_directory():
     else:
         return os.path.join(cache_directory(), 'sources')
 
+def cache_blacklist_directory():
+    if parser.has_option('Planet', 'cache_blacklist_directory'):
+        return os.path.join(cache_directory(),
+            parser.get('Planet', 'cache_blacklist_directory'))
+    else:
+        return os.path.join(cache_directory(), 'blacklist')
+
 def cache_lists_directory():
     if parser.has_option('Planet', 'cache_lists_directory'):
-        parser.get('Planet', 'cache_lists_directory')
+        return parser.get('Planet', 'cache_lists_directory')
     else:
         return os.path.join(cache_directory(), 'lists')
 
@@ -332,7 +341,7 @@ def feed():
 
 def feedtype():
     if parser.has_option('Planet', 'feedtype'):
-        parser.get('Planet', 'feedtype')
+        return parser.get('Planet', 'feedtype')
     elif feed() and feed().find('atom')>=0:
         return 'atom'
     elif feed() and feed().find('rss')>=0:
