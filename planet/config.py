@@ -116,6 +116,7 @@ def __init__():
     define_planet_list('bill_of_materials')
     define_planet_list('template_directories', '.')
     define_planet_list('filter_directories')
+    define_planet('django_autoescape', 'on')
 
     # template options
     define_tmpl_int('days_per_page', 0)
@@ -133,11 +134,11 @@ def __init__():
     define_tmpl('filter', None) 
     define_tmpl('exclude', None) 
 
-def load(config_file):
+def load(config_files):
     """ initialize and load a configuration"""
     global parser
     parser = ConfigParser()
-    parser.read(config_file)
+    parser.read(config_files)
 
     import config, planet
     from planet import opml, foaf, csv_config
@@ -156,8 +157,11 @@ def load(config_file):
                 dirs = config.template_directories()
                 if theme_dir not in dirs:
                     dirs.append(theme_dir)
-                if os.path.dirname(config_file) not in dirs:
-                    dirs.append(os.path.dirname(config_file))
+                if not hasattr(config_files, 'append'):
+                    config_files = [config_files]
+                for config_file in config_files:
+                    if os.path.dirname(config_file) not in dirs:
+                        dirs.append(os.path.dirname(config_file))
 
                 # read in the theme
                 parser = ConfigParser()
@@ -171,7 +175,7 @@ def load(config_file):
                 # merge configurations, allowing current one to override theme
                 template_files = config.template_files()
                 parser.set('Planet','template_files','')
-                parser.read(config_file)
+                parser.read(config_files)
                 for file in config.bill_of_materials():
                     if not file in bom: bom.append(file)
                 parser.set('Planet', 'bill_of_materials', ' '.join(bom))

@@ -13,7 +13,8 @@ def csv2config(input, config=None):
     reader = csv.DictReader(input)
     for row in reader:
         section = row[reader.fieldnames[0]]
-        config.add_section(section)
+        if not config.has_section(section):
+            config.add_section(section)
         for name, value in row.items():
             if value and name != reader.fieldnames[0]:
                 config.set(section, name, value) 

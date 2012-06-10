@@ -70,6 +70,7 @@ def id(xentry, entry):
 
     if entry.has_key("id") and entry.id:
         entry_id = entry.id
+        if hasattr(entry_id, 'values'): entry_id = entry_id.values()[0]
     elif entry.has_key("link") and entry.link:
         entry_id = entry.link
     elif entry.has_key("title") and entry.title:
@@ -278,6 +279,11 @@ def reconstitute(feed, entry):
 
     date(xentry, 'updated', entry_updated(feed.feed, entry, time.gmtime()))
     date(xentry, 'published', entry.get('published_parsed',None))
+
+    if entry.has_key('dc_date.taken'):
+        date_Taken = createTextElement(xentry, '%s:%s' % ('dc','date_Taken'), '%s' % entry.get('dc_date.taken', None))
+        date_Taken.setAttribute('xmlns:%s' % 'dc', 'http://purl.org/dc/elements/1.1/')
+        xentry.appendChild(date_Taken)
 
     for tag in entry.get('tags',[]):
         category(xentry, tag)

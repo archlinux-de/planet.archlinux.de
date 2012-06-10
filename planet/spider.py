@@ -176,7 +176,9 @@ def writeCache(feed_uri, feed_info, data):
         # generate an id, if none is present
         if not entry.has_key('id') or not entry.id:
             entry['id'] = reconstitute.id(None, entry)
-            if not entry['id']: continue
+        elif hasattr(entry['id'], 'values'):
+            entry['id'] = entry['id'].values()[0]
+        if not entry['id']: continue
 
         # determine updated date for purposes of selection
         updated = ''
@@ -428,8 +430,6 @@ def spiderPlanet(only_if_new = False):
     # Process the results as they arrive
     feeds_seen = {}
     while fetch_queue.qsize() or parse_queue.qsize() or threads:
-        while parse_queue.qsize() == 0 and threads:
-            time.sleep(0.1)
         while parse_queue.qsize():
             (uri, feed_info, feed) = parse_queue.get(False)
             try:
@@ -486,6 +486,8 @@ def spiderPlanet(only_if_new = False):
                 for line in (traceback.format_exception_only(type, value) +
                     traceback.format_tb(tb)):
                     log.error(line.rstrip())
+
+        time.sleep(0.1)
 
         for index in threads.keys():
             if not threads[index].isAlive():
