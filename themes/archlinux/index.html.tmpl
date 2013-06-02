@@ -9,17 +9,25 @@
 	<link rel="shortcut icon" href="favicon.ico" />
 	<style type="text/css">
 		<!--
-		img {
-			max-width:600px;
+		.news-item img {
+			max-width: 600px;
 		}
-		pre {
+		.news-item pre {
 			white-space: pre-wrap;
 			word-wrap: break-word;
-			width:600px;
-			min-width:95%;
-			max-height:700px;
-			overflow:auto;
-			font-family:monospace;
+			width: 600px;
+			min-width: 95%;
+			max-height: 700px;
+			overflow: auto;
+			font-family: monospace;
+		}
+		.news-item h1,
+		.news-item h2,
+		.news-item h3,
+		.news-item h4,
+		.news-item h5,
+		.news-item h6 {
+			font-size: 14px;
 		}
 		-->
 	</style>
@@ -48,11 +56,13 @@
 			<div id="news">
 				<h3><TMPL_VAR name></h3>
 				<TMPL_LOOP Items>
+				<div class="news-item">
 				<h4><a href="<TMPL_VAR link ESCAPE="HTML">"><TMPL_VAR title></a></h4>
 				<p class="date"><TMPL_VAR date></p>
 				<p><TMPL_VAR content></p>
 				<div style="font-size:x-small;text-align:right;">
 					<TMPL_IF author><TMPL_VAR author>@</TMPL_IF><a href="<TMPL_VAR channel_link ESCAPE="HTML">"><TMPL_VAR channel_name></a>
+				</div>
 				</div>
 				</TMPL_LOOP>
 			</div>
