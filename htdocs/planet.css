@@ -1,0 +1,20 @@
+.news-item img {
+    max-width: 600px;
+}
+.news-item pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    width: 600px;
+    min-width: 95%;
+    max-height: 700px;
+    overflow: auto;
+    font-family: monospace;
+}
+.news-item h1,
+.news-item h2,
+.news-item h3,
+.news-item h4,
+.news-item h5,
+.news-item h6 {
+    font-size: 14px;
+}

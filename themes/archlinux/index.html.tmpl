@@ -6,31 +6,8 @@
 	<meta name="robots" content="noindex,nofollow" />
 	<link rel="stylesheet" media="screen" href="arch.css?v=3" />
 	<link rel="stylesheet" media="screen" href="archnavbar.css?v=1" />
+	<link rel="stylesheet" media="screen" href="planet.css?v=1" />
 	<link rel="shortcut icon" href="favicon.ico" />
-	<style type="text/css">
-		<!--
-		.news-item img {
-			max-width: 600px;
-		}
-		.news-item pre {
-			white-space: pre-wrap;
-			word-wrap: break-word;
-			width: 600px;
-			min-width: 95%;
-			max-height: 700px;
-			overflow: auto;
-			font-family: monospace;
-		}
-		.news-item h1,
-		.news-item h2,
-		.news-item h3,
-		.news-item h4,
-		.news-item h5,
-		.news-item h6 {
-			font-size: 14px;
-		}
-		-->
-	</style>
 	<TMPL_IF feedtype>
 	<link rel="alternate" href="<TMPL_VAR feed ESCAPE="HTML">" title="<TMPL_VAR channel_title_plain ESCAPE="HTML">" type="application/<TMPL_VAR feedtype>+xml" />
 	</TMPL_IF>
