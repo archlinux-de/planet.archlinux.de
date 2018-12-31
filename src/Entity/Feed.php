@@ -27,7 +27,7 @@ class Feed
      * @Assert\Url()
      * @Assert\Length(max="255")
      *
-     * @ORM\Column(unique=true)
+     * @ORM\Column(length=191, unique=true)
      */
     private $url;
 
