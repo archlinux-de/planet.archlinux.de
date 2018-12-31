@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="{{ _charset }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="{{ asset('build/images/archicon.svg') }}" sizes="any" type="image/svg+xml">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    <title>{% block title %}{% endblock %}{% if block('title') %} - {% endif %}archlinux.de</title>
+    {% block stylesheets %}
+        {% for css_file in encore_entry_css_files('css/app') %}
+            <link href="{{ preload(css_file, { as: 'style' }) }}" rel="stylesheet">
+        {% endfor %}
+    {% endblock %}
+    <meta name="robots" content="{% block robots %}index,follow{% endblock %}"/>
+    <link rel="canonical" href="{% block canonical %}{{ absolute_url(path(app.request.attributes.get('_route'),
+    app.request.attributes.get('_route_params'))) }}{% endblock %}"/>
+</head>
+<body>
+{% macro nav_item(route, name) %}
+    <li class="nav-item ml-3{% if app.request.attributes.get('_route') == route %} active{% endif %}">
+        <a class="nav-link font-weight-bold"
+           href="{% if route starts with 'https://' %}{{ route }}{% else %}{{ path(route) }}{% endif %}">{{ name }}</a>
+    </li>
+{% endmacro %}
+{% import _self as macro %}
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark navbar-border-brand mb-4">
+    <a class="navbar-brand" href="{{ path('app_planet_index') }}">
+        <picture>
+            <source media="(min-width: 576px) and (max-width: 768px)"
+                    srcset="{{ asset('build/images/archicon.svg') }} 190w">
+            <img src="{{ asset('build/images/archlogo.svg') }}" height="40" alt="Arch Linux">
+        </picture>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
+            aria-expanded="false" aria-label="Navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav ml-auto mr-4">
+            {{ macro.nav_item('https://www.archlinux.de/', 'Start') }}
+            {{ macro.nav_item('https://www.archlinux.de/packages', 'Pakete') }}
+            {{ macro.nav_item('https://bbs.archlinux.de/', 'Forum') }}
+            {{ macro.nav_item('https://wiki.archlinux.de/', 'Wiki') }}
+            {{ macro.nav_item('https://aur.archlinux.de/', 'AUR') }}
+            {{ macro.nav_item('https://www.archlinux.de/download', 'Download') }}
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid pl-1 pr-1 pl-xl-5 pr-xl-5">
+    {% block body %}{% endblock %}
+</div>
+
+<footer class="footer pt-5 pb-4 pr-1 pr-xl-5">
+    <div class="container-fluid text-right">
+          <span class="text-muted">
+              <a href="https://www.archlinux.de/privacy-policy">Datenschutz</a> &ndash;
+              <a href="https://www.archlinux.de/impressum">Impressum</a>
+          </span>
+    </div>
+</footer>
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('js/app') }}
+{% endblock %}
+</body>
+</html>
