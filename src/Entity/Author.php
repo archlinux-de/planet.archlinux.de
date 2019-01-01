@@ -12,9 +12,9 @@ class Author
 {
     /**
      * @var string
-     * @Assert\Length(min="1", max="255")
+     * @Assert\Length(max="255")
      *
-     * @ORM\Column()
+     * @ORM\Column(nullable=true)
      */
     private $name;
 
@@ -28,19 +28,21 @@ class Author
     private $uri;
 
     /**
-     * @param string $name
-     */
-    public function __construct(string $name)
-    {
-        $this->name = $name;
-    }
-
-    /**
      * @return string
      */
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return Author
+     */
+    public function setName(string $name): Author
+    {
+        $this->name = $name;
+        return $this;
     }
 
     /**
