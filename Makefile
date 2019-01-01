@@ -17,6 +17,7 @@ init: start
 	${PHP-DB-RUN} bin/console doctrine:database:create
 	${PHP-DB-RUN} bin/console doctrine:schema:create
 	${PHP-DB-RUN} bin/console doctrine:migrations:version --add --all --no-interaction
+	${PHP-DB-RUN} bin/console app:update:feeds
 
 start:
 	${COMPOSE} up -d

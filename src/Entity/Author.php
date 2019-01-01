@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Author
 {
     /**
-     * @var string
+     * @var string|null
      * @Assert\Length(max="255")
      *
      * @ORM\Column(nullable=true)
@@ -28,20 +28,22 @@ class Author
     private $uri;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
+     * @param string|null $name
+     *
      * @return Author
      */
-    public function setName(string $name): Author
+    public function setName(?string $name): Author
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -55,11 +57,13 @@ class Author
 
     /**
      * @param string|null $uri
+     *
      * @return Author
      */
     public function setUri(?string $uri): Author
     {
         $this->uri = $uri;
+
         return $this;
     }
 }
