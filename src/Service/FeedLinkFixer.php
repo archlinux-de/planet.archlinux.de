@@ -9,18 +9,15 @@ use FeedIo\Reader\FixerAbstract;
 class FeedLinkFixer extends FixerAbstract
 {
     /**
-     * @param  FeedInterface $feed
-     * @return $this
+     * @param FeedInterface $feed
+     *
+     * @return FixerAbstract
      */
     public function correct(FeedInterface $feed): FixerAbstract
     {
         $feedUrl = $feed->getUrl();
 
-        $parsedFeedUrl = parse_url($feedUrl);
-        $absoluteUrl = $parsedFeedUrl['scheme'] . '://' . $parsedFeedUrl['host'];
-        if (!empty($parsedFeedUrl['port'])) {
-            $absoluteUrl .= ':' . $parsedFeedUrl['port'];
-        }
+        $absoluteUrl = $this->extractAbsoluteUrl($feedUrl);
         $this->fixNode($feed, $absoluteUrl);
         $this->fixItems($feed, $absoluteUrl);
 
@@ -28,8 +25,24 @@ class FeedLinkFixer extends FixerAbstract
     }
 
     /**
+     * @param string $feedUrl
+     *
+     * @return string
+     */
+    private function extractAbsoluteUrl(string $feedUrl): string
+    {
+        $parsedFeedUrl = parse_url($feedUrl);
+        $absoluteUrl   = $parsedFeedUrl['scheme'] . '://' . $parsedFeedUrl['host'];
+        if (! empty($parsedFeedUrl['port'])) {
+            $absoluteUrl .= ':' . $parsedFeedUrl['port'];
+        }
+
+        return $absoluteUrl;
+    }
+
+    /**
      * @param NodeInterface $node
-     * @param string $absoluteUrl
+     * @param string        $absoluteUrl
      */
     protected function fixNode(NodeInterface $node, string $absoluteUrl): void
     {
@@ -41,7 +54,7 @@ class FeedLinkFixer extends FixerAbstract
 
     /**
      * @param FeedInterface $feed
-     * @param string $absoluteUrl
+     * @param string        $absoluteUrl
      */
     protected function fixItems(FeedInterface $feed, string $absoluteUrl): void
     {
