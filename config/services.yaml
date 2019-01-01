@@ -40,3 +40,12 @@ services:
     FeedIo\FeedIo:
         bind:
             $client: '@FeedIo\Adapter\Guzzle\Client'
+        calls:
+            - method: addDateFormats
+              arguments: [['Y-m-d\TH:i:s.uvP']]
+            - method: addFixer
+              arguments: ['@App\Service\FeedLinkFixer']
+
+    App\Service\FeedFetcher:
+        bind:
+            $feedUrls: '%app.feeds%'

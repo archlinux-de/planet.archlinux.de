@@ -12,15 +12,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Item
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
      * @var string
      * @Assert\Length(min="1", max="255")
      *
@@ -30,17 +21,18 @@ class Item
 
     /**
      * @var string
-     * @Assert\Length(min="1", max="255")
+     * @Assert\Length(min="1", max="191")
      *
-     * @ORM\Column()
+     * @ORM\Id()
+     * @ORM\Column(length=191)
      */
     private $publicId;
 
     /**
      * @var string
-     * @Assert\Length(min="3", max="16384")
+     * @Assert\Length(min="3", max="10485760")
      *
-     * @ORM\Column()
+     * @ORM\Column(type="text")
      */
     private $description;
 
@@ -72,17 +64,11 @@ class Item
      * @var Feed
      * @Assert\Valid()
      *
-     * @ORM\ManyToOne(targetEntity="Feed", inversedBy="items")
+     * @ORM\Id()
+     * @ORM\ManyToOne(targetEntity="Feed", inversedBy="items", cascade={"all"})
+     * @ORM\JoinColumn(name="feed_url", referencedColumnName="url", onDelete="CASCADE")
      */
     private $feed;
-
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
 
     /**
      * @return string
@@ -198,5 +184,15 @@ class Item
     public function getFeed(): Feed
     {
         return $this->feed;
+    }
+
+    /**
+     * @param Feed $feed
+     * @return Item
+     */
+    public function setFeed(Feed $feed): Item
+    {
+        $this->feed = $feed;
+        return $this;
     }
 }

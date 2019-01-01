@@ -14,20 +14,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Feed
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
      * @var string
      * @Assert\Url()
-     * @Assert\Length(max="255")
+     * @Assert\Length(max="191")
      *
-     * @ORM\Column(length=191, unique=true)
+     * @ORM\Id
+     * @ORM\Column(length=191)
      */
     private $url;
 
@@ -35,7 +27,7 @@ class Feed
      * @var Item[]
      * @Assert\Valid()
      *
-     * @ORM\OneToMany(targetEntity="Item", mappedBy="feed", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Item", mappedBy="feed", cascade={"all"})
      */
     private $items;
 
@@ -48,10 +40,10 @@ class Feed
     private $title;
 
     /**
-     * @var string
+     * @var string|null
      * @Assert\Length(max="255")
      *
-     * @ORM\Column()
+     * @ORM\Column(nullable=true)
      */
     private $description;
 
@@ -81,21 +73,32 @@ class Feed
     }
 
     /**
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string|null $description
+     * @return Feed
+     */
+    public function setDescription(?string $description): Feed
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    /**
      * @param Item $item
      * @return Feed
      */
     public function addItem(Item $item): Feed
     {
         $this->items->add($item);
+        $item->setFeed($this);
         return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
     }
 
     /**
@@ -129,24 +132,6 @@ class Feed
     public function setTitle(string $title): Feed
     {
         $this->title = $title;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param string $description
-     * @return Feed
-     */
-    public function setDescription(string $description): Feed
-    {
-        $this->description = $description;
         return $this;
     }
 
