@@ -7,7 +7,7 @@
 {% block body %}
     <div class="row m-0">
         <div class="col-12 col-xl-9 pl-0 pr-0 pr-xl-4">
-            <h1 class="p-2 p-xl-3">planet.archlinux.de</h1>
+            <h1 class="p-2 p-xl-3">Arch Linux Planet</h1>
             <div class="container-fluid">
                 {% for item in items %}
                     <div class="mb-5">
@@ -36,9 +36,9 @@
 
         <div class="col-12 col-xl-3">
             <div class="card mb-4">
-                <h3 class="card-title card-header">Dein Blog bei planet.archlinux.de</h3>
+                <h3 class="card-title card-header">Dein Blog bei archlinux.de</h3>
                 <div class="card-body">
-                    Wenn auch Du Dein Blog bei planet.archlinux.de hinzufügen möchtest, melde Dich einfach bei
+                    Wenn auch Du Dein Blog bei archlinux.de hinzufügen möchtest, melde Dich einfach bei
                     <a href="mailto:pierre@archlinux.de">pierre@archlinux.de</a>
                 </div>
             </div>
@@ -46,11 +46,20 @@
             <div class="card">
                 <h3 class="card-title card-header">Feeds</h3>
                 <div class="card-body p-1 p-lg-3">
-                    <ul class="list-unstyled pl-4">
+                    <ul class="pl-4">
                         {% for feed in feeds %}
                             <li><a href="{{ feed.link }}" title="{{ feed.description }}">{{ feed.title }}</a></li>
                         {% endfor %}
+
                     </ul>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-primary" href="{{ path('app_planet_feed', {'_format': 'atom'}) }}">
+                        <strong>ATOM</strong> Feed
+                    </a>
+                    <a class="btn btn-outline-secondary" href="{{ path('app_planet_feed', {'_format': 'rss'}) }}">
+                        <strong>RSS</strong> Feed
+                    </a>
                 </div>
             </div>
         </div>
