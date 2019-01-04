@@ -27,4 +27,22 @@ class FeedRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * @param array $urls
+     * @return Feed[]
+     */
+    public function findAllExceptByUrls(array $urls): array
+    {
+        if (empty($urls)) {
+            return $this->findAll();
+        } else {
+            return $this
+                ->createQueryBuilder('feed')
+                ->where('feed.url NOT IN (:urls)')
+                ->setParameter('urls', $urls)
+                ->getQuery()
+                ->getResult();
+        }
+    }
 }

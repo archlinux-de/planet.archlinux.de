@@ -29,4 +29,30 @@ class ItemRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * @param \App\Entity\Feed $feed
+     * @param array $itemIds
+     * @return Item[]
+     */
+    public function findAllExceptByIds(\App\Entity\Feed $feed, array $itemIds): array
+    {
+        if (empty($itemIds)) {
+            return $this
+                ->createQueryBuilder('item')
+                ->where('item.feed = :feed')
+                ->setParameter('feed', $feed)
+                ->getQuery()
+                ->getResult();
+        } else {
+            return $this
+                ->createQueryBuilder('item')
+                ->where('item.feed = :feed')
+                ->andWhere('item.publicId NOT IN (:itemIds)')
+                ->setParameter('feed', $feed)
+                ->setParameter('itemIds', $itemIds)
+                ->getQuery()
+                ->getResult();
+        }
+    }
 }
