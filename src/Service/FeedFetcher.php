@@ -20,6 +20,14 @@ class FeedFetcher implements \IteratorAggregate
     }
 
     /**
+     * @return array
+     */
+    public function getFeedUrls(): array
+    {
+        return $this->feedUrls;
+    }
+
+    /**
      * @return iterable
      */
     public function getIterator(): iterable
