@@ -13,12 +13,12 @@
                     <div class="mb-5">
                         <div class="d-lg-flex justify-content-between align-items-baseline border border-top-0 border-left-0 border-right-0 mb-2">
                             <h2 class="p-0 break-word">
-                                <a href="{{ item.link }}">{{ item | item_title }}</a>
+                                <a href="{{ item.link }}">{{ item.title | html_entity_decode }}</a>
                             </h2>
                             <div class="p-0">{{ item.lastModified | date('d.m.Y') }}</div>
                         </div>
                         <div class="item-description break-word mw-100">
-                            {{ item | item_description }}
+                            {{ item.description | purify('planet') }}
                         </div>
                         {% if item.author.name %}
                             <div class="font-italic">

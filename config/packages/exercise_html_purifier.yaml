@@ -1,7 +1,6 @@
 exercise_html_purifier:
     planet:
-        HTML.Allowed: 'a[href],p,code,pre,ul,ol,li,br,strong,em,del,ins,img[src|alt],blockquote,h3,h4,h5,h6,div,span'
+        HTML.Allowed: 'a[href],p,code,pre,ul,ol,li,br,strong,em,del,small,sup,ins,img[src|alt],blockquote,h3,h4,h5,h6,div,span,table,tbody,td,tr,thead,th'
         HTML.Nofollow: true
-        URI.MakeAbsolute: true
         AutoFormat.RemoveEmpty: true
         AutoFormat.RemoveSpansWithoutAttributes: true

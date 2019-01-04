@@ -5,25 +5,17 @@ namespace App\Service;
 use App\Entity\Author;
 use App\Entity\Feed;
 use App\Entity\Item;
-use FeedIo\Feed\ItemInterface;
-use FeedIo\FeedInterface;
-use FeedIo\FeedIo;
 
 class FeedFetcher implements \IteratorAggregate
 {
-    /** @var FeedIo */
-    private $feedIo;
-
-    /** @var string */
+    /** @var array */
     private $feedUrls;
 
     /**
-     * @param FeedIo $feedIo
      * @param array $feedUrls
      */
-    public function __construct(FeedIo $feedIo, array $feedUrls)
+    public function __construct(array $feedUrls)
     {
-        $this->feedIo = $feedIo;
         $this->feedUrls = $feedUrls;
     }
 
@@ -33,32 +25,12 @@ class FeedFetcher implements \IteratorAggregate
     public function getIterator(): iterable
     {
         foreach ($this->feedUrls as $feedUrl) {
-            $feedReader = $this->fetchFeed($feedUrl);
-            $feed = new Feed($feedReader->getUrl());
-            $feed
-                ->setDescription($feedReader->getDescription())
-                ->setLastModified($feedReader->getLastModified())
-                ->setLink($feedReader->getLink())
-                ->setTitle($feedReader->getTitle());
+            $feedReader = $this->createFeedReader($feedUrl);
+            $feed = $this->createFeed($feedReader);
 
-            /** @var ItemInterface $feedReaderItem */
-            foreach ($feedReader as $feedReaderItem) {
-                $item = new Item();
-                $item
-                    ->setPublicId($feedReaderItem->getPublicId())
-                    ->setLastModified($feedReaderItem->getLastModified())
-                    ->setTitle($feedReaderItem->getTitle())
-                    ->setLink($feedReaderItem->getLink())
-                    ->setDescription($feedReaderItem->getDescription())
-                    ->setLastModified($feedReaderItem->getLastModified());
-                if (!is_null($feedReaderItem->getAuthor())) {
-                    $item->setAuthor(
-                        (new Author())
-                            ->setUri($feedReaderItem->getAuthor()->getUri())
-                            ->setName($feedReaderItem->getAuthor()->getName())
-                    );
-                }
-                $feed->addItem($item);
+            /** @var \SimplePie_Item $feedReaderItem */
+            foreach ($feedReader->get_items() as $feedReaderItem) {
+                $feed->addItem($this->createItem($feedReaderItem));
             }
             yield $feed;
         }
@@ -66,17 +38,73 @@ class FeedFetcher implements \IteratorAggregate
 
     /**
      * @param string $feedUrl
-     * @return FeedInterface
+     *
+     * @return \SimplePie
      */
-    private function fetchFeed(string $feedUrl): FeedInterface
+    private function createFeedReader(string $feedUrl): \SimplePie
     {
-        $feedReader = $this->feedIo->read(
-            $feedUrl,
-            (new \FeedIo\Feed())->setUrl($feedUrl)
-        )->getFeed();
-        if ($feedReader->count() == 0) {
-            throw new \RuntimeException(sprintf('empty feed "%s"', $feedUrl));
+        $feed = new \SimplePie();
+        $feed->set_feed_url($feedUrl);
+        $feed->enable_cache(false);
+        $feed->enable_exceptions(true);
+        $feed->init();
+
+        return $feed;
+    }
+
+    /**
+     * @param \SimplePie $feedReader
+     * @return Feed
+     */
+    private function createFeed(\SimplePie $feedReader): Feed
+    {
+        return (new Feed($feedReader->feed_url))
+            ->setDescription($feedReader->get_description())
+            ->setLastModified($this->createDateTime($feedReader->get_item()->get_date()))
+            ->setLink($feedReader->get_link())
+            ->setTitle($feedReader->get_title());
+    }
+
+    /**
+     * @param string $timestamp
+     * @return \DateTime
+     */
+    private function createDateTime(string $timestamp): \DateTime
+    {
+        try {
+            return new \DateTime($timestamp);
+        } catch (\Exception $e) {
+            return new \DateTime();
         }
-        return $feedReader;
+    }
+
+    /**
+     * @param \SimplePie_Item $feedReaderItem
+     * @return Item
+     */
+    private function createItem(\SimplePie_Item $feedReaderItem): Item
+    {
+        return (new Item())
+            ->setPublicId($feedReaderItem->get_id())
+            ->setLastModified($this->createDateTime($feedReaderItem->get_date()))
+            ->setTitle($feedReaderItem->get_title())
+            ->setLink($feedReaderItem->get_link())
+            ->setDescription($feedReaderItem->get_description())
+            ->setAuthor($this->createAuthor($feedReaderItem));
+    }
+
+    /**
+     * @param \SimplePie_Item $feedReaderItem
+     * @return Author
+     */
+    private function createAuthor(\SimplePie_Item $feedReaderItem): Author
+    {
+        $author = new Author();
+        if (!is_null($feedReaderItem->get_author())) {
+            $author
+                ->setUri($feedReaderItem->get_author()->get_link())
+                ->setName($feedReaderItem->get_author()->get_name());
+        }
+        return $author;
     }
 }
