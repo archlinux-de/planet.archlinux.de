@@ -76,7 +76,7 @@ class UpdateFeedsCommand extends Command
         foreach ($this->feedFetcher as $feed) {
             $errors = $this->validator->validate($feed);
             if ($errors->count() > 0) {
-                throw new \RuntimeException((string)$errors);
+                throw new \RuntimeException((string)json_encode($errors));
             }
 
             $this->entityManager->transactional(

@@ -36,9 +36,11 @@ class FeedFetcher implements \IteratorAggregate
             $feedReader = $this->createFeedReader($feedUrl);
             $feed = $this->createFeed($feedReader);
 
-            /** @var \SimplePie_Item $feedReaderItem */
-            foreach ($feedReader->get_items() as $feedReaderItem) {
-                $feed->addItem($this->createItem($feedReaderItem));
+            if (!is_null($feedReader->get_items())) {
+                /** @var \SimplePie_Item $feedReaderItem */
+                foreach ($feedReader->get_items() as $feedReaderItem) {
+                    $feed->addItem($this->createItem($feedReaderItem));
+                }
             }
             yield $feed;
         }
@@ -68,9 +70,15 @@ class FeedFetcher implements \IteratorAggregate
     {
         return (new Feed($feedReader->feed_url))
             ->setDescription($feedReader->get_description())
-            ->setLastModified($this->createDateTime($feedReader->get_item()->get_date()))
-            ->setLink($feedReader->get_link())
-            ->setTitle($feedReader->get_title());
+            ->setLastModified(
+                $this->createDateTime(
+                    !is_null($feedReader->get_item())
+                        ? (string)$feedReader->get_item()->get_date()
+                        : 'now'
+                )
+            )
+            ->setLink($feedReader->get_link() ?? '')
+            ->setTitle($feedReader->get_title() ?? '');
     }
 
     /**
@@ -93,11 +101,11 @@ class FeedFetcher implements \IteratorAggregate
     private function createItem(\SimplePie_Item $feedReaderItem): Item
     {
         return (new Item())
-            ->setPublicId($feedReaderItem->get_id())
-            ->setLastModified($this->createDateTime($feedReaderItem->get_date()))
-            ->setTitle($feedReaderItem->get_title())
-            ->setLink($feedReaderItem->get_link())
-            ->setDescription($feedReaderItem->get_description())
+            ->setPublicId($feedReaderItem->get_id() ?? '')
+            ->setLastModified($this->createDateTime((string)$feedReaderItem->get_date()))
+            ->setTitle($feedReaderItem->get_title() ?? '')
+            ->setLink($feedReaderItem->get_link() ?? '')
+            ->setDescription($feedReaderItem->get_description() ?? '')
             ->setAuthor($this->createAuthor($feedReaderItem));
     }
 
