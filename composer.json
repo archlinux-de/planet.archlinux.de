@@ -1,8 +1,8 @@
 {
     "type": "project",
-    "name": "plant.archlinux.de",
+    "name": "archlinux-de/planet.archlinux.de",
     "description": "The German Arch Linux Feed Aggregator",
-    "license": "GPL-3.0",
+    "license": "GPL-3.0-or-later",
     "require": {
         "php": "^7.3",
         "ext-apcu": "^5.1",
@@ -33,9 +33,9 @@
         "symfony/twig-bundle": "4.2.*",
         "symfony/validator": "4.2.*",
         "symfony/web-link": "4.2.*",
-        "symfony/webpack-encore-bundle": "^1.0",
+        "symfony/webpack-encore-bundle": "^1.1",
         "symfony/yaml": "4.2.*",
-        "zendframework/zend-feed": "^2.10"
+        "zendframework/zend-feed": "^2.11"
     },
     "require-dev": {
         "ext-SimpleXML": "*",
