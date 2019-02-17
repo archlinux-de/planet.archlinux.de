@@ -11,12 +11,17 @@ class FeedFetcher implements \IteratorAggregate
     /** @var array */
     private $feedUrls;
 
+    /** @var FeedReaderFactory */
+    private $feedReaderFactory;
+
     /**
      * @param array $feedUrls
+     * @param FeedReaderFactory $feedReaderFactory
      */
-    public function __construct(array $feedUrls)
+    public function __construct(array $feedUrls, FeedReaderFactory $feedReaderFactory)
     {
         $this->feedUrls = $feedUrls;
+        $this->feedReaderFactory = $feedReaderFactory;
     }
 
     /**
@@ -33,7 +38,7 @@ class FeedFetcher implements \IteratorAggregate
     public function getIterator(): iterable
     {
         foreach ($this->feedUrls as $feedUrl) {
-            $feedReader = $this->createFeedReader($feedUrl);
+            $feedReader = $this->feedReaderFactory->createFeedReader($feedUrl);
             $feed = $this->createFeed($feedReader);
 
             if (!is_null($feedReader->get_items())) {
@@ -47,22 +52,6 @@ class FeedFetcher implements \IteratorAggregate
     }
 
     /**
-     * @param string $feedUrl
-     *
-     * @return \SimplePie
-     */
-    private function createFeedReader(string $feedUrl): \SimplePie
-    {
-        $feed = new \SimplePie();
-        $feed->set_feed_url($feedUrl);
-        $feed->enable_cache(false);
-        $feed->enable_exceptions(true);
-        $feed->init();
-
-        return $feed;
-    }
-
-    /**
      * @param \SimplePie $feedReader
      * @return Feed
      */
@@ -71,7 +60,7 @@ class FeedFetcher implements \IteratorAggregate
         return (new Feed($feedReader->feed_url))
             ->setDescription($feedReader->get_description())
             ->setLastModified(
-                $this->createDateTime(
+                new \DateTime(
                     !is_null($feedReader->get_item())
                         ? (string)$feedReader->get_item()->get_date()
                         : 'now'
@@ -82,19 +71,6 @@ class FeedFetcher implements \IteratorAggregate
     }
 
     /**
-     * @param string $timestamp
-     * @return \DateTime
-     */
-    private function createDateTime(string $timestamp): \DateTime
-    {
-        try {
-            return new \DateTime($timestamp);
-        } catch (\Exception $e) {
-            return new \DateTime();
-        }
-    }
-
-    /**
      * @param \SimplePie_Item $feedReaderItem
      * @return Item
      */
@@ -102,7 +78,7 @@ class FeedFetcher implements \IteratorAggregate
     {
         return (new Item())
             ->setPublicId($feedReaderItem->get_id() ?? '')
-            ->setLastModified($this->createDateTime((string)$feedReaderItem->get_date()))
+            ->setLastModified(new \DateTime((string)$feedReaderItem->get_date()))
             ->setTitle($feedReaderItem->get_title() ?? '')
             ->setLink($feedReaderItem->get_link() ?? '')
             ->setDescription($feedReaderItem->get_description() ?? '')

@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Command\Exception\ValidationException;
 use App\Entity\Feed;
 use App\Entity\Item;
 use App\Repository\FeedRepository;
@@ -76,7 +77,7 @@ class UpdateFeedsCommand extends Command
         foreach ($this->feedFetcher as $feed) {
             $errors = $this->validator->validate($feed);
             if ($errors->count() > 0) {
-                throw new \RuntimeException((string)json_encode($errors));
+                throw new ValidationException($errors);
             }
 
             $this->entityManager->transactional(

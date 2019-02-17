@@ -2,16 +2,13 @@
 
 namespace App\Service;
 
-use App\Repository\ItemRepository;
+use App\Entity\Item;
 use Exercise\HTMLPurifierBundle\HTMLPurifiersRegistryInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Zend\Feed\Writer\Feed;
 
 class ItemExporter
 {
-    /** @var ItemRepository */
-    private $itemRepository;
-
     /** @var UrlGeneratorInterface */
     private $urlGenerator;
 
@@ -19,22 +16,19 @@ class ItemExporter
     private $purifiersRegistry;
 
     /**
-     * @param ItemRepository $itemRepository
      * @param UrlGeneratorInterface $urlGenerator
      * @param HTMLPurifiersRegistryInterface $purifiersRegistry
      */
     public function __construct(
-        ItemRepository $itemRepository,
         UrlGeneratorInterface $urlGenerator,
         HTMLPurifiersRegistryInterface $purifiersRegistry
     ) {
-        $this->itemRepository = $itemRepository;
         $this->urlGenerator = $urlGenerator;
         $this->purifiersRegistry = $purifiersRegistry;
     }
 
     /**
-     * @param array $items
+     * @param Item[] $items
      * @param string $format
      * @return string
      */
