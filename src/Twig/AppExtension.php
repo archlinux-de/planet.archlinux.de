@@ -2,12 +2,15 @@
 
 namespace App\Twig;
 
-class AppExtension extends \Twig_Extension
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+
+class AppExtension extends AbstractExtension
 {
     public function getFilters()
     {
         return [
-            new \Twig_Filter('html_entity_decode', 'html_entity_decode')
+            new TwigFilter('html_entity_decode', 'html_entity_decode')
         ];
     }
 }
