@@ -15,27 +15,27 @@
         "ext-pdo_mysql": "*",
         "ext-xml": "*",
         "ext-xmlreader": "*",
-        "doctrine/doctrine-bundle": "^1.10",
+        "doctrine/doctrine-bundle": "^1.11",
         "doctrine/doctrine-migrations-bundle": "^2.0",
         "doctrine/orm": "^2.6",
         "exercise/htmlpurifier-bundle": "^2.0",
-        "sensio/framework-extra-bundle": "^5.2",
+        "sensio/framework-extra-bundle": "^5.3",
         "simplepie/simplepie": "^1.5",
-        "symfony/asset": "4.2.*",
-        "symfony/console": "4.2.*",
-        "symfony/dotenv": "4.2.*",
-        "symfony/expression-language": "4.2.*",
-        "symfony/flex": "^1.1",
-        "symfony/framework-bundle": "4.2.*",
-        "symfony/lock": "4.2.*",
+        "symfony/asset": "4.3.*",
+        "symfony/console": "4.3.*",
+        "symfony/dotenv": "4.3.*",
+        "symfony/expression-language": "4.3.*",
+        "symfony/flex": "^1.4",
+        "symfony/framework-bundle": "4.3.*",
+        "symfony/lock": "4.3.*",
         "symfony/monolog-bundle": "^3.3",
-        "symfony/process": "4.2.*",
-        "symfony/twig-bundle": "4.2.*",
-        "symfony/validator": "4.2.*",
-        "symfony/web-link": "4.2.*",
-        "symfony/webpack-encore-bundle": "^1.1",
-        "symfony/yaml": "4.2.*",
-        "zendframework/zend-feed": "^2.11"
+        "symfony/process": "4.3.*",
+        "symfony/twig-bundle": "4.3.*",
+        "symfony/validator": "4.3.*",
+        "symfony/web-link": "4.3.*",
+        "symfony/webpack-encore-bundle": "^1.6",
+        "symfony/yaml": "4.3.*",
+        "zendframework/zend-feed": "^2.12"
     },
     "require-dev": {
         "ext-SimpleXML": "*",
@@ -47,13 +47,13 @@
         "phpstan/phpstan-phpunit": "^0.11",
         "phpstan/phpstan-symfony": "^0.11",
         "phpunit/phpunit": "^8",
-        "sensiolabs/security-checker": "^5.0",
+        "sensiolabs/security-checker": "^6.0",
         "squizlabs/php_codesniffer": "^3.4",
-        "symfony/browser-kit": "4.2.*",
-        "symfony/css-selector": "4.2.*",
-        "symfony/phpunit-bridge": "4.2.*",
-        "symfony/stopwatch": "4.2.*",
-        "symfony/web-profiler-bundle": "4.2.*"
+        "symfony/browser-kit": "4.3.*",
+        "symfony/css-selector": "4.3.*",
+        "symfony/phpunit-bridge": "4.3.*",
+        "symfony/stopwatch": "4.3.*",
+        "symfony/web-profiler-bundle": "4.3.*"
     },
     "config": {
         "preferred-install": {
@@ -99,7 +99,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "4.2.*"
+            "require": "4.3.*"
         }
     }
 }
