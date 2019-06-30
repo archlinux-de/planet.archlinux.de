@@ -4,7 +4,7 @@ namespace App\Tests\Repository;
 
 use App\Entity\Feed;
 use App\Repository\FeedRepository;
-use App\Tests\Util\DatabaseTestCase;
+use SymfonyDatabaseTest\DatabaseTestCase;
 
 class FeedRepositoryTest extends DatabaseTestCase
 {

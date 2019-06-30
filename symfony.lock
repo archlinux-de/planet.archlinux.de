@@ -188,6 +188,12 @@
             "ref": "89239f0cf2759efccc76b9944083bfcc4d180f9d"
         }
     },
+    "pierres/doctrine-migrations-test": {
+        "version": "1.0.0"
+    },
+    "pierres/symfony-database-test": {
+        "version": "1.0.0"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },

@@ -5,7 +5,7 @@ namespace App\Tests\Repository;
 use App\Entity\Feed;
 use App\Entity\Item;
 use App\Repository\ItemRepository;
-use App\Tests\Util\DatabaseTestCase;
+use SymfonyDatabaseTest\DatabaseTestCase;
 
 class ItemRepositoryTest extends DatabaseTestCase
 {
