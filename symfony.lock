@@ -389,12 +389,6 @@
             "ref": "0e548dd90adba18fabd4ef419b14d361fe4d6c74"
         }
     },
-    "symfony/polyfill-intl-idn": {
-        "version": "v1.11.0"
-    },
-    "symfony/polyfill-php73": {
-        "version": "v1.11.0"
-    },
     "symfony/process": {
         "version": "v4.2.1"
     },
