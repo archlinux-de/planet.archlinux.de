@@ -4,7 +4,7 @@ const CompressionPlugin = require('compression-webpack-plugin')
 Encore
   .setOutputPath((process.env.PUBLIC_PATH || 'public') + '/build')
   .setPublicPath('/build')
-  .cleanupOutputBeforeBuild()
+  .cleanupOutputBeforeBuild(['**/*.js', '**/*.css', '**/*.svg', '**/*.gz'])
   .addEntry('js/app', './assets/js/app.js')
   .addStyleEntry('css/app', './assets/css/app.scss')
   .copyFiles({
