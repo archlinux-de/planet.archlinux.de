@@ -49,7 +49,7 @@ class UpdateFeedsCommandTest extends KernelTestCase
                 $callable($entityManager);
             });
         $entityManager->expects($this->once())->method('merge')->with($newFeed);
-        $entityManager->expects($this->atLeastOnce())->method('remove')->withConsecutive($oldItem, $oldFeed);
+        $entityManager->expects($this->atLeastOnce())->method('remove')->withConsecutive([$oldFeed], [$oldItem]);
 
         /** @var FeedFetcher|MockObject $feedFetcher */
         $feedFetcher = $this->createMock(FeedFetcher::class);
