@@ -9,7 +9,7 @@ use Twig\TwigFilter;
 
 class AppExtensionTest extends TestCase
 {
-    public function testGetFilters()
+    public function testHtmlEntityDecodeFilter()
     {
         $callable = $this->getFilterCallableFromExtension(new AppExtension(), 'html_entity_decode');
         if (is_callable($callable)) {
@@ -18,6 +18,21 @@ class AppExtensionTest extends TestCase
                 '&uuml;'
             );
             $this->assertEquals('ü', $result);
+        } else {
+            $this->fail('Filter has no callable');
+        }
+    }
+
+    public function testImageLoadingFilter()
+    {
+        $callable = $this->getFilterCallableFromExtension(new AppExtension(), 'img_loading');
+        if (is_callable($callable)) {
+            $result = call_user_func(
+                $callable,
+                '<img src="foo.png"/>',
+                'lazy'
+            );
+            $this->assertEquals('<img loading="lazy" src="foo.png"/>', $result);
         } else {
             $this->fail('Filter has no callable');
         }

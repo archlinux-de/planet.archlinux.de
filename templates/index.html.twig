@@ -16,7 +16,7 @@
                             <div class="p-0">{{ item.lastModified | date('d.m.Y') }}</div>
                         </div>
                         <div class="item-description text-break mw-100">
-                            {{ item.description | purify('planet') }}
+                            {{ item.description | purify('planet') | img_loading('lazy') }}
                         </div>
                         {% if item.author.name %}
                             <div class="font-italic">
