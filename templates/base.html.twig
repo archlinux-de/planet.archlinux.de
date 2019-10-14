@@ -7,7 +7,7 @@
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <title>{% block title %}{% endblock %}{% if block('title') %} - {% endif %}archlinux.de</title>
     {% block stylesheets %}
-        {{ encore_entry_link_tags('css/app') }}
+        {{ encore_entry_link_tags('base') }}
     {% endblock %}
     <meta name="robots" content="{% block robots %}index,follow{% endblock %}"/>
     <link rel="canonical" href="{% block canonical %}{{ absolute_url(path(
@@ -50,13 +50,13 @@
 
 {% block body %}{% endblock %}
 
-<footer class="container-fluid mt-auto py-3 text-right">
-    <a href="{{ path('external_privacypolicy') }}">Datenschutz</a> &ndash;
-    <a href="{{ path('external_impressum') }}">Impressum</a>
+<footer class="nav justify-content-end py-3">
+    <a href="{{ path('external_privacypolicy') }}" class="nav-link">Datenschutz</a> &ndash;
+    <a href="{{ path('external_impressum') }}" class="nav-link">Impressum</a>
 </footer>
 
 {% block javascripts %}
-    {{ encore_entry_script_tags('js/app') }}
+    {{ encore_entry_script_tags('base') }}
 {% endblock %}
 </body>
 </html>
