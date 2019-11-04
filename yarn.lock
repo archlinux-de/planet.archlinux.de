@@ -4752,7 +4752,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.4, lodash@^4.17.5, lodash@~4.17.10:
+"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.5, lodash@~4.17.10:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
@@ -7738,14 +7738,14 @@ stylelint-config-standard@^19.0.0:
   dependencies:
     stylelint-config-recommended "^3.0.0"
 
-stylelint-no-unsupported-browser-features@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/stylelint-no-unsupported-browser-features/-/stylelint-no-unsupported-browser-features-3.0.2.tgz#7115deae4c2ab56fdeebc0eb0983dd21bff1fb46"
-  integrity sha512-TLHYlaiwFa1zM1JGVsIEmQFq7tpxwgZ6xvUf1EVh1cMYKeci3TmNRUHv7GPKumxBlMzPDLPeg7zTOTEnEcTdpw==
+stylelint-no-unsupported-browser-features@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/stylelint-no-unsupported-browser-features/-/stylelint-no-unsupported-browser-features-4.0.0.tgz#f2b6364cb53f364a6297b949a61edc1cf3cedf52"
+  integrity sha512-CwuJ/g+aNADYkyFsrW8eyK/vVOh5INkMRJEx99RZD13SgqzexnRArG/R1LTs4h0Xsi9eAxIEzsyYW40nd90gcw==
   dependencies:
     doiuse "^4.2.0"
-    lodash "^4.17.4"
-    postcss "^7.0.0"
+    lodash "^4.17.15"
+    postcss "^7.0.21"
 
 stylelint@^11.1.1:
   version "11.1.1"
