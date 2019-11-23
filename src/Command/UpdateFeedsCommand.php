@@ -61,7 +61,12 @@ class UpdateFeedsCommand extends Command
         $this->setName('app:update:feeds');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
+     */
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->lock('cron.lock', true);
 
@@ -91,6 +96,8 @@ class UpdateFeedsCommand extends Command
         }
 
         $this->release();
+
+        return 0;
     }
 
     /**
