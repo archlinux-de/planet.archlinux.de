@@ -4,9 +4,7 @@ namespace App\Command;
 
 use App\Command\Exception\ValidationException;
 use App\Entity\Feed;
-use App\Entity\Item;
 use App\Repository\FeedRepository;
-use App\Repository\ItemRepository;
 use App\Service\FeedFetcher;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -31,29 +29,23 @@ class UpdateFeedsCommand extends Command
     /** @var FeedRepository */
     private $feedRepository;
 
-    /** @var ItemRepository */
-    private $itemRepository;
-
     /**
      * @param EntityManagerInterface $entityManager
      * @param ValidatorInterface $validator
      * @param FeedFetcher $feedFetcher
      * @param FeedRepository $feedRepository
-     * @param ItemRepository $itemRepository
      */
     public function __construct(
         EntityManagerInterface $entityManager,
         ValidatorInterface $validator,
         FeedFetcher $feedFetcher,
-        FeedRepository $feedRepository,
-        ItemRepository $itemRepository
+        FeedRepository $feedRepository
     ) {
         parent::__construct();
         $this->entityManager = $entityManager;
         $this->validator = $validator;
         $this->feedFetcher = $feedFetcher;
         $this->feedRepository = $feedRepository;
-        $this->itemRepository = $itemRepository;
     }
 
     protected function configure()
@@ -68,7 +60,7 @@ class UpdateFeedsCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->lock('cron.lock', true);
+        $this->lock('cron.lock');
 
         $this->entityManager->transactional(
             function (EntityManagerInterface $entityManager) {
@@ -87,10 +79,14 @@ class UpdateFeedsCommand extends Command
 
             $this->entityManager->transactional(
                 function (EntityManagerInterface $entityManager) use ($feed) {
-                    foreach ($this->getOrphanedItems($feed) as $orphanedItem) {
-                        $entityManager->remove($orphanedItem);
+                    /** @var Feed|null $persistedFeed */
+                    $persistedFeed = $this->feedRepository->find($feed->getUrl());
+                    if ($persistedFeed) {
+                        $entityManager->remove($persistedFeed);
+                        $entityManager->flush();
                     }
-                    $entityManager->merge($feed);
+
+                    $entityManager->persist($feed);
                 }
             );
         }
@@ -98,19 +94,5 @@ class UpdateFeedsCommand extends Command
         $this->release();
 
         return 0;
-    }
-
-    /**
-     * @param Feed $feed
-     * @return Item[]
-     */
-    private function getOrphanedItems(Feed $feed): array
-    {
-        $itemIds = [];
-        foreach ($feed->getItems() as $item) {
-            $itemIds[] = $item->getPublicId();
-        }
-
-        return $this->itemRepository->findAllExceptByIds($feed, $itemIds);
     }
 }
