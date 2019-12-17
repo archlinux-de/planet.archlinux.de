@@ -36,13 +36,13 @@ class FeedRepository extends ServiceEntityRepository
     {
         if (empty($urls)) {
             return $this->findAll();
-        } else {
-            return $this
-                ->createQueryBuilder('feed')
-                ->where('feed.url NOT IN (:urls)')
-                ->setParameter('urls', $urls)
-                ->getQuery()
-                ->getResult();
         }
+
+        return $this
+            ->createQueryBuilder('feed')
+            ->where('feed.url NOT IN (:urls)')
+            ->setParameter('urls', $urls)
+            ->getQuery()
+            ->getResult();
     }
 }
