@@ -2,6 +2,8 @@
 
 namespace App\Tests\Controller;
 
+use App\Entity\Feed;
+use App\Entity\Item;
 use Symfony\Component\HttpFoundation\Response;
 use SymfonyDatabaseTest\DatabaseTestCase;
 
@@ -10,6 +12,31 @@ use SymfonyDatabaseTest\DatabaseTestCase;
  */
 class PlanetControllerTest extends DatabaseTestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+        $feed = (new Feed('https://www.archlinux.de/'))
+            ->setTitle('Arch Linux')
+            ->setLastModified(new \DateTime())
+            ->setLink('https://www.archlinux.de/news/feed');
+        $oldItem = (new Item('https://www.archlinux.de/news/1'))
+            ->setTitle('Item Title')
+            ->setDescription('Item Description')
+            ->setLastModified(new \DateTime('- 2 day'))
+            ->setFeed($feed);
+        $newItem = (new Item('https://www.archlinux.de/news/2'))
+            ->setTitle('Item Title')
+            ->setDescription('Item Description')
+            ->setLastModified(new \DateTime('now'))
+            ->setFeed($feed);
+
+        $entityManager = $this->getEntityManager();
+        $entityManager->persist($oldItem);
+        $entityManager->persist($newItem);
+        $entityManager->flush();
+        $entityManager->clear();
+    }
+
     public function testIndexAction(): void
     {
         $client = $this->getClient();
