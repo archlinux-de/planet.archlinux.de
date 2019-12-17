@@ -13,7 +13,7 @@
                 <link>{{ item.link }}</link>
                 <description>{{ item.description | purify('planet') | escape('html') }}</description>
                 <dc:creator>{% if item.author.name %}{{ item.author.name }}{% else %}{{ item.feed.title }}{% endif %}</dc:creator>
-                <guid isPermaLink="false">{{ item.publicId }}</guid>
+                <guid isPermaLink="true">{{ item.link }}</guid>
                 <pubDate>{{ item.lastModified | date(constant('DateTimeInterface::RSS'), timezone='GMT') }}</pubDate>
                 <source url="{{ item.feed.url }}">{{ item.feed.title }}</source>
             </item>
