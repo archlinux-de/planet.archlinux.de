@@ -37,7 +37,7 @@ class PlanetControllerTest extends DatabaseTestCase
         $xml = \simplexml_load_string($response);
         $this->assertNotFalse($xml);
         $this->assertEmpty(\libxml_get_errors());
-        $this->assertEquals('Arch Linux Planet', $xml->title->__toString());
+        $this->assertEquals('Arch Linux Planet', (string)$xml->title);
     }
 
     public function testRssAction(): void
@@ -57,7 +57,7 @@ class PlanetControllerTest extends DatabaseTestCase
         $xml = \simplexml_load_string($response);
         $this->assertNotFalse($xml);
         $this->assertEmpty(\libxml_get_errors());
-        $this->assertEquals('Arch Linux Planet', $xml->channel->title->__toString());
+        $this->assertEquals('Arch Linux Planet', (string)$xml->channel->title);
     }
 
     public function testLegacyRssUrlGetsRedirected(): void
