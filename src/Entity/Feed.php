@@ -24,7 +24,7 @@ class Feed
     private $url;
 
     /**
-     * @var Collection
+     * @var Collection<int, Item>
      * @Assert\Valid()
      *
      * @ORM\OneToMany(targetEntity="Item", mappedBy="feed", cascade={"all"})
@@ -110,7 +110,7 @@ class Feed
     }
 
     /**
-     * @return Collection
+     * @return Collection<int, Item>
      */
     public function getItems(): Collection
     {

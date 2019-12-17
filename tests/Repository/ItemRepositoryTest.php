@@ -9,7 +9,7 @@ use SymfonyDatabaseTest\DatabaseTestCase;
 
 class ItemRepositoryTest extends DatabaseTestCase
 {
-    public function testFindLatest()
+    public function testFindLatest(): void
     {
         $feed = (new Feed('https://www.archlinux.de/'))
             ->setTitle('Arch Linux')
@@ -44,7 +44,7 @@ class ItemRepositoryTest extends DatabaseTestCase
         $this->assertEquals($oldItem->getPublicId(), $items[1]->getPublicId());
     }
 
-    public function testFindLatestItemsAreLimited()
+    public function testFindLatestItemsAreLimited(): void
     {
         $feed = (new Feed('https://www.archlinux.de/'))
             ->setTitle('Arch Linux')

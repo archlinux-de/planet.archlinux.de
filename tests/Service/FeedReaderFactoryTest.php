@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class FeedReaderFactoryTest extends TestCase
 {
-    public function testCreateFeedReader()
+    public function testCreateFeedReader(): void
     {
         $feedReaderFactory = new FeedReaderFactory();
         $feedReader = $feedReaderFactory->createFeedReader('https://www.archlinux.de/news/feed');

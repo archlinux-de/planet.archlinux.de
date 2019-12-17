@@ -8,7 +8,7 @@ use SymfonyDatabaseTest\DatabaseTestCase;
 
 class FeedRepositoryTest extends DatabaseTestCase
 {
-    public function testFindLatest()
+    public function testFindLatest(): void
     {
         $feed = (new Feed('https://www.archlinux.de/'))
             ->setTitle('Arch Linux')
@@ -26,7 +26,7 @@ class FeedRepositoryTest extends DatabaseTestCase
         $this->assertEquals('https://www.archlinux.de/', $feedRepository->findLatest()[0]->getUrl());
     }
 
-    public function testFindAllExceptByUrlsIfNoUrlsGiven()
+    public function testFindAllExceptByUrlsIfNoUrlsGiven(): void
     {
         $feed = (new Feed('https://www.archlinux.de/'))
             ->setTitle('Arch Linux')
@@ -44,7 +44,7 @@ class FeedRepositoryTest extends DatabaseTestCase
         $this->assertEquals('https://www.archlinux.de/', $feedRepository->findLatest()[0]->getUrl());
     }
 
-    public function testFindAllExceptByUrls()
+    public function testFindAllExceptByUrls(): void
     {
         $feed = (new Feed('https://www.archlinux.de/'))
             ->setTitle('Arch Linux')

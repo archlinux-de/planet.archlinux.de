@@ -6,16 +6,19 @@ use App\Entity\Author;
 use App\Entity\Feed;
 use App\Entity\Item;
 
+/**
+ * @phpstan-implements \IteratorAggregate<Feed>
+ */
 class FeedFetcher implements \IteratorAggregate
 {
-    /** @var array */
+    /** @var string[] */
     private $feedUrls;
 
     /** @var FeedReaderFactory */
     private $feedReaderFactory;
 
     /**
-     * @param array $feedUrls
+     * @param string[] $feedUrls
      * @param FeedReaderFactory $feedReaderFactory
      */
     public function __construct(array $feedUrls, FeedReaderFactory $feedReaderFactory)
@@ -25,7 +28,7 @@ class FeedFetcher implements \IteratorAggregate
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getFeedUrls(): array
     {
@@ -33,7 +36,7 @@ class FeedFetcher implements \IteratorAggregate
     }
 
     /**
-     * @return iterable
+     * @return iterable<Feed>
      */
     public function getIterator(): iterable
     {

@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 class FeedFetcherTest extends TestCase
 {
-    public function testGetIterator()
+    public function testGetIterator(): void
     {
         $feedReader = new \SimplePie();
         $feedReader->set_raw_data(
@@ -33,7 +33,7 @@ class FeedFetcherTest extends TestCase
                        <updated>2003-12-13T18:30:02Z</updated>
                        <summary>Some text.</summary>
                      </entry>
-                
+
                    </feed>'
         );
         $feedReader->enable_cache(false);
@@ -71,7 +71,7 @@ class FeedFetcherTest extends TestCase
         $this->assertEquals('Some text.', $item->getDescription());
     }
 
-    public function testGetFeedUrls()
+    public function testGetFeedUrls(): void
     {
         /** @var FeedReaderFactory|MockObject $feedReaderFactory */
         $feedReaderFactory = $this->createMock(FeedReaderFactory::class);

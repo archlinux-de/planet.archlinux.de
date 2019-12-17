@@ -9,7 +9,7 @@ use Twig\TwigFilter;
 
 class AppExtensionTest extends TestCase
 {
-    public function testHtmlEntityDecodeFilter()
+    public function testHtmlEntityDecodeFilter(): void
     {
         $callable = $this->getFilterCallableFromExtension(new AppExtension(), 'html_entity_decode');
         if (is_callable($callable)) {
@@ -23,7 +23,7 @@ class AppExtensionTest extends TestCase
         }
     }
 
-    public function testImageLoadingFilter()
+    public function testImageLoadingFilter(): void
     {
         $callable = $this->getFilterCallableFromExtension(new AppExtension(), 'img_loading');
         if (is_callable($callable)) {

@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class AuthorTest extends TestCase
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $author = (new Author())->setUri('https://www.archlinux.de/')->setName('Bob');
 

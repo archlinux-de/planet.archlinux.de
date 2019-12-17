@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ItemExporterTest extends TestCase
 {
-    public function testExport()
+    public function testExport(): void
     {
         /** @var UrlGeneratorInterface|MockObject $urlGenerator */
         $urlGenerator = $this->createMock(UrlGeneratorInterface::class);

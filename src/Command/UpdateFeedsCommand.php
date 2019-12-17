@@ -48,7 +48,7 @@ class UpdateFeedsCommand extends Command
         $this->feedRepository = $feedRepository;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('app:update:feeds');
     }

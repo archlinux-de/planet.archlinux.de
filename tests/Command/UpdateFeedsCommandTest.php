@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class UpdateFeedsCommandTest extends KernelTestCase
 {
-    public function testCommand()
+    public function testCommand(): void
     {
         $oldItem = new Item();
         $oldFeed = new Feed('https://localhost/atom.xml');
@@ -75,7 +75,7 @@ class UpdateFeedsCommandTest extends KernelTestCase
         $this->assertEquals(0, $commandTester->getStatusCode());
     }
 
-    public function testInvalidFeedIsSkipped()
+    public function testInvalidFeedIsSkipped(): void
     {
         $newFeed = new Feed('https://localhost/atom.xml');
 
@@ -125,7 +125,7 @@ class UpdateFeedsCommandTest extends KernelTestCase
         $commandTester->execute(['command' => $command->getName()]);
     }
 
-    public function testUpdateFeed()
+    public function testUpdateFeed(): void
     {
         $item = (new Item())->setPublicId('');
         $feed = new Feed('https://localhost/atom.xml');

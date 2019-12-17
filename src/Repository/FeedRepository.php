@@ -29,7 +29,7 @@ class FeedRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param array $urls
+     * @param string[] $urls
      * @return Feed[]
      */
     public function findAllExceptByUrls(array $urls): array

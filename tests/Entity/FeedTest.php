@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class FeedTest extends TestCase
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         /** @var Item|MockObject $item */
         $item = $this->createMock(Item::class);

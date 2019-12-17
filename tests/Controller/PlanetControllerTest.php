@@ -9,7 +9,7 @@ use SymfonyDatabaseTest\DatabaseTestCase;
  */
 class PlanetControllerTest extends DatabaseTestCase
 {
-    public function testIndexAction()
+    public function testIndexAction(): void
     {
         $client = $this->getClient();
 
@@ -19,7 +19,7 @@ class PlanetControllerTest extends DatabaseTestCase
         $this->assertStringContainsString('Arch Linux Planet', $crawler->filter('h1')->text());
     }
 
-    public function testAtomAction()
+    public function testAtomAction(): void
     {
         $client = $this->getClient();
 
@@ -38,7 +38,7 @@ class PlanetControllerTest extends DatabaseTestCase
      * @param string $rssURl
      * @dataProvider provideRssUrls
      */
-    public function testRssAction(string $rssURl)
+    public function testRssAction(string $rssURl): void
     {
         $client = $this->getClient();
 
@@ -54,7 +54,7 @@ class PlanetControllerTest extends DatabaseTestCase
     }
 
     /**
-     * @return array
+     * @return array<array>
      */
     public function provideRssUrls(): array
     {

@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class ItemTest extends TestCase
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         /** @var Author|MockObject $author */
         $author = $this->createMock(Author::class);
