@@ -63,8 +63,10 @@ class PlanetController extends AbstractController
      */
     public function feedAction(string $_format): Response
     {
-        return new Response(
+        $response = new Response(
             $this->itemExporter->export($this->itemRepository->findLatest(30), $_format)
         );
+        $response->headers->set('Content-Type', 'application/' . $_format . '+xml; charset=UTF-8');
+        return $response;
     }
 }

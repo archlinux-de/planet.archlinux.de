@@ -26,6 +26,11 @@ class PlanetControllerTest extends DatabaseTestCase
         $client->request('GET', '/atom.xml');
 
         $this->assertTrue($client->getResponse()->isSuccessful());
+        $this->assertStringStartsWith(
+            'application/atom+xml; charset=UTF-8',
+            (string)$client->getResponse()->headers->get('Content-Type')
+        );
+        $this->assertEquals('UTF-8', $client->getResponse()->getCharset());
         $response = $client->getResponse()->getContent();
         $this->assertIsString($response);
         $xml = \simplexml_load_string($response);
@@ -45,6 +50,11 @@ class PlanetControllerTest extends DatabaseTestCase
         $client->request('GET', $rssURl);
 
         $this->assertTrue($client->getResponse()->isSuccessful());
+        $this->assertStringStartsWith(
+            'application/rss+xml; charset=UTF-8',
+            (string)$client->getResponse()->headers->get('Content-Type')
+        );
+        $this->assertEquals('UTF-8', $client->getResponse()->getCharset());
         $response = $client->getResponse()->getContent();
         $this->assertIsString($response);
         $xml = \simplexml_load_string($response);
