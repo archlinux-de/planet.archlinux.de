@@ -12,7 +12,6 @@ class FeedReaderFactoryTest extends TestCase
         $feedReaderFactory = new FeedReaderFactory();
         $feedReader = $feedReaderFactory->createFeedReader('https://www.archlinux.de/news/feed');
 
-        $this->assertInstanceOf(\SimplePie::class, $feedReader);
         $this->assertEquals('https://www.archlinux.de/news/feed', $feedReader->feed_url);
     }
 }
