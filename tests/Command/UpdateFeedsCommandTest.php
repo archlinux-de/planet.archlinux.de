@@ -24,10 +24,10 @@ class UpdateFeedsCommandTest extends KernelTestCase
 {
     public function testCommand(): void
     {
-        $oldItem = new Item();
+        $oldItem = new Item('https://localhost/1');
         $oldFeed = new Feed('https://localhost/atom.xml');
 
-        $newItem = (new Item())->setPublicId('');
+        $newItem = new Item('https://localhost/2');
         $newFeed = new Feed('https://localhost/atom.xml');
         $newFeed->addItem($newItem);
 
@@ -127,7 +127,7 @@ class UpdateFeedsCommandTest extends KernelTestCase
 
     public function testUpdateFeed(): void
     {
-        $item = (new Item())->setPublicId('');
+        $item = new Item('https://localhost/1');
         $feed = new Feed('https://localhost/atom.xml');
         $feed->addItem($item);
 

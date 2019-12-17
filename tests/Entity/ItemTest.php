@@ -16,12 +16,10 @@ class ItemTest extends TestCase
         $author = $this->createMock(Author::class);
         /** @var Feed|MockObject $feed */
         $feed = $this->createMock(Feed::class);
-        $item = (new Item())
+        $item = (new Item('https://www.archlinux.de/news/item'))
             ->setLastModified(new \DateTime('2019-01-01'))
             ->setTitle('Item Title')
-            ->setLink('https://www.archlinux.de/news/item')
             ->setDescription('Item Description')
-            ->setPublicId('1')
             ->setAuthor($author)
             ->setFeed($feed);
 
@@ -29,7 +27,6 @@ class ItemTest extends TestCase
         $this->assertEquals('Item Title', $item->getTitle());
         $this->assertEquals('https://www.archlinux.de/news/item', $item->getLink());
         $this->assertEquals('Item Description', $item->getDescription());
-        $this->assertEquals('1', $item->getPublicId());
         $this->assertEquals($author, $item->getAuthor());
         $this->assertEquals($feed, $item->getFeed());
     }

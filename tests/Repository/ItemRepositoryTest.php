@@ -15,19 +15,15 @@ class ItemRepositoryTest extends DatabaseTestCase
             ->setTitle('Arch Linux')
             ->setLastModified(new \DateTime())
             ->setLink('https://www.archlinux.de/news/feed');
-        $oldItem = (new Item())
-            ->setPublicId('1')
+        $oldItem = (new Item('https://www.archlinux.de/news/1'))
             ->setTitle('Item Title')
             ->setDescription('Item Description')
             ->setLastModified(new \DateTime('- 2 day'))
-            ->setLink('https://www.archlinux.de/news/item')
             ->setFeed($feed);
-        $newItem = (new Item())
-            ->setPublicId('2')
+        $newItem = (new Item('https://www.archlinux.de/news/2'))
             ->setTitle('Item Title')
             ->setDescription('Item Description')
             ->setLastModified(new \DateTime('now'))
-            ->setLink('https://www.archlinux.de/news/item')
             ->setFeed($feed);
 
         $entityManager = $this->getEntityManager();
@@ -40,8 +36,8 @@ class ItemRepositoryTest extends DatabaseTestCase
         $itemRepository = $this->getRepository(Item::class);
         $items = $itemRepository->findLatest(2);
         $this->assertCount(2, $items);
-        $this->assertEquals($newItem->getPublicId(), $items[0]->getPublicId());
-        $this->assertEquals($oldItem->getPublicId(), $items[1]->getPublicId());
+        $this->assertEquals($newItem->getLink(), $items[0]->getLink());
+        $this->assertEquals($oldItem->getLink(), $items[1]->getLink());
     }
 
     public function testFindLatestItemsAreLimited(): void
@@ -50,19 +46,15 @@ class ItemRepositoryTest extends DatabaseTestCase
             ->setTitle('Arch Linux')
             ->setLastModified(new \DateTime())
             ->setLink('https://www.archlinux.de/news/feed');
-        $oldItem = (new Item())
-            ->setPublicId('1')
+        $oldItem = (new Item('https://www.archlinux.de/news/1'))
             ->setTitle('Item Title')
             ->setDescription('Item Description')
             ->setLastModified(new \DateTime('- 2 day'))
-            ->setLink('https://www.archlinux.de/news/item')
             ->setFeed($feed);
-        $newItem = (new Item())
-            ->setPublicId('2')
+        $newItem = (new Item('https://www.archlinux.de/news/2'))
             ->setTitle('Item Title')
             ->setDescription('Item Description')
             ->setLastModified(new \DateTime('now'))
-            ->setLink('https://www.archlinux.de/news/item')
             ->setFeed($feed);
 
         $entityManager = $this->getEntityManager();
@@ -75,6 +67,6 @@ class ItemRepositoryTest extends DatabaseTestCase
         $itemRepository = $this->getRepository(Item::class);
         $items = $itemRepository->findLatest(1);
         $this->assertCount(1, $items);
-        $this->assertEquals($newItem->getPublicId(), $items[0]->getPublicId());
+        $this->assertEquals($newItem->getLink(), $items[0]->getLink());
     }
 }

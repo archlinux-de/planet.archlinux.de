@@ -79,11 +79,9 @@ class FeedFetcher implements \IteratorAggregate
      */
     private function createItem(\SimplePie_Item $feedReaderItem): Item
     {
-        return (new Item())
-            ->setPublicId($feedReaderItem->get_id() ?? '')
+        return (new Item((string)$feedReaderItem->get_link()))
             ->setLastModified(new \DateTime((string)$feedReaderItem->get_date()))
             ->setTitle(html_entity_decode($feedReaderItem->get_title() ?? ''))
-            ->setLink($feedReaderItem->get_link() ?? '')
             ->setDescription($feedReaderItem->get_description() ?? '')
             ->setAuthor($this->createAuthor($feedReaderItem));
     }

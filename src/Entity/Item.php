@@ -13,20 +13,21 @@ class Item
 {
     /**
      * @var string
+     * @Assert\Url()
+     * @Assert\Length(max="255")
+     *
+     * @ORM\Id()
+     * @ORM\Column()
+     */
+    private $link;
+
+    /**
+     * @var string
      * @Assert\Length(min="1", max="255")
      *
      * @ORM\Column()
      */
     private $title;
-
-    /**
-     * @var string
-     * @Assert\Length(min="1", max="191")
-     *
-     * @ORM\Id()
-     * @ORM\Column(length=191)
-     */
-    private $publicId;
 
     /**
      * @var string
@@ -44,15 +45,6 @@ class Item
     private $lastModified;
 
     /**
-     * @var string
-     * @Assert\Url()
-     * @Assert\Length(max="255")
-     *
-     * @ORM\Column()
-     */
-    private $link;
-
-    /**
      * @var Author
      * @Assert\Valid()
      *
@@ -64,11 +56,18 @@ class Item
      * @var Feed
      * @Assert\Valid()
      *
-     * @ORM\Id()
      * @ORM\ManyToOne(targetEntity="Feed", inversedBy="items", cascade={"all"})
      * @ORM\JoinColumn(name="feed_url", referencedColumnName="url", onDelete="CASCADE")
      */
     private $feed;
+
+    /**
+     * @param string $link
+     */
+    public function __construct(string $link)
+    {
+        $this->link = $link;
+    }
 
     /**
      * @return string
@@ -85,24 +84,6 @@ class Item
     public function setTitle(string $title): Item
     {
         $this->title = $title;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPublicId(): string
-    {
-        return $this->publicId;
-    }
-
-    /**
-     * @param string $publicId
-     * @return Item
-     */
-    public function setPublicId(string $publicId): Item
-    {
-        $this->publicId = $publicId;
         return $this;
     }
 
@@ -148,16 +129,6 @@ class Item
     public function getLink(): string
     {
         return $this->link;
-    }
-
-    /**
-     * @param string $link
-     * @return Item
-     */
-    public function setLink(string $link): Item
-    {
-        $this->link = $link;
-        return $this;
     }
 
     /**
