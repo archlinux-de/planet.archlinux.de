@@ -35,8 +35,7 @@
         "symfony/validator": "^v5.0.1",
         "symfony/web-link": "^v5.0.1",
         "symfony/webpack-encore-bundle": "^v1.7.2",
-        "symfony/yaml": "^v5.0.1",
-        "zendframework/zend-feed": "^2.12.0"
+        "symfony/yaml": "^v5.0.1"
     },
     "require-dev": {
         "ext-SimpleXML": "*",

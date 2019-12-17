@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>{{ url('app_planet_atomfeed') }}</id>
+    <title>Arch Linux Planet</title>
+    <subtitle type="text">planet.archlinux.de</subtitle>
+    <updated>{{ 'now' | date(constant('DateTimeInterface::ATOM'), timezone='GMT') }}</updated>
+    <link rel="alternate" href="{{ url('app_planet_index') }}"/>
+    <link rel="self" href="{{ url('app_planet_atomfeed') }}"/>
+    <icon>{{ absolute_url(asset('build/images/archicon.svg')) }}</icon>
+    <logo>{{ absolute_url(asset('build/images/archlogo.svg')) }}</logo>
+    {# @var items \App\Entity\Item[] #}
+    {% for item in items %}
+        <entry>
+            <id>{{ item.link }}</id>
+            <title>{{ item.title | html_entity_decode }}</title>
+            <updated>{{ item.lastModified | date(constant('DateTimeInterface::ATOM'), timezone='GMT') }}</updated>
+            <link rel="alternate" href="{{ item.link }}"/>
+            <author>
+                <name>{% if item.author.name %}{{ item.author.name }}{% else %}{{ item.feed.title }}{% endif %}</name>
+                {% if item.author.uri %}
+                    <uri>{{ item.author.uri }}</uri>
+                {% endif %}
+            </author>
+            <summary type="html">{{ item.description | purify('planet') | escape('html') }}</summary>
+            <source>
+                <title>{{ item.feed.title }}</title>
+                <updated>{{ item.feed.lastModified | date(constant('DateTimeInterface::ATOM'), timezone='GMT') }}</updated>
+                <link rel="alternate" href="{{ item.feed.link }}"/>
+                <link rel="self" href="{{ item.feed.url }}"/>
+                <id>{{ item.feed.url }}</id>
+            </source>
+        </entry>
+    {% endfor %}
+</feed>

@@ -2,6 +2,7 @@
 
 namespace App\Tests\Controller;
 
+use Symfony\Component\HttpFoundation\Response;
 use SymfonyDatabaseTest\DatabaseTestCase;
 
 /**
@@ -39,15 +40,11 @@ class PlanetControllerTest extends DatabaseTestCase
         $this->assertEquals('Arch Linux Planet', $xml->title->__toString());
     }
 
-    /**
-     * @param string $rssURl
-     * @dataProvider provideRssUrls
-     */
-    public function testRssAction(string $rssURl): void
+    public function testRssAction(): void
     {
         $client = $this->getClient();
 
-        $client->request('GET', $rssURl);
+        $client->request('GET', '/rss.xml');
 
         $this->assertTrue($client->getResponse()->isSuccessful());
         $this->assertStringStartsWith(
@@ -63,14 +60,13 @@ class PlanetControllerTest extends DatabaseTestCase
         $this->assertEquals('Arch Linux Planet', $xml->channel->title->__toString());
     }
 
-    /**
-     * @return array<array>
-     */
-    public function provideRssUrls(): array
+    public function testLegacyRssUrlGetsRedirected(): void
     {
-        return [
-            ['/rss.xml'],
-            ['/rss20.xml']
-        ];
+        $client = $this->getClient();
+
+        $client->request('GET', '/rss20.xml');
+
+        $this->assertEquals(Response::HTTP_MOVED_PERMANENTLY, $client->getResponse()->getStatusCode());
+        $this->assertTrue($client->getResponse()->isRedirect('http://localhost/rss.xml'));
     }
 }

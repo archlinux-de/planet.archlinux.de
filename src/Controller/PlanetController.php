@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Repository\FeedRepository;
 use App\Repository\ItemRepository;
-use App\Service\ItemExporter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,22 +17,14 @@ class PlanetController extends AbstractController
     /** @var FeedRepository */
     private $feedRepository;
 
-    /** @var ItemExporter */
-    private $itemExporter;
-
     /**
      * @param ItemRepository $itemRepository
      * @param FeedRepository $feedRepository
-     * @param ItemExporter $itemExporter
      */
-    public function __construct(
-        ItemRepository $itemRepository,
-        FeedRepository $feedRepository,
-        ItemExporter $itemExporter
-    ) {
+    public function __construct(ItemRepository $itemRepository, FeedRepository $feedRepository)
+    {
         $this->itemRepository = $itemRepository;
         $this->feedRepository = $feedRepository;
-        $this->itemExporter = $itemExporter;
     }
 
     /**
@@ -54,19 +45,34 @@ class PlanetController extends AbstractController
     }
 
     /**
-     * @Route("/{_format}.xml", methods={"GET"}, requirements={"_format": "atom|rss"})
-     * @Route("/rss20.xml", methods={"GET"}, defaults={"_format"="rss"})
+     * @Route("/rss.xml", methods={"GET"})
      * @Cache(smaxage="600")
      *
-     * @param string $_format
      * @return Response
      */
-    public function feedAction(string $_format): Response
+    public function rssFeedAction(): Response
     {
-        $response = new Response(
-            $this->itemExporter->export($this->itemRepository->findLatest(30), $_format)
+        $response = $this->render(
+            'feed.rss.xml.twig',
+            ['items' => $this->itemRepository->findLatest(30)]
         );
-        $response->headers->set('Content-Type', 'application/' . $_format . '+xml; charset=UTF-8');
+        $response->headers->set('Content-Type', 'application/rss+xml; charset=UTF-8');
+        return $response;
+    }
+
+    /**
+     * @Route("/atom.xml", methods={"GET"})
+     * @Cache(smaxage="600")
+     *
+     * @return Response
+     */
+    public function atomFeedAction(): Response
+    {
+        $response = $this->render(
+            'feed.atom.xml.twig',
+            ['items' => $this->itemRepository->findLatest(30)]
+        );
+        $response->headers->set('Content-Type', 'application/atom+xml; charset=UTF-8');
         return $response;
     }
 }

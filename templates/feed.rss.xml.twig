@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>Arch Linux Planet</title>
+        <link>{{ url('app_planet_index') }}</link>
+        <description>planet.archlinux.de</description>
+        <pubDate>{{ 'now' | date(constant('DateTimeInterface::RSS'), timezone='GMT') }}</pubDate>
+        <atom:link href="{{ url('app_planet_rssfeed') }}" rel="self"/>
+        {# @var items \App\Entity\Item[] #}
+        {% for item in items %}
+            <item>
+                <title>{{ item.title | html_entity_decode }}</title>
+                <link>{{ item.link }}</link>
+                <description>{{ item.description | purify('planet') | escape('html') }}</description>
+                <dc:creator>{% if item.author.name %}{{ item.author.name }}{% else %}{{ item.feed.title }}{% endif %}</dc:creator>
+                <guid isPermaLink="false">{{ item.publicId }}</guid>
+                <pubDate>{{ item.lastModified | date(constant('DateTimeInterface::RSS'), timezone='GMT') }}</pubDate>
+                <source url="{{ item.feed.url }}">{{ item.feed.title }}</source>
+            </item>
+        {% endfor %}
+    </channel>
+</rss>
