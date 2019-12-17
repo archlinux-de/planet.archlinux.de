@@ -82,7 +82,7 @@ class FeedFetcher implements \IteratorAggregate
         return (new Item())
             ->setPublicId($feedReaderItem->get_id() ?? '')
             ->setLastModified(new \DateTime((string)$feedReaderItem->get_date()))
-            ->setTitle($feedReaderItem->get_title() ?? '')
+            ->setTitle(html_entity_decode($feedReaderItem->get_title() ?? ''))
             ->setLink($feedReaderItem->get_link() ?? '')
             ->setDescription($feedReaderItem->get_description() ?? '')
             ->setAuthor($this->createAuthor($feedReaderItem));

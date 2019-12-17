@@ -73,7 +73,7 @@ class ItemExporter
 
             $entry
                 ->setLink($item->getLink())
-                ->setTitle(html_entity_decode($item->getTitle()))
+                ->setTitle($item->getTitle())
                 ->setDescription($this->purifiersRegistry->get('planet')->purify($item->getDescription()))
                 ->setDateModified($item->getLastModified())
                 ->setSource($source);
