@@ -13,10 +13,7 @@ class AppExtensionTest extends TestCase
     {
         $callable = $this->getFilterCallableFromExtension(new AppExtension(), 'html_entity_decode');
         if (is_callable($callable)) {
-            $result = call_user_func(
-                $callable,
-                '&uuml;'
-            );
+            $result = $callable('&uuml;');
             $this->assertEquals('ü', $result);
         } else {
             $this->fail('Filter has no callable');
@@ -27,11 +24,7 @@ class AppExtensionTest extends TestCase
     {
         $callable = $this->getFilterCallableFromExtension(new AppExtension(), 'img_loading');
         if (is_callable($callable)) {
-            $result = call_user_func(
-                $callable,
-                '<img src="foo.png"/>',
-                'lazy'
-            );
+            $result = $callable('<img src="foo.png"/>', 'lazy');
             $this->assertEquals('<img loading="lazy" src="foo.png"/>', $result);
         } else {
             $this->fail('Filter has no callable');
