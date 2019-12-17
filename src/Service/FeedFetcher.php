@@ -44,7 +44,7 @@ class FeedFetcher implements \IteratorAggregate
             $feedReader = $this->feedReaderFactory->createFeedReader($feedUrl);
             $feed = $this->createFeed($feedReader);
 
-            if (!is_null($feedReader->get_items())) {
+            if ($feedReader->get_items() !== null) {
                 /** @var \SimplePie_Item $feedReaderItem */
                 foreach ($feedReader->get_items() as $feedReaderItem) {
                     $feed->addItem($this->createItem($feedReaderItem));
@@ -64,7 +64,7 @@ class FeedFetcher implements \IteratorAggregate
             ->setDescription($feedReader->get_description())
             ->setLastModified(
                 new \DateTime(
-                    !is_null($feedReader->get_item())
+                    $feedReader->get_item() !== null
                         ? (string)$feedReader->get_item()->get_date()
                         : 'now'
                 )
@@ -93,7 +93,7 @@ class FeedFetcher implements \IteratorAggregate
     private function createAuthor(\SimplePie_Item $feedReaderItem): Author
     {
         $author = new Author();
-        if (!is_null($feedReaderItem->get_author())) {
+        if ($feedReaderItem->get_author() !== null) {
             $author
                 ->setUri($feedReaderItem->get_author()->get_link())
                 ->setName($feedReaderItem->get_author()->get_name());
