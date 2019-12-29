@@ -20,7 +20,7 @@
         "doctrine/doctrine-migrations-bundle": "^2.1.2",
         "doctrine/orm": "^v2.7.0",
         "exercise/htmlpurifier-bundle": "^v2.0.5",
-        "sensio/framework-extra-bundle": "^v5.5.2",
+        "sensio/framework-extra-bundle": "^v5.5.3",
         "simplepie/simplepie": "^1.5.4",
         "symfony/asset": "^v5.0.2",
         "symfony/console": "^v5.0.2",
