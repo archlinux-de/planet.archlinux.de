@@ -18,7 +18,7 @@
         "ext-xmlreader": "*",
         "doctrine/doctrine-bundle": "^2.0.7",
         "doctrine/doctrine-migrations-bundle": "^2.1.2",
-        "doctrine/orm": "^v2.7.1",
+        "doctrine/orm": "^v2.7.2",
         "exercise/htmlpurifier-bundle": "^v2.0.6",
         "sensio/framework-extra-bundle": "^v5.5.3",
         "simplepie/simplepie": "^1.5.4",
