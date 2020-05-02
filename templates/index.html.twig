@@ -1,73 +1,13 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Planet{% endblock %}
-
-{% block stylesheets %}
-    {{ encore_entry_link_tags('index') }}
-{% endblock %}
-
-{% block javascripts %}
-    {{ encore_entry_script_tags('index') }}
-{% endblock %}
-
-{% block body %}
-    <main role="main" class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-xl-9">
-                <h1 class="mb-4">Arch Linux Planet</h1>
-                {% for item in items %}
-                    <div class="mb-5">
-                        <div class="d-lg-flex justify-content-between align-items-baseline border border-top-0 border-left-0 border-right-0 mb-2">
-                            <h2 class="p-0 text-break">
-                                <a href="{{ item.link }}">{{ item.title }}</a>
-                            </h2>
-                            <div class="p-0">{{ item.lastModified | date('d.m.Y') }}</div>
-                        </div>
-                        <div class="item-description text-break mw-100">
-                            {{ item.description | purify('planet') | img_loading('lazy') }}
-                        </div>
-                        {% if item.author.name %}
-                            <div class="font-italic">
-                                {% if item.author.uri %}
-                                    <a href="{{ item.author.uri }}" rel="nofollow">{{ item.author.name }}</a>
-                                {% else %}
-                                    {{ item.author.name }}
-                                {% endif %}
-                            </div>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-            </div>
-
-            <div class="col-12 col-xl-3">
-                <div class="card mb-4">
-                    <h3 class="card-title card-header">Dein Blog bei archlinux.de</h3>
-                    <div class="card-body">
-                        Wenn auch Du Dein Blog bei archlinux.de hinzufügen möchtest, melde Dich einfach bei
-                        <a href="mailto:pierre@archlinux.de">pierre@archlinux.de</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title card-header">Feeds</h3>
-                    <div class="card-body p-1 p-lg-3">
-                        <ul class="pl-4">
-                            {% for feed in feeds %}
-                                <li><a href="{{ feed.link }}" title="{{ feed.description }}">{{ feed.title }}</a></li>
-                            {% endfor %}
-
-                        </ul>
-                    </div>
-                    <div class="card-footer">
-                        <a class="btn btn-primary" href="{{ path('app_planet_atomfeed') }}">
-                            <strong>ATOM</strong> Feed
-                        </a>
-                        <a class="btn btn-outline-secondary" href="{{ path('app_planet_rssfeed') }}">
-                            <strong>RSS</strong> Feed
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {{ encore_entry_link_tags('main') }}
+    <title></title>
+</head>
+<body>
+<app id="app"></app>
+{{ encore_entry_script_tags('main') }}
+</body>
+</html>

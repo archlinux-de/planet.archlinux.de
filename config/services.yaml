@@ -29,3 +29,7 @@ services:
     App\Service\FeedFetcher:
         bind:
             $feedUrls: '%app.feeds%'
+
+    App\Serializer\ItemNormalizer:
+        bind:
+            $planetPurifier: '@exercise_html_purifier.planet'

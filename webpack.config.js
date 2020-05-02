@@ -6,16 +6,21 @@ Encore
   .setOutputPath((process.env.PUBLIC_PATH || 'public') + '/build')
   .setPublicPath('/build')
   .addAliases({ '@': path.resolve(__dirname, 'assets') })
-  .addAliases({ jquery: 'jquery/dist/jquery.slim' })
-  .addEntry('base', './assets/js/base.js')
-  .addEntry('index', './assets/js/index.js')
-  .copyFiles({ from: 'assets/images', to: 'images/[path][name].[hash:8].[ext]' })
+  .addEntry('main', '@/js/main.js')
   .splitEntryChunks()
   .enableSingleRuntimeChunk()
-  .enableSassLoader()
+  .enableSassLoader((options) => {
+    options.sourceMap = true
+    options.sassOptions = {
+      outputStyle: options.outputStyle,
+      sourceComments: !Encore.isProduction()
+    }
+    delete options.outputStyle
+  }, {})
   .enableSourceMaps(!Encore.isProduction())
   .enableVersioning(Encore.isProduction())
   .enablePostCssLoader()
+  .enableVueLoader()
   .configureBabel(() => {}, { useBuiltIns: 'usage', corejs: 3 })
 
 if (Encore.isProduction()) {

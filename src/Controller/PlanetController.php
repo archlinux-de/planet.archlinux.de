@@ -36,13 +36,7 @@ class PlanetController extends AbstractController
      */
     public function indexAction(): Response
     {
-        return $this->render(
-            'index.html.twig',
-            [
-                'items' => $this->itemRepository->findLatest(0, 30),
-                'feeds' => $this->feedRepository->findLatest(0, 50)
-            ]
-        );
+        return $this->render('index.html.twig');
     }
 
     /**

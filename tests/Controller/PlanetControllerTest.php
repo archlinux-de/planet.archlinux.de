@@ -44,7 +44,6 @@ class PlanetControllerTest extends DatabaseTestCase
         $crawler = $client->request('GET', '/');
 
         $this->assertTrue($client->getResponse()->isSuccessful());
-        $this->assertStringContainsString('Arch Linux Planet', $crawler->filter('h1')->text());
     }
 
     public function testAtomAction(): void
