@@ -34,7 +34,7 @@ class ItemRepositoryTest extends DatabaseTestCase
 
         /** @var ItemRepository $itemRepository */
         $itemRepository = $this->getRepository(Item::class);
-        $items = $itemRepository->findLatest(2);
+        $items = iterator_to_array($itemRepository->findLatest(0, 2));
         $this->assertCount(2, $items);
         $this->assertEquals($newItem->getLink(), $items[0]->getLink());
         $this->assertEquals($oldItem->getLink(), $items[1]->getLink());
@@ -65,7 +65,7 @@ class ItemRepositoryTest extends DatabaseTestCase
 
         /** @var ItemRepository $itemRepository */
         $itemRepository = $this->getRepository(Item::class);
-        $items = $itemRepository->findLatest(1);
+        $items =  iterator_to_array($itemRepository->findLatest(0, 1));
         $this->assertCount(1, $items);
         $this->assertEquals($newItem->getLink(), $items[0]->getLink());
     }

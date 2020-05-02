@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Feed;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class FeedRepository extends ServiceEntityRepository
 {
@@ -17,15 +18,19 @@ class FeedRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Feed[]
+     * @param int $offset
+     * @param int $limit
+     * @return Paginator<feed>
      */
-    public function findLatest(): array
+    public function findLatest(int $offset, int $limit): Paginator
     {
-        return $this
+        $queryBuilder = $this
             ->createQueryBuilder('feed')
             ->orderBy('feed.lastModified', 'DESC')
-            ->getQuery()
-            ->getResult();
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
+
+        return new Paginator($queryBuilder);
     }
 
     /**

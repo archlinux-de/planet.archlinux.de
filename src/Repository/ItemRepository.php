@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Item;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ItemRepository extends ServiceEntityRepository
 {
@@ -17,16 +18,18 @@ class ItemRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param int $offset
      * @param int $limit
-     * @return Item[]
+     * @return Paginator<Item>
      */
-    public function findLatest(int $limit): array
+    public function findLatest(int $offset, int $limit): Paginator
     {
-        return $this
+        $queryBuilder = $this
             ->createQueryBuilder('item')
             ->orderBy('item.lastModified', 'DESC')
-            ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult();
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
+
+        return new Paginator($queryBuilder);
     }
 }

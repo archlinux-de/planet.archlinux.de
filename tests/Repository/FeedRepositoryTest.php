@@ -22,8 +22,9 @@ class FeedRepositoryTest extends DatabaseTestCase
 
         /** @var FeedRepository $feedRepository */
         $feedRepository = $this->getRepository(Feed::class);
-        $this->assertCount(1, $feedRepository->findLatest());
-        $this->assertEquals('https://www.archlinux.de/', $feedRepository->findLatest()[0]->getUrl());
+        $feeds = iterator_to_array($feedRepository->findLatest(0, 10));
+        $this->assertCount(1, $feeds);
+        $this->assertEquals('https://www.archlinux.de/', $feeds[0]->getUrl());
     }
 
     public function testFindAllExceptByUrlsIfNoUrlsGiven(): void
@@ -41,7 +42,10 @@ class FeedRepositoryTest extends DatabaseTestCase
         /** @var FeedRepository $feedRepository */
         $feedRepository = $this->getRepository(Feed::class);
         $this->assertCount(1, $feedRepository->findAllExceptByUrls([]));
-        $this->assertEquals('https://www.archlinux.de/', $feedRepository->findLatest()[0]->getUrl());
+        $this->assertEquals(
+            'https://www.archlinux.de/',
+            iterator_to_array($feedRepository->findLatest(0, 10))[0]->getUrl()
+        );
     }
 
     public function testFindAllExceptByUrls(): void
