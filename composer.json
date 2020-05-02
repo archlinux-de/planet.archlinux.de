@@ -32,6 +32,7 @@
         "symfony/monolog-bundle": "^v3.5.0",
         "symfony/process": "^v5.0.8",
         "symfony/property-access": "^v5.0.8",
+        "symfony/serializer": "^v5.0.8",
         "symfony/twig-bundle": "^v5.0.8",
         "symfony/validator": "^v5.0.8",
         "symfony/web-link": "^v5.0.8",
