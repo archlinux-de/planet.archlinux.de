@@ -1,6 +1,8 @@
 exercise_html_purifier:
-    planet:
-        HTML.Allowed: 'a[href],p,code,pre,ul,ol,li,br,strong,em,del,small,sup,ins,img[src|alt],blockquote,h3,h4,h5,h6,div,span,table,tbody,td,tr,thead,th'
-        HTML.Nofollow: true
-        AutoFormat.RemoveEmpty: true
-        AutoFormat.RemoveSpansWithoutAttributes: true
+    html_profiles:
+        planet:
+            config:
+                HTML.Allowed: 'a[href],p,code,pre,ul,ol,li,br,strong,em,del,small,sup,ins,img[src|alt],blockquote,h3,h4,h5,h6,div,span,table,tbody,td,tr,thead,th'
+                HTML.Nofollow: true
+                AutoFormat.RemoveEmpty: true
+                AutoFormat.RemoveSpansWithoutAttributes: true

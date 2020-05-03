@@ -59,10 +59,7 @@ class ItemNormalizer implements NormalizerInterface, CacheableSupportsMethodInte
                 ]
             )
         );
-
-        if (isset($data['description'])) {
-            $data['description'] = $this->planetPurifier->purify($data['description']);
-        }
+        $data['description'] = $this->planetPurifier->purify($data['description']);
 
         return $data;
     }
