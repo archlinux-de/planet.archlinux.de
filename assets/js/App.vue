@@ -57,7 +57,11 @@ export default {
       title: 'planet.archlinux.de',
       titleTemplate: '%s - planet.archlinux.de',
       meta: [{ vmid: 'robots', name: 'robots', content: 'index,follow' }],
-      link: [{ rel: 'icon', href: require('@/images/archicon.svg'), sizes: 'any', type: 'image/svg+xml' }]
+      link: [
+        { rel: 'icon', href: require('@/images/archicon.svg'), sizes: 'any', type: 'image/svg+xml' },
+        { rel: 'alternate', type: 'application/rss+xml', href: '/rss.xml' },
+        { rel: 'alternate', type: 'application/atom+xml', href: '/atom.xml' }
+      ]
     }
   }
 }
