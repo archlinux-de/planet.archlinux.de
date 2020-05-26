@@ -16,7 +16,7 @@
         "ext-pdo_mysql": "*",
         "ext-xml": "*",
         "ext-xmlreader": "*",
-        "doctrine/doctrine-bundle": "^2.0.8",
+        "doctrine/doctrine-bundle": "^2.1.0",
         "doctrine/doctrine-migrations-bundle": "^2.1.2",
         "doctrine/orm": "^v2.7.2",
         "exercise/htmlpurifier-bundle": "^v3.0",
