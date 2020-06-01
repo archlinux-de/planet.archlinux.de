@@ -2,7 +2,7 @@
   <div>
     <b-navbar class="navbar-border-brand nav-no-outline mb-4" toggleable="sm" type="dark" variant="dark">
       <b-navbar-brand href="https://www.archlinux.de/">
-        <img alt="Arch Linux" height="40" src="@/images/archlogo.svg"/>
+        <img alt="Arch Linux" height="40" :src="logo"/>
       </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -50,6 +50,9 @@
 </style>
 
 <script>
+import LogoImage from '@/images/archlogo.svg'
+import IconImage from '@/images/archicon.svg'
+
 export default {
   name: 'App',
   metaInfo () {
@@ -58,10 +61,16 @@ export default {
       titleTemplate: '%s - planet.archlinux.de',
       meta: [{ vmid: 'robots', name: 'robots', content: 'index,follow' }],
       link: [
-        { rel: 'icon', href: require('@/images/archicon.svg'), sizes: 'any', type: 'image/svg+xml' },
+        { rel: 'icon', href: this.icon, sizes: 'any', type: 'image/svg+xml' },
         { rel: 'alternate', type: 'application/rss+xml', href: '/rss.xml' },
         { rel: 'alternate', type: 'application/atom+xml', href: '/atom.xml' }
       ]
+    }
+  },
+  data () {
+    return {
+      logo: LogoImage,
+      icon: IconImage
     }
   }
 }
