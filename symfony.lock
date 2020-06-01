@@ -296,6 +296,9 @@
     "symfony/dependency-injection": {
         "version": "v4.2.1"
     },
+    "symfony/deprecation-contracts": {
+        "version": "v2.1.2"
+    },
     "symfony/doctrine-bridge": {
         "version": "v4.2.1"
     },
@@ -392,6 +395,9 @@
     "symfony/property-access": {
         "version": "v5.0.8"
     },
+    "symfony/property-info": {
+        "version": "v5.1.0"
+    },
     "symfony/proxy-manager-bridge": {
         "version": "v5.0.2"
     },
@@ -412,6 +418,9 @@
     },
     "symfony/stopwatch": {
         "version": "v4.2.1"
+    },
+    "symfony/string": {
+        "version": "v5.1.0"
     },
     "symfony/translation-contracts": {
         "version": "v1.1.5"
