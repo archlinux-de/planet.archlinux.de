@@ -58,7 +58,7 @@ test:
 	${NODE-RUN} node_modules/.bin/jest
 	${PHP-RUN} bin/console lint:yaml config
 	${PHP-RUN} bin/console lint:twig templates
-	${NODE-RUN} yarn build --dest $(shell mktemp -d)
+	${NODE-RUN} yarn build --modern --dest $(shell mktemp -d)
 	${PHP-RUN} vendor/bin/phpstan analyse
 	${PHP-RUN} vendor/bin/phpunit
 

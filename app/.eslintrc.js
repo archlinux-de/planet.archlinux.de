@@ -8,6 +8,13 @@ module.exports = {
     '@vue/standard',
     'plugin:compat/recommended'
   ],
+  settings: {
+    polyfills: [
+      'fetch',
+      'URL',
+      'Object.entries'
+    ]
+  },
   parserOptions: {
     parser: 'babel-eslint'
   },
