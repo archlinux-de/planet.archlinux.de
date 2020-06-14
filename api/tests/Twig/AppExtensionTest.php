@@ -20,17 +20,6 @@ class AppExtensionTest extends TestCase
         }
     }
 
-    public function testImageLoadingFilter(): void
-    {
-        $callable = $this->getFilterCallableFromExtension(new AppExtension(), 'img_loading');
-        if (is_callable($callable)) {
-            $result = $callable('<img src="foo.png"/>', 'lazy');
-            $this->assertEquals('<img loading="lazy" src="foo.png"/>', $result);
-        } else {
-            $this->fail('Filter has no callable');
-        }
-    }
-
     /**
      * @param AbstractExtension $extension
      * @param string $filterName

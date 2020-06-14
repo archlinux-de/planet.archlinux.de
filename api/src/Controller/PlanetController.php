@@ -29,17 +29,6 @@ class PlanetController extends AbstractController
     }
 
     /**
-     * @Route("/", methods={"GET"})
-     * @Cache(smaxage="600")
-     *
-     * @return Response
-     */
-    public function indexAction(): Response
-    {
-        return $this->render('index.html.twig');
-    }
-
-    /**
      * @Route("/rss.xml", methods={"GET"})
      * @Cache(smaxage="600")
      *

@@ -86,7 +86,7 @@ fix-code-style:
 
 update:
 	${PHP-RUN} composer --no-interaction update
-	${PHP-RUN} composer --no-interaction update --lock
+	${PHP-RUN} composer --no-interaction update --lock --no-scripts
 	${NODE-RUN} yarn upgrade --non-interactive
 
 deploy:

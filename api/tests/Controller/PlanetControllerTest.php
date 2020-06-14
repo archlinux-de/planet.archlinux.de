@@ -37,15 +37,6 @@ class PlanetControllerTest extends DatabaseTestCase
         $entityManager->clear();
     }
 
-    public function testIndexAction(): void
-    {
-        $client = $this->getClient();
-
-        $crawler = $client->request('GET', '/');
-
-        $this->assertTrue($client->getResponse()->isSuccessful());
-    }
-
     public function testAtomAction(): void
     {
         $client = $this->getClient();

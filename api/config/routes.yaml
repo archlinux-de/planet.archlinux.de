@@ -2,6 +2,12 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+app_planet_index:
+    path: /
+    host: www.archlinux.de
+    schemes: ['https']
+    methods: GET
+
 app_legacy_rssfeed:
     path: /rss20.xml
     methods: GET

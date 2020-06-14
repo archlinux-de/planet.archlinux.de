@@ -188,9 +188,6 @@
     "psr/event-dispatcher": {
         "version": "1.0.0"
     },
-    "psr/link": {
-        "version": "1.0.0"
-    },
     "psr/log": {
         "version": "1.1.0"
     },
@@ -266,9 +263,6 @@
             "ref": "0dc9cceda799fd3a08b96987e176a261028a3709"
         }
     },
-    "symfony/asset": {
-        "version": "v4.2.1"
-    },
     "symfony/browser-kit": {
         "version": "v4.2.1"
     },
@@ -289,9 +283,6 @@
             "version": "3.3",
             "ref": "f3a28efb32f20b8740fd763651cabd780bce43da"
         }
-    },
-    "symfony/css-selector": {
-        "version": "v4.2.1"
     },
     "symfony/dependency-injection": {
         "version": "v4.2.1"
@@ -451,27 +442,6 @@
     },
     "symfony/var-exporter": {
         "version": "v4.2.1"
-    },
-    "symfony/web-link": {
-        "version": "v4.2.1"
-    },
-    "symfony/web-profiler-bundle": {
-        "version": "3.3",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "3.3",
-            "ref": "6bdfa1a95f6b2e677ab985cd1af2eae35d62e0f6"
-        }
-    },
-    "symfony/webpack-encore-bundle": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "248c29c070dcd79e8333c676b0c5e284e3b365b5"
-        }
     },
     "symfony/yaml": {
         "version": "v4.2.1"
