@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import Feeds from '@/js/components/Feeds'
-import Items from '@/js/components/Items'
+import Feeds from '@/components/Feeds'
+import Items from '@/components/Items'
 
 export default {
   name: 'Index',

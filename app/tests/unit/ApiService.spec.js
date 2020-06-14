@@ -1,4 +1,4 @@
-import createApiService from '@/js/services/ApiService'
+import createApiService from '@/services/ApiService'
 
 describe('Testing fetchItems', () => {
   it('Items can be fetched', async () => {

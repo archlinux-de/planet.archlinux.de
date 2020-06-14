@@ -32,7 +32,7 @@
 </template>
 
 <style lang="scss">
-  @import "@/css/archlinux-bootstrap";
+  @import "@/assets/css/archlinux-bootstrap";
 
   .navbar-border-brand {
     border-bottom: 0.313rem solid $primary;
@@ -50,11 +50,21 @@
 </style>
 
 <script>
-import LogoImage from '@/images/archlogo.svg'
-import IconImage from '@/images/archicon.svg'
+import { BCollapse, BNav, BNavbar, BNavbarBrand, BNavbarNav, BNavbarToggle, BNavItem } from 'bootstrap-vue'
+import LogoImage from '@/assets/images/archlogo.svg'
+import IconImage from '@/assets/images/archicon.svg'
 
 export default {
   name: 'App',
+  components: {
+    BNavbar,
+    BNavbarBrand,
+    BNavbarToggle,
+    BCollapse,
+    BNavbarNav,
+    BNavItem,
+    BNav
+  },
   metaInfo () {
     return {
       title: 'planet.archlinux.de',
