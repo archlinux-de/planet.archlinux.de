@@ -1,7 +1,0 @@
-twig:
-    default_path: '%kernel.project_dir%/templates'
-    date:
-        format: 'd.m.Y H:i'
-    number_format:
-        decimal_point: ','
-        thousands_separator: '.'
