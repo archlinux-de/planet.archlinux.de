@@ -90,10 +90,10 @@ update:
 	${NODE-RUN} yarn upgrade --non-interactive
 
 deploy:
-	yarn install --non-interactive --frozen-lockfile --prod
-	yarn build --modern --no-clean
-	find public/build -type f -mtime +30 -delete
-	find public/build -type d -empty -delete
-	composer --no-interaction install --prefer-dist --no-dev --optimize-autoloader
-	composer dump-env prod
-	bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration
+	cd app && yarn install --non-interactive --frozen-lockfile --prod
+	cd app && yarn build --modern --no-clean
+	cd app && find dist -type f -mtime +30 -delete
+	cd app && find dist -type d -empty -delete
+	cd api && composer --no-interaction install --prefer-dist --no-dev --optimize-autoloader
+	cd api && composer dump-env prod
+	cd api && bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration
