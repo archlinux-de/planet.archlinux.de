@@ -91,7 +91,7 @@ update:
 
 deploy:
 	yarn install --non-interactive --frozen-lockfile --prod
-	yarn build --modern
+	yarn build --modern --no-clean
 	find public/build -type f -mtime +30 -delete
 	find public/build -type d -empty -delete
 	composer --no-interaction install --prefer-dist --no-dev --optimize-autoloader

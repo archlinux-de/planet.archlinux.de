@@ -1,4 +1,5 @@
 const CompressionPlugin = require('compression-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   lintOnSave: false,
@@ -10,6 +11,13 @@ module.exports = {
     if (!process.env.VUE_CLI_MODERN_BUILD) {
       config.entry.app.unshift('whatwg-fetch')
     }
+
+    config.plugins.push(new CopyWebpackPlugin({
+      patterns: [
+        { from: 'src/assets/images/arch(icon|logo).svg', to: 'img/[name].[ext]' }
+      ]
+    }))
+
     if (process.env.NODE_ENV === 'production') {
       config.plugins.push(new CompressionPlugin({ filename: '[path].gz[query]', algorithm: 'gzip' }))
       config.plugins.push(new CompressionPlugin({ filename: '[path].br[query]', algorithm: 'brotliCompress' }))
