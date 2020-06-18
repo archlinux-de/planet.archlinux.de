@@ -10,6 +10,7 @@ module.exports = {
   configureWebpack: config => {
     if (!process.env.VUE_CLI_MODERN_BUILD) {
       config.entry.app.unshift('whatwg-fetch')
+      config.entry.app.unshift('intersection-observer')
     }
 
     config.plugins.push(new CopyWebpackPlugin({
