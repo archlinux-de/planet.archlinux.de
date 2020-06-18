@@ -14,7 +14,7 @@
         <span v-else>{{ item.author.name }}</span>
       </div>
     </div>
-    <div v-observe-visibility="visibilityChanged"></div>
+    <div v-b-visible.300="visibilityChanged"></div>
   </div>
 </template>
 
