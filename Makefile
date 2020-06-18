@@ -90,7 +90,7 @@ update:
 	${NODE-RUN} yarn upgrade --non-interactive
 
 deploy:
-	cd app && yarn install --non-interactive --frozen-lockfile --prod
+	cd app && yarn install --non-interactive --frozen-lockfile --prod --ignore-optional
 	cd app && yarn build --modern --no-clean
 	cd app && find dist -type f -mtime +30 -delete
 	cd app && find dist -type d -empty -delete
