@@ -6,8 +6,8 @@
     <updated>{{ 'now' | date(constant('DateTimeInterface::ATOM'), timezone='GMT') }}</updated>
     <link rel="alternate" href="{{ url('app_planet_index') }}"/>
     <link rel="self" href="{{ url('app_planet_atomfeed') }}"/>
-    <icon>{{ absolute_url('build/img/archicon.svg') }}</icon>
-    <logo>{{ absolute_url('build/img/archlogo.svg') }}</logo>
+    <icon>{{ absolute_url('img/archicon.svg') }}</icon>
+    <logo>{{ absolute_url('img/archlogo.svg') }}</logo>
     {# @var items \App\Entity\Item[] #}
     {% for item in items %}
         <entry>
