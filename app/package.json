@@ -11,7 +11,7 @@
   "dependencies": {
     "bootstrap-vue": "^2.15.0",
     "core-js": "^3.6.5",
-    "intersection-observer": "^0.10.0",
+    "intersection-observer": "^0.11.0",
     "vue": "^2.6.11",
     "vue-filter-pretty-bytes": "^0.1.5",
     "vue-meta": "^2.4.0",
@@ -37,7 +37,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.2.2",
     "sass": "^1.26.8",
-    "sass-loader": "^8.0.2",
+    "sass-loader": "^9.0.0",
     "stylelint": "^13.6.0",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-no-unsupported-browser-features": "^4.0.0",
