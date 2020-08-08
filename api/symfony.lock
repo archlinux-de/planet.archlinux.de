@@ -203,6 +203,9 @@
     "sebastian/comparator": {
         "version": "3.0.2"
     },
+    "sebastian/complexity": {
+        "version": "2.0.0"
+    },
     "sebastian/diff": {
         "version": "3.0.1"
     },
@@ -214,6 +217,9 @@
     },
     "sebastian/global-state": {
         "version": "2.0.0"
+    },
+    "sebastian/lines-of-code": {
+        "version": "1.0.0"
     },
     "sebastian/object-enumerator": {
         "version": "3.0.3"
