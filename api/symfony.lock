@@ -194,6 +194,9 @@
     "psr/simple-cache": {
         "version": "1.0.1"
     },
+    "sebastian/cli-parser": {
+        "version": "1.0.0"
+    },
     "sebastian/code-unit": {
         "version": "1.0.2"
     },
