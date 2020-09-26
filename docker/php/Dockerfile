@@ -1,6 +1,7 @@
-FROM archlinux/base
+FROM php:7-fpm-alpine
 
-RUN pacman -Syu --noconfirm --needed php php-intl php-sqlite php-phpdbg php-apcu php-fpm composer git unzip
-RUN echo 'de_DE.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
-RUN chmod -R 1777 /run
-ADD etc/ /etc
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
+RUN install-php-extensions opcache apcu intl pdo_mysql
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
