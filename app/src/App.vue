@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="page">
     <b-navbar class="navbar-border-brand nav-no-outline mb-4" toggleable="sm" type="dark" variant="dark">
       <b-navbar-brand href="https://www.archlinux.de/">
         <img alt="Arch Linux" height="40" :src="logo"/>
@@ -20,9 +20,9 @@
       </b-collapse>
     </b-navbar>
 
-    <router-view/>
+    <router-view id="content"/>
 
-    <footer>
+    <footer id="footer">
       <b-nav align="right" class="nav-no-outline">
         <b-nav-item href="https://www.archlinux.de/privacy-policy">Datenschutz</b-nav-item>
         <b-nav-item href="https://www.archlinux.de/impressum">Impressum</b-nav-item>
@@ -43,6 +43,22 @@
     button:focus {
       outline: 0;
     }
+  }
+
+  #page {
+    position: relative;
+    min-height: 100vh;
+  }
+
+  #content {
+    padding-bottom: 2.3rem;
+  }
+
+  #footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.3rem;
   }
 
   @import "~bootstrap/scss/bootstrap.scss";
@@ -69,11 +85,15 @@ export default {
     return {
       title: 'planet.archlinux.de',
       titleTemplate: '%s - planet.archlinux.de',
-      meta: [{ vmid: 'robots', name: 'robots', content: 'index,follow' }],
+      meta: [
+        { vmid: 'robots', name: 'robots', content: 'index,follow' },
+        { name: 'theme-color', content: '#333' }
+      ],
       link: [
         { rel: 'icon', href: this.icon, sizes: 'any', type: 'image/svg+xml' },
         { rel: 'alternate', type: 'application/rss+xml', href: '/rss.xml' },
-        { rel: 'alternate', type: 'application/atom+xml', href: '/atom.xml' }
+        { rel: 'alternate', type: 'application/atom+xml', href: '/atom.xml' },
+        { rel: 'manifest', href: '/manifest.webmanifest' }
       ]
     }
   },
@@ -81,6 +101,13 @@ export default {
     return {
       logo: LogoImage,
       icon: IconImage
+    }
+  },
+  mounted () {
+    if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register(`${process.env.BASE_URL}service-worker.js`)
+      })
     }
   }
 }
