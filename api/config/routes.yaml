@@ -1,7 +1,3 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
-
 app_planet_index:
     path: /
     host: www.archlinux.de
