@@ -11,13 +11,13 @@
   "dependencies": {
     "abortcontroller-polyfill": "~1.5.0",
     "bootstrap-vue": "~2.18.1",
-    "core-js": "~3.6.5",
+    "core-js": "~3.7.0",
     "intersection-observer": "~0.11.0",
     "vue": "~2.6.11",
     "vue-filter-pretty-bytes": "~0.1.5",
     "vue-meta": "~2.4.0",
     "vue-router": "~3.4.9",
-    "whatwg-fetch": "~3.4.1"
+    "whatwg-fetch": "~3.5.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.4",
