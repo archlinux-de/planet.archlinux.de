@@ -32,7 +32,7 @@
 </template>
 
 <style lang="scss">
-  @import "@/assets/css/archlinux-bootstrap";
+  @import "./assets/css/archlinux-bootstrap";
 
   .navbar-border-brand {
     border-bottom: 0.313rem solid $primary;
@@ -67,8 +67,8 @@
 
 <script>
 import { BCollapse, BNav, BNavbar, BNavbarBrand, BNavbarNav, BNavbarToggle, BNavItem } from 'bootstrap-vue'
-import LogoImage from '@/assets/images/archlogo.svg'
-import IconImage from '@/assets/images/archicon.svg'
+import LogoImage from './assets/images/archlogo.svg'
+import IconImage from './assets/images/archicon.svg'
 
 export default {
   name: 'App',
@@ -106,7 +106,7 @@ export default {
   mounted () {
     if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register(`${process.env.BASE_URL}service-worker.js`)
+        navigator.serviceWorker.register('/service-worker.js')
       })
     }
   }
