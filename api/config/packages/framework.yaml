@@ -15,8 +15,4 @@ framework:
     #fragments: true
     php_errors:
         log: true
-    http_client:
-        default_options:
-            timeout: 60
-            max_duration: 1800
     default_locale: de
