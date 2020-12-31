@@ -37,4 +37,9 @@ final class Version20190101125607 extends AbstractMigration
         $this->addSql('DROP TABLE item');
         $this->addSql('DROP TABLE feed');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

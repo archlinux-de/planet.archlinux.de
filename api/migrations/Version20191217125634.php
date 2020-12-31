@@ -36,4 +36,9 @@ final class Version20191217125634 extends AbstractMigration
         $this->addSql('ALTER TABLE item ADD PRIMARY KEY (public_id, feed_url)');
         // phpcs:enable
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }
