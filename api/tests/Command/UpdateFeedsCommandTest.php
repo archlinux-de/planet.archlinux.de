@@ -2,7 +2,6 @@
 
 namespace App\Tests\Command;
 
-use App\Command\Exception\ValidationException;
 use App\Command\UpdateFeedsCommand;
 use App\Entity\Feed;
 use App\Entity\Item;
@@ -10,6 +9,7 @@ use App\Repository\FeedRepository;
 use App\Service\FeedFetcher;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -56,6 +56,12 @@ class UpdateFeedsCommandTest extends KernelTestCase
         $validator = $this->createMock(ValidatorInterface::class);
         $validator->expects($this->atLeastOnce())->method('validate')->willReturn(new ConstraintViolationList());
 
+        /** @var LoggerInterface|MockObject $logger */
+        $logger = $this->createMock(LoggerInterface::class);
+        $logger
+            ->expects($this->never())
+            ->method('error');
+
         $kernel = self::bootKernel();
         $application = new Application($kernel);
 
@@ -64,7 +70,8 @@ class UpdateFeedsCommandTest extends KernelTestCase
                 $entityManager,
                 $validator,
                 $feedFetcher,
-                $feedRepository
+                $feedRepository,
+                $logger
             )
         );
 
@@ -107,6 +114,12 @@ class UpdateFeedsCommandTest extends KernelTestCase
             ->method('validate')
             ->willReturn(new ConstraintViolationList([$this->createMock(ConstraintViolation::class)]));
 
+        /** @var LoggerInterface|MockObject $logger */
+        $logger = $this->createMock(LoggerInterface::class);
+        $logger
+            ->expects($this->once())
+            ->method('error');
+
         $kernel = self::bootKernel();
         $application = new Application($kernel);
 
@@ -115,14 +128,14 @@ class UpdateFeedsCommandTest extends KernelTestCase
                 $entityManager,
                 $validator,
                 $feedFetcher,
-                $feedRepository
+                $feedRepository,
+                $logger
             )
         );
 
         $command = $application->find('app:update:feeds');
         $commandTester = new CommandTester($command);
-        $this->expectException(ValidationException::class);
-        $commandTester->execute(['command' => $command->getName()]);
+        $this->assertNotEquals(0, $commandTester->execute(['command' => $command->getName()]));
     }
 
     public function testUpdateFeed(): void
@@ -156,6 +169,12 @@ class UpdateFeedsCommandTest extends KernelTestCase
         $validator = $this->createMock(ValidatorInterface::class);
         $validator->expects($this->atLeastOnce())->method('validate')->willReturn(new ConstraintViolationList());
 
+        /** @var LoggerInterface|MockObject $logger */
+        $logger = $this->createMock(LoggerInterface::class);
+        $logger
+            ->expects($this->never())
+            ->method('error');
+
         $kernel = self::bootKernel();
         $application = new Application($kernel);
 
@@ -164,7 +183,8 @@ class UpdateFeedsCommandTest extends KernelTestCase
                 $entityManager,
                 $validator,
                 $feedFetcher,
-                $feedRepository
+                $feedRepository,
+                $logger
             )
         );
 

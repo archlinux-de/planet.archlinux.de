@@ -7,6 +7,7 @@ use App\Entity\Feed;
 use App\Repository\FeedRepository;
 use App\Service\FeedFetcher;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputInterface;
@@ -29,23 +30,29 @@ class UpdateFeedsCommand extends Command
     /** @var FeedRepository */
     private $feedRepository;
 
+    /** @var LoggerInterface */
+    private $logger;
+
     /**
      * @param EntityManagerInterface $entityManager
      * @param ValidatorInterface $validator
      * @param FeedFetcher $feedFetcher
      * @param FeedRepository $feedRepository
+     * @param LoggerInterface $logger
      */
     public function __construct(
         EntityManagerInterface $entityManager,
         ValidatorInterface $validator,
         FeedFetcher $feedFetcher,
-        FeedRepository $feedRepository
+        FeedRepository $feedRepository,
+        LoggerInterface $logger
     ) {
         parent::__construct();
         $this->entityManager = $entityManager;
         $this->validator = $validator;
         $this->feedFetcher = $feedFetcher;
         $this->feedRepository = $feedRepository;
+        $this->logger = $logger;
     }
 
     protected function configure(): void
@@ -60,6 +67,7 @@ class UpdateFeedsCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $exitCode = 0;
         $this->lock('cron.lock');
 
         $this->entityManager->transactional(
@@ -74,7 +82,9 @@ class UpdateFeedsCommand extends Command
         foreach ($this->feedFetcher as $feed) {
             $errors = $this->validator->validate($feed);
             if ($errors->count() > 0) {
-                throw new ValidationException($errors);
+                $this->logger->error(new ValidationException($errors), ['feedUrl' => $feed->getUrl()]);
+                $exitCode = 1;
+                continue;
             }
 
             $this->entityManager->transactional(
@@ -93,6 +103,6 @@ class UpdateFeedsCommand extends Command
 
         $this->release();
 
-        return 0;
+        return $exitCode;
     }
 }
