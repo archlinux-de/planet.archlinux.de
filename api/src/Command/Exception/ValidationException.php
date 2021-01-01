@@ -20,8 +20,9 @@ class ValidationException extends \RuntimeException
                         /** @var ConstraintViolationInterface $constraintViolation */
                         foreach ($constraintViolationList as $constraintViolation) {
                             yield sprintf(
-                                'Validation of %s failed. %s',
+                                'Validation of value %s in "%s" failed. %s',
                                 json_encode($constraintViolation->getInvalidValue()),
+                                $constraintViolation->getPropertyPath(),
                                 (string)$constraintViolation->getMessage()
                             );
                         }
