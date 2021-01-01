@@ -23,7 +23,7 @@ describe('Testing fetchItems', () => {
   it('Fetching items fails on server error', async () => {
     const fetchMock = jest.fn().mockReturnValue(Promise.resolve({
       ok: false,
-      statusText: 'Server is down'
+      status: 500
     }))
 
     expect.assertions(1)
