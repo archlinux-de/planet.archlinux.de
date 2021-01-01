@@ -11,13 +11,18 @@ MARIADB-RUN := COMPOSE-RUN + ' --no-deps mariadb'
 default:
 	just --list
 
+load-fixtures:
+	{{PHP-DB-RUN}} bin/console doctrine:fixtures:load -n
+
+load-production-fixtures:
+	{{PHP-DB-RUN}} bin/console app:update:feeds
+
 init: start
 	{{PHP-DB-RUN}} bin/console cache:warmup
 	{{PHP-DB-RUN}} bin/console doctrine:database:create
 	{{PHP-DB-RUN}} bin/console doctrine:schema:create
 	{{PHP-DB-RUN}} bin/console doctrine:migrations:sync-metadata-storage --no-interaction
 	{{PHP-DB-RUN}} bin/console doctrine:migrations:version --add --all --no-interaction
-	{{PHP-DB-RUN}} bin/console app:update:feeds
 
 start:
 	{{COMPOSE}} up -d
@@ -106,6 +111,7 @@ test-e2e:
 	if [ "${CI-}" = "true" ]; then
 		git clean -xdf app/dist
 		just init
+		just load-fixtures
 		just yarn build
 		CYPRESS_baseUrl=http://nginx:81 just cypress-run
 	else
