@@ -7,6 +7,7 @@
         "php": "^8.0",
         "ext-apcu": "^5.1",
         "ext-ctype": "*",
+        "ext-curl": "*",
         "ext-dom": "*",
         "ext-iconv": "*",
         "ext-intl": "*",
