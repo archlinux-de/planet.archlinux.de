@@ -278,15 +278,6 @@
             "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
         }
     },
-    "sensiolabs/security-checker": {
-        "version": "4.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "4.0",
-            "ref": "05daf6b214e54aed4089f3480f944a67ac3a7889"
-        }
-    },
     "simplepie/simplepie": {
         "version": "1.5.2"
     },
@@ -371,9 +362,6 @@
             "ref": "82e2278ff2a74a97837e84c2493c30e7a85ad299"
         }
     },
-    "symfony/http-client": {
-        "version": "v4.3.2"
-    },
     "symfony/http-client-contracts": {
         "version": "v1.1.5"
     },
@@ -388,9 +376,6 @@
     },
     "symfony/lock": {
         "version": "v4.2.1"
-    },
-    "symfony/mime": {
-        "version": "v4.3.2"
     },
     "symfony/monolog-bridge": {
         "version": "v4.2.1"
