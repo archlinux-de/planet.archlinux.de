@@ -43,7 +43,6 @@
         "ext-pdo_sqlite": "*",
         "doctrine/doctrine-fixtures-bundle": "^3.4.0",
         "fakerphp/faker": "^1.13.0",
-        "malukenho/mcbumpface": "^1.1.5",
         "phpstan/extension-installer": "^1.1.0",
         "phpstan/phpstan": "^0.12.82",
         "phpstan/phpstan-deprecation-rules": "^0.12.6",
