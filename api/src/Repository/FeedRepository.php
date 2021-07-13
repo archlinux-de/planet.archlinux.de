@@ -40,7 +40,9 @@ class FeedRepository extends ServiceEntityRepository
     public function findAllExceptByUrls(array $urls): array
     {
         if (empty($urls)) {
-            return $this->findAll();
+            /** @var Feed[] $feeds */
+            $feeds = $this->findAll();
+            return $feeds;
         }
 
         return $this

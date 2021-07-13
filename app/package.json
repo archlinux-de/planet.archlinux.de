@@ -9,7 +9,7 @@
   "dependencies": {
     "bootstrap-vue": "~2.21.2",
     "core-js": "~3.15.2",
-    "vue": "~2.6.13",
+    "vue": "~2.6.14",
     "vue-meta": "~2.4.0",
     "vue-router": "~3.5.2"
   },
@@ -31,17 +31,17 @@
     "eslint-plugin-vue": "~7.13.0",
     "file-loader": "~6.2.0",
     "html-webpack-plugin": "^5.3.2",
-    "jest": "~26.6.3",
-    "mini-css-extract-plugin": "~1.6.2",
-    "postcss-loader": "~5.3.0",
+    "jest": "~27.0.6",
+    "mini-css-extract-plugin": "~2.1.0",
+    "postcss-loader": "~6.1.1",
     "sass": "~1.35.2",
     "sass-loader": "~12.1.0",
-    "style-loader": "~2.0.0",
+    "style-loader": "~3.1.0",
     "stylelint": "~13.13.1",
-    "stylelint-config-standard": "~21.0.0",
+    "stylelint-config-standard": "~22.0.0",
     "stylelint-no-unsupported-browser-features": "~5.0.1",
-    "vue-loader": "~15.9.7",
-    "vue-template-compiler": "~2.6.13",
+    "vue-loader": "~15",
+    "vue-template-compiler": "~2.6.14",
     "webpack": "~5.44.0",
     "webpack-cli": "~4.7.2",
     "webpack-dev-server": "~3.11.2",
@@ -49,6 +49,6 @@
     "workbox-webpack-plugin": "~6.1.5"
   },
   "engines": {
-    "node": ">=15"
+    "node": ">=16"
   }
 }
