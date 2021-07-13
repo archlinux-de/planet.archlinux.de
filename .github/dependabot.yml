@@ -1,17 +1,5 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/app"
-    open-pull-requests-limit: 20
-    schedule:
-      interval: "daily"
-
-  - package-ecosystem: "composer"
-    directory: "/api"
-    open-pull-requests-limit: 20
-    schedule:
-      interval: "daily"
-
   - package-ecosystem: "docker"
     directory: "/docker"
     schedule:
