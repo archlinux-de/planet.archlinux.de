@@ -63,10 +63,10 @@ php *args='-h':
 composer *args:
 	{{PHP-RUN}} composer {{args}}
 
-composer-outdated: (composer "install") (composer "outdated --direct --strict")
-
 symfony *args:
 	{{SYMFONY-RUN}} {{args}}
+
+composer-outdated: (composer "install") (composer "outdated --direct --strict")
 
 console *args:
 	{{PHP-RUN}} bin/console {{args}}
