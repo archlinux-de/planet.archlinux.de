@@ -1,2 +1,8 @@
 User-agent: *
 Allow: /
+
+User-agent: SemrushBot
+User-agent: AhrefsBot
+User-agent: dotbot
+User-agent: MJ12bot
+Disallow: /
