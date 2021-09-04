@@ -90,8 +90,6 @@ export default {
       ],
       link: [
         { rel: 'icon', href: this.icon, sizes: 'any', type: 'image/svg+xml' },
-        { rel: 'alternate', type: 'application/rss+xml', href: '/rss.xml' },
-        { rel: 'alternate', type: 'application/atom+xml', href: '/atom.xml' },
         { rel: 'manifest', href: '/manifest.webmanifest' }
       ]
     }
