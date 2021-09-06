@@ -1,4 +1,4 @@
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 const CopyPlugin = require('copy-webpack-plugin')
 const HtmlPlugin = require('html-webpack-plugin')
 
@@ -6,12 +6,25 @@ module.exports = {
   entry: { app: ['./src/main.js'] },
   output: { publicPath: '/' },
   resolve: {
-    extensions: ['.js', '.vue']
+    extensions: ['.js', '.vue'],
+    alias: {
+      vue: '@vue/compat'
+    }
   },
 
   module: {
     rules: [
-      { test: /\.vue$/, loader: 'vue-loader' },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          compilerOptions: {
+            compatConfig: {
+              MODE: 2
+            }
+          }
+        }
+      },
       { test: /\.svg$/, use: { loader: 'file-loader', options: { name: 'img/[name].[contenthash].[ext]' } } }
     ]
   },
