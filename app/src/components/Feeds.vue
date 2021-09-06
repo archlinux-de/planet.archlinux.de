@@ -1,5 +1,5 @@
 <template>
-  <ul class="pl-4">
+  <ul class="ps-4">
     <li :key="id" v-for="(feed, id) in feeds"><a :href="feed.link" :title="feed.description">{{ feed.title }}</a></li>
   </ul>
 </template>

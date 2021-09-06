@@ -1,22 +1,22 @@
 <template>
-  <b-container role="main" tag="main">
-    <b-row>
-      <b-col cols="12" xl="8">
+  <main class="container" role="main">
+    <div class="row">
+      <div class="col col-12 col-xl-8">
         <h1 class="mb-4">Arch Linux Planet</h1>
         <items :limit="10"></items>
-      </b-col>
+      </div>
 
-      <b-col cols="12" xl="4">
+      <div class="col col-12 col-xl-4">
         <div class="card mb-4">
           <h3 class="card-title card-header">Feeds</h3>
           <div class="card-body p-1 p-lg-3">
             <feeds :limit="100"></feeds>
           </div>
           <div class="card-footer">
-            <a class="btn btn-primary" href="/atom.xml">
+            <a class="btn btn-primary" role="button" href="/atom.xml">
               <strong>ATOM</strong> Feed
             </a>
-            <a class="btn btn-outline-secondary" href="/rss.xml">
+            <a class="btn btn-outline-secondary" role="button" href="/rss.xml">
               <strong>RSS</strong> Feed
             </a>
           </div>
@@ -29,9 +29,9 @@
             <a href="mailto:pierre@archlinux.de">pierre@archlinux.de</a>
           </div>
         </div>
-      </b-col>
-    </b-row>
-  </b-container>
+      </div>
+    </div>
+  </main>
 </template>
 
 <script>

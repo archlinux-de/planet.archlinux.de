@@ -29,6 +29,7 @@ module.exports = {
       filename: 'css/[name].[contenthash].css',
       chunkFilename: 'css/[name].[contenthash].css'
     }),
+    // @TODO autoprefixer
     new WorkboxPlugin.GenerateSW({
       cacheId: 'app',
       exclude: [/robots\.txt$/],
