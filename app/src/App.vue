@@ -49,7 +49,7 @@
 
 <style lang="scss">
 @import "./assets/css/archlinux-bootstrap";
-@import "~bootstrap/scss/bootstrap";
+@import "./assets/css/import-bootstrap";
 
 .navbar-border-brand {
   border-bottom: 0.313rem solid $primary;
@@ -77,7 +77,7 @@
 </style>
 
 <script>
-import 'bootstrap'
+import 'bootstrap/js/src/collapse'
 import LogoImage from './assets/images/archlogo.svg'
 import IconImage from './assets/images/archicon.svg'
 

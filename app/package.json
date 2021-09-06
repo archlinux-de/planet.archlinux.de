@@ -7,7 +7,6 @@
     "build": "webpack --mode production"
   },
   "dependencies": {
-    "@popperjs/core": "^2.10.1",
     "bootstrap": "^5.1.0",
     "core-js": "~3.17.2",
     "vue": "~2.6.14",
