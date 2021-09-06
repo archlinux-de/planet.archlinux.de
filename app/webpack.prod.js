@@ -19,7 +19,7 @@ module.exports = {
 
   module: {
     rules: [
-      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules\/(?!bootstrap-vue\/src\/)/ },
+      { test: /\.js$/, loader: 'babel-loader' },
       { test: /\.s?css$/, use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'] }
     ]
   },
@@ -29,7 +29,6 @@ module.exports = {
       filename: 'css/[name].[contenthash].css',
       chunkFilename: 'css/[name].[contenthash].css'
     }),
-    // @TODO autoprefixer
     new WorkboxPlugin.GenerateSW({
       cacheId: 'app',
       exclude: [/robots\.txt$/],
