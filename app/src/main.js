@@ -1,16 +1,15 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
+import { createHead } from '@vueuse/head'
 import App from './App.vue'
 import router from './router'
-import VueMeta from 'vue-meta'
 import createApiService from './services/ApiService'
 
-Vue.use(VueMeta)
+const head = createHead()
+const app = createApp(App)
 
-Vue.config.productionTip = false
-new Vue({
-  router,
-  render: h => h(App),
-  provide: {
-    apiService: createApiService(fetch)
-  }
-}).$mount('#app')
+app.use(router)
+app.use(head)
+
+app.provide('apiService', createApiService(fetch))
+
+app.mount('#app')

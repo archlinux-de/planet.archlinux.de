@@ -1,16 +1,12 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-
+import { createRouter, createWebHistory } from 'vue-router'
 import Index from './views/Index'
 import NotFound from './views/NotFound'
 
-Vue.use(Router)
-
-export default new Router({
-  mode: 'history',
+export default createRouter({
+  history: createWebHistory(),
   linkActiveClass: 'active',
   routes: [
     { path: '/', name: 'index', component: Index },
-    { path: '*', component: NotFound }
+    { path: '/:pathMatch(.*)*', component: NotFound }
   ]
 })

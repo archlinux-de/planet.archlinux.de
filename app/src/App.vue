@@ -80,34 +80,33 @@
 import 'bootstrap/js/src/collapse'
 import LogoImage from './assets/images/archlogo.svg'
 import IconImage from './assets/images/archicon.svg'
+import { onMounted } from 'vue'
+import { useHead } from '@vueuse/head'
 
 export default {
-  name: 'App',
-  metaInfo () {
-    return {
+  setup () {
+    useHead({
       title: 'planet.archlinux.de',
-      titleTemplate: '%s - planet.archlinux.de',
       meta: [
-        { vmid: 'robots', name: 'robots', content: 'index,follow' },
+        { name: 'robots', content: 'index,follow' },
         { name: 'theme-color', content: '#333' }
       ],
       link: [
-        { rel: 'icon', href: this.icon, sizes: 'any', type: 'image/svg+xml' },
+        { rel: 'icon', href: IconImage, sizes: 'any', type: 'image/svg+xml' },
         { rel: 'manifest', href: '/manifest.webmanifest' }
       ]
-    }
-  },
-  data () {
+    })
+
+    onMounted(() => {
+      if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js')
+        })
+      }
+    })
+
     return {
-      logo: LogoImage,
-      icon: IconImage
-    }
-  },
-  mounted () {
-    if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
-      })
+      logo: LogoImage
     }
   }
 }

@@ -11,16 +11,16 @@
 </template>
 
 <script>
+import { useHead } from '@vueuse/head'
+
 export default {
-  name: 'NotFound',
+  setup () {
+    useHead({
+      meta: [{ name: 'robots', content: 'noindex,nofollow' }]
+    })
+  },
   data () {
     return { currentUrl: window.location.pathname }
-  },
-  metaInfo () {
-    return {
-      title: 'Datei nicht gefunden',
-      meta: [{ vmid: 'robots', name: 'robots', content: 'noindex,nofollow' }]
-    }
   }
 }
 </script>
