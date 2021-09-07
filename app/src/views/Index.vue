@@ -37,13 +37,22 @@
 <script>
 import Feeds from '../components/Feeds'
 import Items from '../components/Items'
+import { useHead } from '@vueuse/head'
+import { useRouter } from 'vue-router'
 
 export default {
-  name: 'Index',
   components: {
     Feeds,
     Items
   },
-  metaInfo: { titleTemplate: null }
+  setup (props, context) {
+    const createCanonical = () => {
+      return window.location.origin + useRouter().resolve({ name: 'index' }).href
+    }
+
+    useHead({
+      link: [{ rel: 'canonical', href: createCanonical() }]
+    })
+  }
 }
 </script>

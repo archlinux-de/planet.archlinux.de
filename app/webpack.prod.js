@@ -10,13 +10,6 @@ module.exports = {
   mode: 'production',
   output: { path: path.resolve(__dirname, 'dist'), filename: 'js/[name].[contenthash].js' },
 
-  resolve: {
-    alias: {
-      vue$: 'vue/dist/vue.runtime.esm.js',
-      'bootstrap-vue$': 'bootstrap-vue/src/index.js'
-    }
-  },
-
   module: {
     rules: [
       { test: /\.js$/, loader: 'babel-loader' },
@@ -29,7 +22,6 @@ module.exports = {
       filename: 'css/[name].[contenthash].css',
       chunkFilename: 'css/[name].[contenthash].css'
     }),
-    // @TODO autoprefixer
     new WorkboxPlugin.GenerateSW({
       cacheId: 'app',
       exclude: [/robots\.txt$/],
