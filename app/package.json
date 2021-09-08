@@ -10,13 +10,13 @@
     "@vueuse/head": "~0.6.0",
     "bootstrap": "~5.1.1",
     "core-js": "~3.17.2",
-    "vue": "~3.2.9",
-    "vue-router": "~4.0.11"
+    "vue": "^3.2.9",
+    "vue-router": "^4.0.11"
   },
   "devDependencies": {
     "@babel/core": "~7.15.5",
     "@babel/preset-env": "~7.15.4",
-    "@vue/compiler-sfc": "~3.2.9",
+    "@vue/compiler-sfc": "~3.2.10",
     "babel-loader": "~8.2.2",
     "compression-webpack-plugin": "~8.0.1",
     "copy-webpack-plugin": "~9.0.1",

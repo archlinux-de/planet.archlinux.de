@@ -11,7 +11,3 @@ parameters:
 		- migrations
 	checkMissingIterableValueType: false
 	checkGenericClassInNonGenericObjectType: false
-	ignoreErrors:
-		-
-			message: '#^Access to an undefined property Faker#'
-			path: src/DataFixtures
