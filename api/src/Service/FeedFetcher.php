@@ -11,20 +11,11 @@ use App\Entity\Item;
  */
 class FeedFetcher implements \IteratorAggregate
 {
-    /** @var string[] */
-    private $feedUrls;
-
-    /** @var FeedReaderFactory */
-    private $feedReaderFactory;
-
     /**
      * @param string[] $feedUrls
-     * @param FeedReaderFactory $feedReaderFactory
      */
-    public function __construct(array $feedUrls, FeedReaderFactory $feedReaderFactory)
+    public function __construct(private array $feedUrls, private FeedReaderFactory $feedReaderFactory)
     {
-        $this->feedUrls = $feedUrls;
-        $this->feedReaderFactory = $feedReaderFactory;
     }
 
     /**
@@ -54,10 +45,6 @@ class FeedFetcher implements \IteratorAggregate
         }
     }
 
-    /**
-     * @param \SimplePie $feedReader
-     * @return Feed
-     */
     private function createFeed(\SimplePie $feedReader): Feed
     {
         return (new Feed($feedReader->feed_url))
@@ -73,10 +60,6 @@ class FeedFetcher implements \IteratorAggregate
             ->setTitle($feedReader->get_title() ?? '');
     }
 
-    /**
-     * @param \SimplePie_Item $feedReaderItem
-     * @return Item
-     */
     private function createItem(\SimplePie_Item $feedReaderItem): Item
     {
         return (new Item((string)$feedReaderItem->get_link()))
@@ -86,10 +69,6 @@ class FeedFetcher implements \IteratorAggregate
             ->setAuthor($this->createAuthor($feedReaderItem));
     }
 
-    /**
-     * @param \SimplePie_Item $feedReaderItem
-     * @return Author
-     */
     private function createAuthor(\SimplePie_Item $feedReaderItem): Author
     {
         $author = new Author();

@@ -10,34 +10,21 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class FeedNormalizer implements NormalizerInterface, CacheableSupportsMethodInterface
 {
-    /** @var ObjectNormalizer */
-    private $normalizer;
-
-    /**
-     * @param ObjectNormalizer $normalizer
-     */
-    public function __construct(ObjectNormalizer $normalizer)
+    public function __construct(private ObjectNormalizer $normalizer)
     {
-        $this->normalizer = $normalizer;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function supportsNormalization($data, string $format = null)
+    public function supportsNormalization(mixed $data, string $format = null): bool
     {
         return $data instanceof Feed;
     }
 
     /**
      * @param Feed $object
-     * @param string $format
-     * @param array<mixed> $context
-     * @return array<mixed>
      */
-    public function normalize($object, string $format = null, array $context = [])
+    public function normalize(mixed $object, string $format = null, array $context = []): array
     {
-        /** @var array<mixed> $data */
+        /** @var array $data */
         $data = $this->normalizer->normalize(
             $object,
             $format,
@@ -56,9 +43,6 @@ class FeedNormalizer implements NormalizerInterface, CacheableSupportsMethodInte
         return $data;
     }
 
-    /**
-     * @return bool
-     */
     public function hasCacheableSupportsMethod(): bool
     {
         return true;

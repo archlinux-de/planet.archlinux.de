@@ -4,10 +4,6 @@ namespace App\Service;
 
 class FeedReaderFactory
 {
-    /**
-     * @param string $feedUrl
-     * @return \SimplePie
-     */
     public function createFeedReader(string $feedUrl): \SimplePie
     {
         $feedReader = new \SimplePie();

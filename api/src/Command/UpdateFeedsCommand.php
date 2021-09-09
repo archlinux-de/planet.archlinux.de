@@ -18,41 +18,14 @@ class UpdateFeedsCommand extends Command
 {
     use LockableTrait;
 
-    /** @var EntityManagerInterface */
-    private $entityManager;
-
-    /** @var ValidatorInterface */
-    private $validator;
-
-    /** @var FeedFetcher */
-    private $feedFetcher;
-
-    /** @var FeedRepository */
-    private $feedRepository;
-
-    /** @var LoggerInterface */
-    private $logger;
-
-    /**
-     * @param EntityManagerInterface $entityManager
-     * @param ValidatorInterface $validator
-     * @param FeedFetcher $feedFetcher
-     * @param FeedRepository $feedRepository
-     * @param LoggerInterface $logger
-     */
     public function __construct(
-        EntityManagerInterface $entityManager,
-        ValidatorInterface $validator,
-        FeedFetcher $feedFetcher,
-        FeedRepository $feedRepository,
-        LoggerInterface $logger
+        private EntityManagerInterface $entityManager,
+        private ValidatorInterface $validator,
+        private FeedFetcher $feedFetcher,
+        private FeedRepository $feedRepository,
+        private LoggerInterface $logger
     ) {
         parent::__construct();
-        $this->entityManager = $entityManager;
-        $this->validator = $validator;
-        $this->feedFetcher = $feedFetcher;
-        $this->feedRepository = $feedRepository;
-        $this->logger = $logger;
     }
 
     protected function configure(): void
@@ -60,11 +33,6 @@ class UpdateFeedsCommand extends Command
         $this->setName('app:update:feeds');
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @return int
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $exitCode = 0;

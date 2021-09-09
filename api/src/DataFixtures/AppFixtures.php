@@ -11,16 +11,12 @@ use Faker\Factory;
 
 class AppFixtures extends Fixture
 {
-    /** @var int */
     private const SEED = 1;
 
-    /** @var int */
     private const MAX_FEED_COUNT = 100;
 
-    /** @var int */
     private const MAX_ITEM_COUNT = 100;
 
-    /** @var string */
     private const MAX_DATETIME = '2021-01-01';
 
     public function load(ObjectManager $manager): void

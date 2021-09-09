@@ -9,17 +9,12 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class FeedRepository extends ServiceEntityRepository
 {
-    /**
-     * @param ManagerRegistry $registry
-     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Feed::class);
     }
 
     /**
-     * @param int $offset
-     * @param int $limit
      * @return Paginator<feed>
      */
     public function findLatest(int $offset, int $limit): Paginator

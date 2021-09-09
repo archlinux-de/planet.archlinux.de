@@ -2,165 +2,99 @@
 
 namespace App\Entity;
 
+use App\Repository\ItemRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Table(indexes={@ORM\Index(columns={"last_modified"})})
- * @ORM\Entity(repositoryClass="App\Repository\ItemRepository")
- */
+#[ORM\Entity(repositoryClass: ItemRepository::class)]
+#[ORM\Index(columns: ['last_modified'])]
 class Item
 {
-    /**
-     * @var string
-     * @Assert\Url()
-     * @Assert\Length(max="255")
-     *
-     * @ORM\Id()
-     * @ORM\Column()
-     */
-    private $link;
+    #[ORM\Id]
+    #[ORM\Column]
+    #[Assert\Url]
+    #[Assert\Length(max: 255)]
+    private string $link;
 
-    /**
-     * @var string
-     * @Assert\Length(min="1", max="255")
-     *
-     * @ORM\Column()
-     */
-    private $title;
+    #[ORM\Column]
+    #[Assert\Length(min: 1, max: 255)]
+    private string $title;
 
-    /**
-     * @var string
-     * @Assert\Length(min="3", max="10485760")
-     *
-     * @ORM\Column(type="text")
-     */
-    private $description;
+    #[ORM\Column(type: 'text')]
+    #[Assert\Length(min: 3, max: 10485760)]
+    private string $description;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(type="datetime")
-     */
-    private $lastModified;
+    #[ORM\Column(type: 'datetime')]
+    private \DateTime $lastModified;
 
-    /**
-     * @var Author
-     * @Assert\Valid()
-     *
-     * @ORM\Embedded(class="Author")
-     */
-    private $author;
+    #[ORM\Embedded(class: Author::class)]
+    #[Assert\Valid]
+    private Author $author;
 
-    /**
-     * @var Feed
-     * @Assert\Valid()
-     *
-     * @ORM\ManyToOne(targetEntity="Feed", inversedBy="items", cascade={"all"})
-     * @ORM\JoinColumn(name="feed_url", referencedColumnName="url", onDelete="CASCADE")
-     */
-    private $feed;
+    #[ORM\ManyToOne(targetEntity: Feed::class, cascade: ['all'], inversedBy: 'items')]
+    #[ORM\JoinColumn(name: 'feed_url', referencedColumnName: 'url', onDelete: 'CASCADE')]
+    #[Assert\Valid]
+    private Feed $feed;
 
-    /**
-     * @param string $link
-     */
     public function __construct(string $link)
     {
         $this->link = $link;
     }
 
-    /**
-     * @return string
-     */
     public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * @param string $title
-     * @return Item
-     */
     public function setTitle(string $title): Item
     {
         $this->title = $title;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     * @return Item
-     */
     public function setDescription(string $description): Item
     {
         $this->description = $description;
         return $this;
     }
 
-    /**
-     * @return \DateTime
-     */
     public function getLastModified(): \DateTime
     {
         return $this->lastModified;
     }
 
-    /**
-     * @param \DateTime $lastModified
-     * @return Item
-     */
     public function setLastModified(\DateTime $lastModified): Item
     {
         $this->lastModified = $lastModified;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getLink(): string
     {
         return $this->link;
     }
 
-    /**
-     * @return Author
-     */
     public function getAuthor(): Author
     {
         return $this->author;
     }
 
-    /**
-     * @param Author $author
-     * @return Item
-     */
     public function setAuthor(Author $author): Item
     {
         $this->author = $author;
         return $this;
     }
 
-    /**
-     * @return Feed
-     */
     public function getFeed(): Feed
     {
         return $this->feed;
     }
 
-    /**
-     * @param Feed $feed
-     * @return Item
-     */
     public function setFeed(Feed $feed): Item
     {
         $this->feed = $feed;
