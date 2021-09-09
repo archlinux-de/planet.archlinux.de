@@ -13,37 +13,40 @@
 </template>
 
 <script>
+import { inject, onMounted, ref } from 'vue'
+
 export default {
-  name: 'Feeds',
-  inject: ['apiService'],
   props: {
     limit: {
       type: Number,
       required: false
     }
   },
-  data () {
-    return {
-      feeds: [],
-      offset: 0
-    }
-  },
-  methods: {
-    fetchData () {
-      return this.apiService
+  setup (props) {
+    const offset = ref(0)
+    const feeds = ref([])
+
+    const apiService = inject('apiService')
+
+    const fetchData = () => {
+      return apiService
         .fetchFeeds({
-          limit: this.limit,
-          offset: this.offset
+          limit: props.limit,
+          offset: offset.value
         })
         .then(data => {
-          this.feeds = data.items
+          feeds.value = data.items
         })
         .catch(() => {
         })
     }
-  },
-  mounted () {
-    this.fetchData()
+
+    onMounted(() => { fetchData() })
+
+    return {
+      offset,
+      feeds
+    }
   }
 }
 </script>

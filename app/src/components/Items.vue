@@ -52,73 +52,89 @@
 </style>
 
 <script>
+import { inject, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
+
 export default {
-  name: 'Items',
-  inject: ['apiService'],
   props: {
     limit: {
       type: Number,
       required: false
     }
   },
-  data () {
-    return {
-      loading: true,
-      data: {
-        count: this.limit,
-        total: this.limit,
-        limit: this.limit,
-        offset: 0,
-        items: []
-      },
-      offset: 0
-    }
-  },
-  methods: {
-    fetchData () {
-      this.loading = true
-      const offset = this.offset
-      return this.apiService
+  setup (props) {
+    const loading = ref(true)
+    const offset = ref(0)
+    const data = reactive({
+      count: props.limit,
+      total: props.limit,
+      limit: props.limit,
+      offset: 0,
+      items: []
+    })
+    const apiService = inject('apiService')
+
+    const fetchData = () => {
+      loading.value = true
+      const oldOffset = offset.value
+      return apiService
         .fetchItems({
-          limit: this.limit,
-          offset: this.offset
+          limit: props.limit,
+          offset: offset.value
         })
-        .then(data => {
-          if (offset === this.offset) {
-            if (offset === 0) {
-              this.data = data
+        .then(fetchedData => {
+          if (oldOffset === offset.value) {
+            if (oldOffset === 0) {
+              data.items = fetchedData.items
+              data.count = fetchedData.count
+              data.total = fetchedData.total
+              data.limit = fetchedData.limit
+              data.offset = fetchedData.offset
             } else {
-              this.data.count += data.count
-              this.data.items.push(...data.items)
+              data.count += fetchedData.count
+              data.items.push(...fetchedData.items)
             }
           }
         })
         .catch(() => {
         })
         .finally(() => {
-          this.loading = false
+          loading.value = false
         })
-    },
-    visibilityChanged () {
-      if (!this.loading) {
-        if (this.data.count < this.data.total) {
-          this.offset += this.limit
-          this.fetchData()
+    }
+
+    const visibilityChanged = () => {
+      if (!loading.value) {
+        if (data.count < data.total) {
+          offset.value += props.limit
+          fetchData()
         }
       }
-    },
-    observeItemsEnd () {
-      new IntersectionObserver(entries => {
+    }
+
+    const observeItemsEnd = () => {
+      const observer = new IntersectionObserver(entries => {
         if (entries[0].intersectionRatio <= 0) {
           return
         }
-        this.visibilityChanged()
-      }).observe(this.$el.querySelector('#items-end'))
+        visibilityChanged()
+      }, { rootMargin: '0px 0px 640px 0px' })
+      observer.observe(document.getElementById('items-end'))
+
+      onBeforeUnmount(() => {
+        observer.disconnect()
+      })
     }
-  },
-  mounted () {
-    this.fetchData()
-    this.observeItemsEnd()
+
+    onMounted(() => {
+      fetchData()
+      observeItemsEnd()
+    })
+
+    return {
+      loading,
+      data,
+      offset
+    }
   }
 }
 </script>

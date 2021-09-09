@@ -45,7 +45,7 @@ export default {
     Feeds,
     Items
   },
-  setup (props, context) {
+  setup () {
     const createCanonical = () => {
       return window.location.origin + useRouter().resolve({ name: 'index' }).href
     }

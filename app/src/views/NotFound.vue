@@ -18,9 +18,10 @@ export default {
     useHead({
       meta: [{ name: 'robots', content: 'noindex,nofollow' }]
     })
-  },
-  data () {
-    return { currentUrl: window.location.pathname }
+
+    return {
+      currentUrl: window.location.pathname
+    }
   }
 }
 </script>
