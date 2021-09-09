@@ -10,18 +10,12 @@
   </main>
 </template>
 
-<script>
+<script setup>
 import { useHead } from '@vueuse/head'
 
-export default {
-  setup () {
-    useHead({
-      meta: [{ name: 'robots', content: 'noindex,nofollow' }]
-    })
+useHead({
+  meta: [{ name: 'robots', content: 'noindex,nofollow' }]
+})
 
-    return {
-      currentUrl: window.location.pathname
-    }
-  }
-}
+const currentUrl = window.location.pathname
 </script>

@@ -12,41 +12,32 @@
   </div>
 </template>
 
-<script>
-import { inject, onMounted, ref } from 'vue'
+<script setup>
+import { inject, onMounted, ref, defineProps } from 'vue'
 
-export default {
-  props: {
-    limit: {
-      type: Number,
-      required: false
-    }
-  },
-  setup (props) {
-    const offset = ref(0)
-    const feeds = ref([])
-
-    const apiService = inject('apiService')
-
-    const fetchData = () => {
-      return apiService
-        .fetchFeeds({
-          limit: props.limit,
-          offset: offset.value
-        })
-        .then(data => {
-          feeds.value = data.items
-        })
-        .catch(() => {
-        })
-    }
-
-    onMounted(() => { fetchData() })
-
-    return {
-      offset,
-      feeds
-    }
+const props = defineProps({
+  limit: {
+    type: Number,
+    required: false
   }
+})
+const offset = ref(0)
+const feeds = ref([])
+
+const apiService = inject('apiService')
+
+const fetchData = () => {
+  return apiService
+    .fetchFeeds({
+      limit: props.limit,
+      offset: offset.value
+    })
+    .then(data => {
+      feeds.value = data.items
+    })
+    .catch(() => {
+    })
 }
+
+onMounted(() => { fetchData() })
 </script>

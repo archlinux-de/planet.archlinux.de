@@ -51,90 +51,82 @@
 }
 </style>
 
-<script>
-import { inject, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
+<script setup>
+import { defineProps, inject, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
 
-export default {
-  props: {
-    limit: {
-      type: Number,
-      required: false
-    }
-  },
-  setup (props) {
-    const loading = ref(true)
-    const offset = ref(0)
-    const data = reactive({
-      count: props.limit,
-      total: props.limit,
+const props = defineProps({
+  limit: {
+    type: Number,
+    required: false
+  }
+})
+
+const loading = ref(true)
+const offset = ref(0)
+const data = reactive({
+  count: props.limit,
+  total: props.limit,
+  limit: props.limit,
+  offset: 0,
+  items: []
+})
+
+const apiService = inject('apiService')
+
+const fetchData = () => {
+  loading.value = true
+  const oldOffset = offset.value
+  return apiService
+    .fetchItems({
       limit: props.limit,
-      offset: 0,
-      items: []
+      offset: offset.value
     })
-    const apiService = inject('apiService')
-
-    const fetchData = () => {
-      loading.value = true
-      const oldOffset = offset.value
-      return apiService
-        .fetchItems({
-          limit: props.limit,
-          offset: offset.value
-        })
-        .then(fetchedData => {
-          if (oldOffset === offset.value) {
-            if (oldOffset === 0) {
-              data.items = fetchedData.items
-              data.count = fetchedData.count
-              data.total = fetchedData.total
-              data.limit = fetchedData.limit
-              data.offset = fetchedData.offset
-            } else {
-              data.count += fetchedData.count
-              data.items.push(...fetchedData.items)
-            }
-          }
-        })
-        .catch(() => {
-        })
-        .finally(() => {
-          loading.value = false
-        })
-    }
-
-    const visibilityChanged = () => {
-      if (!loading.value) {
-        if (data.count < data.total) {
-          offset.value += props.limit
-          fetchData()
+    .then(fetchedData => {
+      if (oldOffset === offset.value) {
+        if (oldOffset === 0) {
+          data.items = fetchedData.items
+          data.count = fetchedData.count
+          data.total = fetchedData.total
+          data.limit = fetchedData.limit
+          data.offset = fetchedData.offset
+        } else {
+          data.count += fetchedData.count
+          data.items.push(...fetchedData.items)
         }
       }
-    }
-
-    const observeItemsEnd = () => {
-      const observer = new IntersectionObserver(entries => {
-        if (entries[0].intersectionRatio <= 0) {
-          return
-        }
-        visibilityChanged()
-      }, { rootMargin: '0px 0px 640px 0px' })
-      observer.observe(document.getElementById('items-end'))
-
-      onBeforeUnmount(() => {
-        observer.disconnect()
-      })
-    }
-
-    onMounted(() => {
-      fetchData()
-      observeItemsEnd()
     })
+    .catch(() => {
+    })
+    .finally(() => {
+      loading.value = false
+    })
+}
 
-    return {
-      loading,
-      data,
-      offset
+const visibilityChanged = () => {
+  if (!loading.value) {
+    if (data.count < data.total) {
+      offset.value += props.limit
+      fetchData()
     }
   }
 }
+
+const observeItemsEnd = () => {
+  const observer = new IntersectionObserver(entries => {
+    if (entries[0].intersectionRatio <= 0) {
+      return
+    }
+    visibilityChanged()
+  }, { rootMargin: '0px 0px 640px 0px' })
+  observer.observe(document.getElementById('items-end'))
+
+  onBeforeUnmount(() => {
+    observer.disconnect()
+  })
+}
+
+onMounted(() => {
+  fetchData()
+  observeItemsEnd()
+})
 </script>
