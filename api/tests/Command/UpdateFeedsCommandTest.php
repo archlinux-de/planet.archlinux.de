@@ -7,7 +7,7 @@ use App\Entity\Feed;
 use App\Entity\Item;
 use App\Repository\FeedRepository;
 use App\Service\FeedFetcher;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -35,11 +35,11 @@ class UpdateFeedsCommandTest extends KernelTestCase
         $feedRepository = $this->createMock(FeedRepository::class);
         $feedRepository->method('findAllExceptByUrls')->willReturn([$oldFeed]);
 
-        /** @var EntityManagerInterface|MockObject $entityManager */
-        $entityManager = $this->createMock(EntityManagerInterface::class);
+        /** @var EntityManager|MockObject $entityManager */
+        $entityManager = $this->createMock(EntityManager::class);
         $entityManager
             ->expects($this->atLeastOnce())
-            ->method('transactional')
+            ->method('wrapInTransaction')
             ->willReturnCallback(
                 function (callable $callable) use ($entityManager) {
                     $callable($entityManager);
@@ -90,11 +90,11 @@ class UpdateFeedsCommandTest extends KernelTestCase
         $feedRepository = $this->createMock(FeedRepository::class);
         $feedRepository->method('findAllExceptByUrls')->willReturn([]);
 
-        /** @var EntityManagerInterface|MockObject $entityManager */
-        $entityManager = $this->createMock(EntityManagerInterface::class);
+        /** @var EntityManager|MockObject $entityManager */
+        $entityManager = $this->createMock(EntityManager::class);
         $entityManager
             ->expects($this->atLeastOnce())
-            ->method('transactional')
+            ->method('wrapInTransaction')
             ->willReturnCallback(
                 function (callable $callable) use ($entityManager) {
                     $callable($entityManager);
@@ -148,11 +148,11 @@ class UpdateFeedsCommandTest extends KernelTestCase
         $feedRepository = $this->createMock(FeedRepository::class);
         $feedRepository->method('find')->willReturn($feed);
 
-        /** @var EntityManagerInterface|MockObject $entityManager */
-        $entityManager = $this->createMock(EntityManagerInterface::class);
+        /** @var EntityManager|MockObject $entityManager */
+        $entityManager = $this->createMock(EntityManager::class);
         $entityManager
             ->expects($this->atLeastOnce())
-            ->method('transactional')
+            ->method('wrapInTransaction')
             ->willReturnCallback(
                 function (callable $callable) use ($entityManager) {
                     $callable($entityManager);

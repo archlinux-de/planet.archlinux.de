@@ -6,6 +6,7 @@ use App\Command\Exception\ValidationException;
 use App\Entity\Feed;
 use App\Repository\FeedRepository;
 use App\Service\FeedFetcher;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -18,6 +19,9 @@ class UpdateFeedsCommand extends Command
 {
     use LockableTrait;
 
+    /**
+     * @param EntityManager $entityManager
+     */
     public function __construct(
         private EntityManagerInterface $entityManager,
         private ValidatorInterface $validator,
@@ -38,7 +42,7 @@ class UpdateFeedsCommand extends Command
         $exitCode = 0;
         $this->lock('cron.lock');
 
-        $this->entityManager->transactional(
+        $this->entityManager->wrapInTransaction(
             function (EntityManagerInterface $entityManager) {
                 foreach ($this->feedRepository->findAllExceptByUrls($this->feedFetcher->getFeedUrls()) as $feed) {
                     $entityManager->remove($feed);
@@ -55,7 +59,7 @@ class UpdateFeedsCommand extends Command
                 continue;
             }
 
-            $this->entityManager->transactional(
+            $this->entityManager->wrapInTransaction(
                 function (EntityManagerInterface $entityManager) use ($feed) {
                     /** @var Feed|null $persistedFeed */
                     $persistedFeed = $this->feedRepository->find($feed->getUrl());
