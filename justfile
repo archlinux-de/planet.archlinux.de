@@ -40,7 +40,7 @@ stop:
 	{{COMPOSE}} stop
 
 clean:
-	{{COMPOSE}} down -v
+	{{COMPOSE}} rm -vsf
 	git clean -fdqx -e .idea
 
 rebuild: clean
