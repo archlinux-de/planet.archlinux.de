@@ -42,7 +42,7 @@
         "ext-SimpleXML": "*",
         "ext-libxml": "*",
         "ext-pdo_sqlite": "*",
-        "doctrine/doctrine-fixtures-bundle": "^3.4.0",
+        "doctrine/doctrine-fixtures-bundle": "^3.4.1",
         "fakerphp/faker": "^1.16.0",
         "malukenho/mcbumpface": "^1.1.5",
         "phpstan/extension-installer": "^1.1.0",
