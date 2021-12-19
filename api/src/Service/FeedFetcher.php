@@ -27,9 +27,9 @@ class FeedFetcher implements \IteratorAggregate
     }
 
     /**
-     * @return iterable<Feed>
+     * @return \Traversable<Feed>
      */
-    public function getIterator(): iterable
+    public function getIterator(): \Traversable
     {
         foreach ($this->feedUrls as $feedUrl) {
             $feedReader = $this->feedReaderFactory->createFeedReader($feedUrl);
