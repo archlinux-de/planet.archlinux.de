@@ -21,7 +21,7 @@
                     <uri>{{ item.author.uri }}</uri>
                 {% endif %}
             </author>
-            <summary type="html">{{ item.description | purify('planet') | escape('html') }}</summary>
+            <summary type="html">{{ item.description | purify | escape }}</summary>
             <source>
                 <title>{{ item.feed.title }}</title>
                 <updated>{{ item.feed.lastModified | date(constant('DateTimeInterface::ATOM'), timezone='GMT') }}</updated>

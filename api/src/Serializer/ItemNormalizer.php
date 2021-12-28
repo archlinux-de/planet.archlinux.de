@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class ItemNormalizer implements NormalizerInterface, CacheableSupportsMethodInterface
 {
-    public function __construct(private ObjectNormalizer $normalizer, private \HTMLPurifier $planetPurifier)
+    public function __construct(private ObjectNormalizer $normalizer, private \HTMLPurifier $purifier)
     {
     }
 
@@ -41,7 +41,7 @@ class ItemNormalizer implements NormalizerInterface, CacheableSupportsMethodInte
                 ]
             )
         );
-        $data['description'] = $this->planetPurifier->purify($data['description']);
+        $data['description'] = $this->purifier->purify($data['description']);
 
         return $data;
     }
