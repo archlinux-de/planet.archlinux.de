@@ -445,9 +445,6 @@
             "tests/bootstrap.php"
         ]
     },
-    "symfony/polyfill-php81": {
-        "version": "v1.23.0"
-    },
     "symfony/process": {
         "version": "v4.2.1"
     },
