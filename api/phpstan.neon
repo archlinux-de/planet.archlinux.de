@@ -1,5 +1,5 @@
 parameters:
-	level: 8
+	level: max
 	symfony:
 		container_xml_path: '%rootDir%/../../../var/cache/dev/App_KernelDevDebugContainer.xml'
 	doctrine:
@@ -13,3 +13,9 @@ parameters:
 		- migrations
 	checkMissingIterableValueType: false
 	checkGenericClassInNonGenericObjectType: false
+	ignoreErrors:
+		-
+			# ORM ensures correct types
+			message: '#Method .+ should return .+ but returns (array|mixed)#'
+			paths:
+				- src/Repository
