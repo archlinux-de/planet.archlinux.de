@@ -32,7 +32,7 @@ class Item
     private Author $author;
 
     #[ORM\ManyToOne(targetEntity: Feed::class, cascade: ['all'], inversedBy: 'items')]
-    #[ORM\JoinColumn(name: 'feed_url', referencedColumnName: 'url', onDelete: 'CASCADE')]
+    #[ORM\JoinColumn(name: 'feed_url', referencedColumnName: 'url', nullable: false, onDelete: 'CASCADE')]
     #[Assert\Valid]
     private Feed $feed;
 
