@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d172c0a5e596b84cf003734b8ecb7c8f",
+    "content-hash": "e554f1e8426d8338989f6d369b581ec0",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -5348,16 +5348,16 @@
         },
         {
             "name": "fakerphp/faker",
-            "version": "v1.17.0",
+            "version": "v1.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FakerPHP/Faker.git",
-                "reference": "b85e9d44eae8c52cca7aa0939483611f7232b669"
+                "reference": "2e77a868f6540695cf5ebf21e5ab472c65f47567"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/b85e9d44eae8c52cca7aa0939483611f7232b669",
-                "reference": "b85e9d44eae8c52cca7aa0939483611f7232b669",
+                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/2e77a868f6540695cf5ebf21e5ab472c65f47567",
+                "reference": "2e77a868f6540695cf5ebf21e5ab472c65f47567",
                 "shasum": ""
             },
             "require": {
@@ -5382,7 +5382,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "v1.17-dev"
+                    "dev-main": "v1.18-dev"
                 }
             },
             "autoload": {
@@ -5407,9 +5407,9 @@
             ],
             "support": {
                 "issues": "https://github.com/FakerPHP/Faker/issues",
-                "source": "https://github.com/FakerPHP/Faker/tree/v1.17.0"
+                "source": "https://github.com/FakerPHP/Faker/tree/v1.18.0"
             },
-            "time": "2021-12-05T17:14:47+00:00"
+            "time": "2022-01-23T17:56:23+00:00"
         },
         {
             "name": "malukenho/mcbumpface",
@@ -6074,16 +6074,16 @@
         },
         {
             "name": "phpstan/phpstan-doctrine",
-            "version": "1.2.2",
+            "version": "1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-doctrine.git",
-                "reference": "5fa8fefdf7d3b41ada096c0271250e2faf1d6adc"
+                "reference": "16cb23af853014620473a0c72d188cf76b9a9401"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/5fa8fefdf7d3b41ada096c0271250e2faf1d6adc",
-                "reference": "5fa8fefdf7d3b41ada096c0271250e2faf1d6adc",
+                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/16cb23af853014620473a0c72d188cf76b9a9401",
+                "reference": "16cb23af853014620473a0c72d188cf76b9a9401",
                 "shasum": ""
             },
             "require": {
@@ -6139,9 +6139,9 @@
             "description": "Doctrine extensions for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-doctrine/issues",
-                "source": "https://github.com/phpstan/phpstan-doctrine/tree/1.2.2"
+                "source": "https://github.com/phpstan/phpstan-doctrine/tree/1.2.3"
             },
-            "time": "2022-01-21T21:06:44+00:00"
+            "time": "2022-01-23T12:35:08+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
