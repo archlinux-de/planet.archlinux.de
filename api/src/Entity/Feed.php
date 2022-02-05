@@ -20,7 +20,7 @@ class Feed
     /**
      * @var Collection<int, Item>
      */
-    #[ORM\OneToMany(mappedBy: 'feed', targetEntity: 'Item', cascade: ['all'])]
+    #[ORM\OneToMany(mappedBy: 'feed', targetEntity: Item::class, cascade: ['all'])]
     #[Assert\Valid]
     private Collection $items;
 
