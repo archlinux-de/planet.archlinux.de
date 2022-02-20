@@ -1,7 +1,6 @@
 parameters:
     app.feeds:
         - https://www.archlinux.de/news/feed
-        - http://www.atsutane.de/atom.xml
         - http://5in4.de/blog/category/arch-linux/feed/atom/
         - https://trompetenkaefer.wordpress.com/tag/archlinux/feed/atom/
         - https://www.uninformativ.de/blog/feeds/de.atom
