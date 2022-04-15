@@ -3,6 +3,7 @@
 namespace App\Serializer;
 
 use App\Entity\Item;
+use Symfony\Component\HtmlSanitizer\HtmlSanitizerInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -10,7 +11,7 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class ItemNormalizer implements NormalizerInterface, CacheableSupportsMethodInterface
 {
-    public function __construct(private ObjectNormalizer $normalizer, private \HTMLPurifier $purifier)
+    public function __construct(private ObjectNormalizer $normalizer, private HtmlSanitizerInterface $htmlSanitizer)
     {
     }
 
@@ -41,7 +42,7 @@ class ItemNormalizer implements NormalizerInterface, CacheableSupportsMethodInte
                 ]
             )
         );
-        $data['description'] = $this->purifier->purify($data['description']);
+        $data['description'] = $this->htmlSanitizer->sanitize($data['description']);
 
         return $data;
     }

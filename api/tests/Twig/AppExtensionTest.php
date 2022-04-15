@@ -3,8 +3,8 @@
 namespace App\Tests\Twig;
 
 use App\Twig\AppExtension;
-use HTMLPurifier;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HtmlSanitizer\HtmlSanitizerInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
@@ -13,7 +13,7 @@ class AppExtensionTest extends TestCase
     public function testHtmlEntityDecodeFilter(): void
     {
         $callable = $this->getFilterCallableFromExtension(
-            new AppExtension($this->createMock(HTMLPurifier::class)),
+            new AppExtension($this->createMock(HtmlSanitizerInterface::class)),
             'html_entity_decode'
         );
         if (is_callable($callable)) {
@@ -24,18 +24,18 @@ class AppExtensionTest extends TestCase
         }
     }
 
-    public function testPurifyFilter(): void
+    public function testSanitizeFilter(): void
     {
-        $purifier = $this->createMock(HTMLPurifier::class);
+        $purifier = $this->createMock(HtmlSanitizerInterface::class);
         $purifier
             ->expects($this->once())
-            ->method('purify')
+            ->method('sanitize')
             ->with('foo')
             ->willReturn('bar');
 
         $callable = $this->getFilterCallableFromExtension(
             new AppExtension($purifier),
-            'purify'
+            'sanitize'
         );
         if (is_callable($callable)) {
             $result = $callable('foo');
