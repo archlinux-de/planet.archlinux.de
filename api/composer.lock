@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "155a24250a452af3df8d729af502df75",
+    "content-hash": "7987344f159e8df9353b3454e01fcecd",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -3596,22 +3596,22 @@
         },
         {
             "name": "symfony/html-sanitizer",
-            "version": "v6.1.0-BETA2",
+            "version": "v6.1.0-RC1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/html-sanitizer.git",
-                "reference": "867cfda8d636cc1cab0eda674300a0d47c96eb69"
+                "reference": "28d19124099e860ef52da06ae251e37738b750fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/html-sanitizer/zipball/867cfda8d636cc1cab0eda674300a0d47c96eb69",
-                "reference": "867cfda8d636cc1cab0eda674300a0d47c96eb69",
+                "url": "https://api.github.com/repos/symfony/html-sanitizer/zipball/28d19124099e860ef52da06ae251e37738b750fe",
+                "reference": "28d19124099e860ef52da06ae251e37738b750fe",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "league/uri": "^6.5",
-                "masterminds/html5": "^2.4",
+                "masterminds/html5": "^2.7.2",
                 "php": ">=8.1"
             },
             "type": "library",
@@ -3645,7 +3645,7 @@
                 "sanitizer"
             ],
             "support": {
-                "source": "https://github.com/symfony/html-sanitizer/tree/v6.1.0-BETA2"
+                "source": "https://github.com/symfony/html-sanitizer/tree/v6.1.0-RC1"
             },
             "funding": [
                 {
@@ -3661,7 +3661,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-16T13:37:21+00:00"
+            "time": "2022-05-06T15:18:34+00:00"
         },
         {
             "name": "symfony/http-foundation",
@@ -8492,7 +8492,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "symfony/html-sanitizer": 10
+        "symfony/html-sanitizer": 5
     },
     "prefer-stable": false,
     "prefer-lowest": false,
