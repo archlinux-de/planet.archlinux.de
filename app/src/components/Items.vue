@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template v-if="data.items.length === 0">
+    <template v-if="isFetching">
       <div class="mb-5 placeholder-glow" :key="'placeholder-' + id" v-for="id in 10" aria-hidden="true">
         <div
           class="d-lg-flex justify-content-between align-items-baseline border border-top-0 border-start-0 border-end-0 mb-2">
@@ -19,22 +19,25 @@
       </div>
     </template>
 
-    <div class="mb-5" :key="id" v-for="(item, id) in data.items">
-      <div
-        class="d-lg-flex justify-content-between align-items-baseline border border-top-0 border-start-0 border-end-0 mb-2">
-        <h2 class="p-0 text-break">
-          <a :href="item.link">{{ item.title }}</a>
-        </h2>
-        <div class="p-0">{{ new Date(item.lastModified).toLocaleDateString('de-DE') }}</div>
+    <div v-if="isFinished">
+      <div class="mb-5" :key="id" v-for="(item, id) in data.items">
+        <div
+          class="d-lg-flex justify-content-between align-items-baseline border border-top-0 border-start-0 border-end-0 mb-2">
+          <h2 class="p-0 text-break">
+            <a :href="item.link">{{ item.title }}</a>
+          </h2>
+          <div class="p-0">{{ new Date(item.lastModified).toLocaleDateString('de-DE') }}</div>
+        </div>
+        <div class="item-description text-break mw-100" v-html="item.description"></div>
+        <div class="fst-italic" v-if="item.author.name">
+          <a v-if="item.author.uri" :href="item.author.uri" rel="nofollow">{{ item.author.name }}</a>
+          <span v-else>{{ item.author.name }}</span>
+        </div>
       </div>
-      <div class="item-description text-break mw-100" v-html="item.description"></div>
-      <div class="fst-italic" v-if="item.author.name">
-        <a v-if="item.author.uri" :href="item.author.uri" rel="nofollow">{{ item.author.name }}</a>
-        <span v-else>{{ item.author.name }}</span>
-      </div>
+      <div ref="end"></div>
     </div>
 
-    <div id="items-end"></div>
+    <div class="alert alert-danger" v-if="error">{{ error }}</div>
   </div>
 </template>
 
@@ -46,87 +49,60 @@
   padding: 10px 0;
 }
 
-#items-end {
+[ref="end"] {
   min-height: 1px;
 }
 </style>
 
 <script setup>
-import { defineProps, inject, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
+import { defineProps, onBeforeUnmount, ref, computed } from 'vue'
+import { useIntersectionObserver } from '@vueuse/core'
+import { useApiFetch } from '../composables/useApiFetch'
 
 const props = defineProps({
   limit: {
     type: Number,
-    required: false
+    required: true
   }
 })
 
-const loading = ref(true)
 const offset = ref(0)
-const data = reactive({
-  count: props.limit,
-  total: props.limit,
-  limit: props.limit,
-  offset: 0,
-  items: []
-})
+const url = computed(() => `/api/items?limit=${props.limit}&offset=${offset.value}`)
 
-const apiService = inject('apiService')
+const { isFinished, isFetching, data, error } = useApiFetch(
+  url,
+  {
+    initialData: { items: [] },
+    refetch: true,
+    afterFetch: (ctx) => {
+      ctx.data.items = [...data.value.items, ...ctx.data.items]
+      ctx.data.count = ctx.data.items.length
+      ctx.data.offset = 0
+      ctx.data.limit = ctx.data.count
 
-const fetchData = () => {
-  loading.value = true
-  const oldOffset = offset.value
-  return apiService
-    .fetchItems({
-      limit: props.limit,
-      offset: offset.value
-    })
-    .then(fetchedData => {
-      if (oldOffset === offset.value) {
-        if (oldOffset === 0) {
-          data.items = fetchedData.items
-          data.count = fetchedData.count
-          data.total = fetchedData.total
-          data.limit = fetchedData.limit
-          data.offset = fetchedData.offset
-        } else {
-          data.count += fetchedData.count
-          data.items.push(...fetchedData.items)
-        }
-      }
-    })
-    .catch(() => {
-    })
-    .finally(() => {
-      loading.value = false
-    })
-}
-
-const visibilityChanged = () => {
-  if (!loading.value) {
-    if (data.count < data.total) {
-      offset.value += props.limit
-      fetchData()
+      return ctx
     }
   }
-}
+).get().json()
 
-const observeItemsEnd = () => {
-  const observer = new IntersectionObserver(entries => {
-    if (entries[0].intersectionRatio <= 0) {
+const end = ref(null)
+
+const { stop } = useIntersectionObserver(
+  end,
+  ([entry]) => {
+    if (entry.intersectionRatio <= 0) {
       return
     }
-    visibilityChanged()
-  }, { rootMargin: '0px 0px 640px 0px' })
-  observer.observe(document.getElementById('items-end'))
+    if (error.value || data.value.count >= data.value.total) {
+      stop()
+      return
+    }
+    offset.value += 10
+  },
+  { rootMargin: '0px 0px 640px 0px' }
+)
 
-  onBeforeUnmount(() => {
-    observer.disconnect()
-  })
-}
-
-onMounted(() => {
-  fetchData()
-  observeItemsEnd()
+onBeforeUnmount(() => {
+  stop()
 })
 </script>

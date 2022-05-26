@@ -1,43 +1,37 @@
 <template>
   <div>
-    <template v-if="feeds.length === 0">
+    <template v-if="isFetching">
       <ul class="ps-4 placeholder-glow" aria-hidden="true">
-        <li :key="'placeholder-'+id" v-for="id in 9" class="placeholder col-8 bg-primary"></li>
+        <li :key="'placeholder-'+id" v-for="id in 8" class="placeholder col-8 bg-primary"></li>
       </ul>
     </template>
 
-    <ul class="ps-4">
-      <li :key="id" v-for="(feed, id) in feeds"><a :href="feed.link" :title="feed.description">{{ feed.title }}</a></li>
+    <ul class="ps-4" v-if="isFinished">
+      <li :key="id" v-for="(feed, id) in data.items"><a :href="feed.link" :title="feed.description">{{ feed.title }}</a></li>
     </ul>
+
+    <div class="alert alert-danger" v-show="error">{{ error }}</div>
   </div>
 </template>
 
 <script setup>
-import { inject, onMounted, ref, defineProps } from 'vue'
+import { defineProps } from 'vue'
+import { useApiFetch } from '../composables/useApiFetch'
 
 const props = defineProps({
   limit: {
     type: Number,
-    required: false
+    required: true
   }
 })
-const offset = ref(0)
-const feeds = ref([])
 
-const apiService = inject('apiService')
-
-const fetchData = () => {
-  return apiService
-    .fetchFeeds({
-      limit: props.limit,
-      offset: offset.value
-    })
-    .then(data => {
-      feeds.value = data.items
-    })
-    .catch(() => {
-    })
-}
-
-onMounted(() => { fetchData() })
+const { isFinished, isFetching, data, error } = useApiFetch(
+  `/api/feeds?limit=${props.limit}&offset=0`,
+  {
+    initialData: { items: [] },
+    afterFetch: ctx => {
+      ctx.data = { items: ctx.data.items }; return ctx
+    }
+  }
+).get().json()
 </script>

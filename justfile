@@ -85,7 +85,7 @@ yarn *args='-h':
 	{{NODE-RUN}} yarn {{args}}
 
 jest *args:
-	{{NODE-RUN}} node_modules/.bin/jest {{args}}
+	{{NODE-RUN}} node_modules/.bin/jest --passWithNoTests {{args}}
 
 cypress-run *args:
 	{{COMPOSE}} -f docker/cypress-run.yml run     --rm --no-deps cypress run  --project tests/e2e --browser chrome --headless {{args}}
@@ -106,7 +106,7 @@ test-php:
 test-js:
 	{{NODE-RUN}} node_modules/.bin/eslint '*.js' src tests --ext js --ext vue
 	{{NODE-RUN}} node_modules/.bin/stylelint 'src/assets/css/**/*.scss' 'src/assets/css/**/*.css' 'src/**/*.vue'
-	{{NODE-RUN}} node_modules/.bin/jest
+	{{NODE-RUN}} node_modules/.bin/jest --passWithNoTests
 	{{NODE-RUN}} yarn build --output-path $(mktemp -d)
 
 test: test-php test-js
@@ -131,7 +131,7 @@ test-db-migrations: start-db
 	{{PHP-DB-RUN}} vendor/bin/phpunit -c phpunit-db.xml --testsuite 'Doctrine Migrations Test'
 
 test-coverage:
-	{{NODE-RUN}} node_modules/.bin/jest --coverage --coverageDirectory var/coverage/jest
+	{{NODE-RUN}} node_modules/.bin/jest --passWithNoTests --coverage --coverageDirectory var/coverage/jest
 	{{PHP-RUN}} phpdbg -qrr -d memory_limit=-1 vendor/bin/phpunit --coverage-html var/coverage/phpunit
 
 test-db-coverage: start-db
