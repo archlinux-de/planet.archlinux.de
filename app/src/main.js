@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import { createHead } from '@vueuse/head'
-import App from './App.vue'
+import App from './App'
 import router from './router'
 import createApiService from './services/ApiService'
 

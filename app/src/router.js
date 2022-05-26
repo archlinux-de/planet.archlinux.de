@@ -8,5 +8,8 @@ export default createRouter({
   routes: [
     { path: '/', name: 'index', component: Index },
     { path: '/:pathMatch(.*)*', component: NotFound }
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    return savedPosition ?? { x: 0, y: 0 }
+  }
 })
