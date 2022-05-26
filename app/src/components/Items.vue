@@ -55,9 +55,9 @@
 </style>
 
 <script setup>
-import { defineProps, onBeforeUnmount, ref, computed } from 'vue'
+import { defineProps, onBeforeUnmount, ref } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
-import { useApiFetch } from '../composables/useApiFetch'
+import { useItemsFetch } from '../composables/useApiFetch'
 
 const props = defineProps({
   limit: {
@@ -67,23 +67,8 @@ const props = defineProps({
 })
 
 const offset = ref(0)
-const url = computed(() => `/api/items?limit=${props.limit}&offset=${offset.value}`)
 
-const { isFinished, isFetching, data, error } = useApiFetch(
-  url,
-  {
-    initialData: { items: [] },
-    refetch: true,
-    afterFetch: (ctx) => {
-      ctx.data.items = [...data.value.items, ...ctx.data.items]
-      ctx.data.count = ctx.data.items.length
-      ctx.data.offset = 0
-      ctx.data.limit = ctx.data.count
-
-      return ctx
-    }
-  }
-).get().json()
+const { isFinished, isFetching, data, error } = useItemsFetch(offset, props.limit)
 
 const end = ref(null)
 

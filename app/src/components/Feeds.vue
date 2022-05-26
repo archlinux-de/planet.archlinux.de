@@ -16,7 +16,7 @@
 
 <script setup>
 import { defineProps } from 'vue'
-import { useApiFetch } from '../composables/useApiFetch'
+import { useFeedsFetch } from '../composables/useApiFetch'
 
 const props = defineProps({
   limit: {
@@ -25,13 +25,5 @@ const props = defineProps({
   }
 })
 
-const { isFinished, isFetching, data, error } = useApiFetch(
-  `/api/feeds?limit=${props.limit}&offset=0`,
-  {
-    initialData: { items: [] },
-    afterFetch: ctx => {
-      ctx.data = { items: ctx.data.items }; return ctx
-    }
-  }
-).get().json()
+const { isFinished, isFetching, data, error } = useFeedsFetch(props.limit)
 </script>
