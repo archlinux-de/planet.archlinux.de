@@ -82,7 +82,7 @@ const { stop } = useIntersectionObserver(
       stop()
       return
     }
-    offset.value += 10
+    offset.value += props.limit
   },
   { rootMargin: '0px 0px 640px 0px' }
 )

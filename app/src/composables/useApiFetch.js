@@ -20,7 +20,9 @@ const useChunkedApiFetch = (path, offset, limit) => {
       initialData: { items: [] },
       refetch: true,
       afterFetch: (ctx) => {
-        ctx.data.items = [...result.data.value.items, ...ctx.data.items]
+        if (result.data.value.offset < ctx.data.offset) {
+          ctx.data.items = [...result.data.value.items, ...ctx.data.items]
+        }
         ctx.data.count = ctx.data.items.length
         ctx.data.offset = 0
         ctx.data.limit = ctx.data.count
