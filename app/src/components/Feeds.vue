@@ -15,7 +15,6 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
 import { useFeedsFetch } from '../composables/useApiFetch'
 
 const props = defineProps({

@@ -55,7 +55,7 @@
 </style>
 
 <script setup>
-import { defineProps, onBeforeUnmount, ref } from 'vue'
+import { onBeforeUnmount, ref } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 import { useItemsFetch } from '../composables/useApiFetch'
 
