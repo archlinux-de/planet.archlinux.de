@@ -20,7 +20,7 @@
     </template>
 
     <div v-if="isFinished">
-      <div class="mb-5" :key="id" v-for="(item, id) in data.items">
+      <div class="mb-5" :key="id" v-for="(item, id) in data.items" :data-test="`item item-${id}`">
         <div
           class="d-lg-flex justify-content-between align-items-baseline border border-top-0 border-start-0 border-end-0 mb-2">
           <h2 class="p-0 text-break">
@@ -28,7 +28,7 @@
           </h2>
           <div class="p-0">{{ new Date(item.lastModified).toLocaleDateString('de-DE') }}</div>
         </div>
-        <div class="item-description text-break mw-100" v-html="item.description"></div>
+        <div class="item-description text-break mw-100" v-html="item.description" data-test="item-description"></div>
         <div class="fst-italic" v-if="item.author.name">
           <a v-if="item.author.uri" :href="item.author.uri" rel="nofollow">{{ item.author.name }}</a>
           <span v-else>{{ item.author.name }}</span>
