@@ -2,11 +2,13 @@
 
 namespace App\Service;
 
+use SimplePie\SimplePie;
+
 class FeedReaderFactory
 {
-    public function createFeedReader(string $feedUrl): \SimplePie
+    public function createFeedReader(string $feedUrl): SimplePie
     {
-        $feedReader = new \SimplePie();
+        $feedReader = new SimplePie();
         $feedReader->set_feed_url($feedUrl);
         $feedReader->enable_cache(false);
         $feedReader->enable_exceptions(true);

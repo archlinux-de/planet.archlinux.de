@@ -8,12 +8,13 @@ use App\Service\FeedFetcher;
 use App\Service\FeedReaderFactory;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use SimplePie\SimplePie;
 
 class FeedFetcherTest extends TestCase
 {
     public function testGetIterator(): void
     {
-        $feedReader = new \SimplePie();
+        $feedReader = new SimplePie();
         $feedReader->set_raw_data(
             '<?xml version="1.0" encoding="utf-8"?>
                    <feed xmlns="http://www.w3.org/2005/Atom">

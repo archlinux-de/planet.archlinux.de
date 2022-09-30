@@ -5,6 +5,8 @@ namespace App\Service;
 use App\Entity\Author;
 use App\Entity\Feed;
 use App\Entity\Item;
+use SimplePie\SimplePie;
+use SimplePie\Item as SimplePieItem;
 
 /**
  * @phpstan-implements \IteratorAggregate<Feed>
@@ -36,7 +38,6 @@ class FeedFetcher implements \IteratorAggregate
             $feed = $this->createFeed($feedReader);
 
             if ($feedReader->get_items() !== null) {
-                /** @var \SimplePie_Item $feedReaderItem */
                 foreach ($feedReader->get_items() as $feedReaderItem) {
                     $feed->addItem($this->createItem($feedReaderItem));
                 }
@@ -45,7 +46,7 @@ class FeedFetcher implements \IteratorAggregate
         }
     }
 
-    private function createFeed(\SimplePie $feedReader): Feed
+    private function createFeed(SimplePie $feedReader): Feed
     {
         // @FIXME: Sanitize headers that might not contain actual URLs but preload hints
         unset($feedReader->data['headers']['link']);
@@ -63,7 +64,7 @@ class FeedFetcher implements \IteratorAggregate
             ->setTitle($feedReader->get_title() ?? '');
     }
 
-    private function createItem(\SimplePie_Item $feedReaderItem): Item
+    private function createItem(SimplePieItem $feedReaderItem): Item
     {
         return (new Item((string)$feedReaderItem->get_link()))
             ->setLastModified(new \DateTime((string)$feedReaderItem->get_date()))
@@ -72,7 +73,7 @@ class FeedFetcher implements \IteratorAggregate
             ->setAuthor($this->createAuthor($feedReaderItem));
     }
 
-    private function createAuthor(\SimplePie_Item $feedReaderItem): Author
+    private function createAuthor(SimplePieItem $feedReaderItem): Author
     {
         $author = new Author();
         if ($feedReaderItem->get_author() !== null) {
