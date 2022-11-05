@@ -13,7 +13,7 @@ module.exports = {
   module: {
     rules: [
       { test: /\.vue$/, loader: 'vue-loader' },
-      { test: /\.svg$/, use: { loader: 'file-loader', options: { name: 'img/[name].[contenthash].[ext]' } } }
+      { test: /\.svg$/, type: 'asset/resource', generator: { filename: 'img/[name].[contenthash].[ext]' } }
     ]
   },
 
