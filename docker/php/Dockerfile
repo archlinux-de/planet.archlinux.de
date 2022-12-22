@@ -1,8 +1,8 @@
-FROM php:8.1-fpm-alpine
+FROM php:8.2-fpm-alpine
 
 RUN apk add --no-cache git
 
-COPY --from=mlocati/php-extension-installer:1.5 /usr/bin/install-php-extensions /usr/bin/
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
 RUN install-php-extensions opcache apcu intl pdo_mysql
 
-COPY --from=composer:2.4 /usr/bin/composer /usr/bin/composer
+COPY --from=composer /usr/bin/composer /usr/bin/composer
