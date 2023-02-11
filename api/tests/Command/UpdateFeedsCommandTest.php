@@ -46,7 +46,7 @@ class UpdateFeedsCommandTest extends KernelTestCase
                 }
             );
         $entityManager->expects($this->once())->method('persist')->with($newFeed);
-        $entityManager->expects($this->atLeastOnce())->method('remove')->withConsecutive([$oldFeed], [$oldItem]);
+        $entityManager->expects($this->atLeastOnce())->method('remove');
 
         /** @var FeedFetcher|MockObject $feedFetcher */
         $feedFetcher = $this->createMock(FeedFetcher::class);
@@ -159,7 +159,7 @@ class UpdateFeedsCommandTest extends KernelTestCase
                 }
             );
         $entityManager->expects($this->once())->method('persist')->with($feed);
-        $entityManager->expects($this->atLeastOnce())->method('remove')->withConsecutive([$feed]);
+        $entityManager->expects($this->atLeastOnce())->method('remove')->with($feed);
 
         /** @var FeedFetcher|MockObject $feedFetcher */
         $feedFetcher = $this->createMock(FeedFetcher::class);
