@@ -223,9 +223,6 @@
     "sebastian/recursion-context": {
         "version": "3.0.0"
     },
-    "sebastian/resource-operations": {
-        "version": "2.0.1"
-    },
     "sebastian/type": {
         "version": "1.0.0"
     },
