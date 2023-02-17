@@ -83,12 +83,6 @@
     "fakerphp/faker": {
         "version": "v1.13.0"
     },
-    "friendsofphp/proxy-manager-lts": {
-        "version": "v1.0.0"
-    },
-    "laminas/laminas-code": {
-        "version": "3.4.1"
-    },
     "league/uri": {
         "version": "6.5.0"
     },
