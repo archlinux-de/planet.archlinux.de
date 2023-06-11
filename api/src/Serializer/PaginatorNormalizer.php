@@ -3,13 +3,13 @@
 namespace App\Serializer;
 
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class PaginatorNormalizer implements NormalizerInterface, NormalizerAwareInterface, CacheableSupportsMethodInterface
+class PaginatorNormalizer implements NormalizerInterface, NormalizerAwareInterface
 {
-    private NormalizerInterface $normalizer;
+    use NormalizerAwareTrait;
 
     /**
      * @param Paginator<object> $object
@@ -33,13 +33,10 @@ class PaginatorNormalizer implements NormalizerInterface, NormalizerAwareInterfa
         return $data instanceof Paginator;
     }
 
-    public function setNormalizer(NormalizerInterface $normalizer): void
+    public function getSupportedTypes(?string $format): array
     {
-        $this->normalizer = $normalizer;
-    }
-
-    public function hasCacheableSupportsMethod(): bool
-    {
-        return true;
+        return [
+            Paginator::class => true
+        ];
     }
 }
