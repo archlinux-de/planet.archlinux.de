@@ -14,7 +14,7 @@
     "@babel/preset-env": "^7.22.5",
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "@vue/compiler-sfc": "^3.3.4",
-    "@vueuse/core": "^10.2.0",
+    "@vueuse/core": "^10.2.1",
     "@vueuse/head": "^1.1.26",
     "autoprefixer": "^10.4.14",
     "babel-loader": "^9.1.2",
@@ -34,7 +34,7 @@
     "vue": "^3.3.4",
     "vue-loader": "^17.2.2",
     "vue-router": "^4.2.2",
-    "webpack": "^5.88.0",
+    "webpack": "^5.88.1",
     "webpack-cli": "^5.1.4",
     "webpack-merge": "^5.9.0",
     "workbox-webpack-plugin": "^7.0.0"

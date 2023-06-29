@@ -17,7 +17,7 @@
         "ext-pdo_mysql": "*",
         "ext-xml": "*",
         "ext-xmlreader": "*",
-        "doctrine/doctrine-bundle": "^2.10.0",
+        "doctrine/doctrine-bundle": "^2.10.1",
         "doctrine/doctrine-migrations-bundle": "^3.2.4",
         "doctrine/orm": "^2.15.3",
         "simplepie/simplepie": "^1.8.0",
