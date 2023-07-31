@@ -68,6 +68,7 @@ const props = defineProps({
 
 const offset = ref(0)
 
+// eslint-disable-next-line vue/no-setup-props-destructure
 const { isFinished, isFetching, data, error } = useItemsFetch(offset, props.limit)
 
 const end = ref(null)

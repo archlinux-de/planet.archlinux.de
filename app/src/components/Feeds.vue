@@ -24,5 +24,6 @@ const props = defineProps({
   }
 })
 
+// eslint-disable-next-line vue/no-setup-props-destructure
 const { isFinished, isFetching, data, error } = useFeedsFetch(props.limit)
 </script>
