@@ -17,7 +17,7 @@ services:
       - mariadb
 
   app:
-    image: node:19-alpine
+    image: node:20-alpine
     working_dir: /app/app
     environment:
       - HOME=/tmp

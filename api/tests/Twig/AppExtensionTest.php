@@ -55,7 +55,9 @@ class AppExtensionTest extends TestCase
         /** @var TwigFilter $filter */
         foreach ($extension->getFilters() as $filter) {
             if ($filter->getName() == $filterName) {
-                return $filter->getCallable();
+                $callable = $filter->getCallable();
+                assert(is_callable($callable) || is_null($callable));
+                return $callable;
             }
         }
         throw new \RuntimeException('Filter "' . $filterName . '" was not found.');
