@@ -19,3 +19,13 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+
+  - package-ecosystem: "composer"
+    directory: "/api"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "npm"
+    directory: "/app"
+    schedule:
+      interval: "daily"
