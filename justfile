@@ -115,7 +115,7 @@ test-e2e:
 		just init
 		just load-fixtures
 		just yarn build
-		CYPRESS_baseUrl=http://nginx:81 just cypress-run
+		CYPRESS_baseUrl=http://nginx:8081 just cypress-run
 	else
 		just cypress-run
 	fi
