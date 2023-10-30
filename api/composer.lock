@@ -3608,16 +3608,16 @@
         },
         {
             "name": "symfony/lock",
-            "version": "v6.3.6",
+            "version": "v6.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/lock.git",
-                "reference": "714c52173dd3720ae63e564c4ec7fd03eb8a635a"
+                "reference": "7e5d1412827aa97e90f9af9495d452f0b9465a85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/lock/zipball/714c52173dd3720ae63e564c4ec7fd03eb8a635a",
-                "reference": "714c52173dd3720ae63e564c4ec7fd03eb8a635a",
+                "url": "https://api.github.com/repos/symfony/lock/zipball/7e5d1412827aa97e90f9af9495d452f0b9465a85",
+                "reference": "7e5d1412827aa97e90f9af9495d452f0b9465a85",
                 "shasum": ""
             },
             "require": {
@@ -3667,7 +3667,7 @@
                 "semaphore"
             ],
             "support": {
-                "source": "https://github.com/symfony/lock/tree/v6.3.6"
+                "source": "https://github.com/symfony/lock/tree/v6.3.7"
             },
             "funding": [
                 {
@@ -3683,7 +3683,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-10-12T15:02:41+00:00"
+            "time": "2023-10-28T23:55:27+00:00"
         },
         {
             "name": "symfony/monolog-bridge",
