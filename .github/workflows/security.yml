@@ -1,0 +1,24 @@
+name: security
+
+on:
+  schedule:
+    - cron: '0 5 1 * *'
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Just
+        uses: extractions/setup-just@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Pulling Docker images
+        run: just compose pull
+      - name: Building Docker images
+        run: just compose build
+      - name: Install dependencies
+        run: just install
+      - name: Check security issues
+        run: just test-security

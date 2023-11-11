@@ -145,6 +145,11 @@ fix-code-style:
 	{{NODE-RUN}} node_modules/.bin/eslint '*.js' src tests --ext js --ext vue --fix
 	{{NODE-RUN}} node_modules/.bin/stylelint --fix 'src/assets/css/**/*.scss' 'src/assets/css/**/*.css' 'src/**/*.vue'
 
+update:
+	{{PHP-RUN}} composer --no-interaction update
+	{{PHP-RUN}} composer --no-interaction update --lock --no-scripts
+	{{NODE-RUN}} yarn upgrade --non-interactive --latest
+
 deploy:
 	cd app && yarn install --non-interactive --frozen-lockfile --production
 	cd app && yarn build
