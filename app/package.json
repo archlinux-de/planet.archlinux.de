@@ -55,5 +55,12 @@
     "stylelint-config-standard-scss": "^13.1.0",
     "stylelint-no-unsupported-browser-features": "^8.0.1",
     "webpack-dev-server": "^5.0.4"
+  },
+  "pnpm": {
+    "updateConfig": {
+      "ignoreDependencies": [
+        "eslint"
+      ]
+    }
   }
 }
