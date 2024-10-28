@@ -16,9 +16,11 @@ final class Version20220122121022 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
+        $this->addSql('ALTER TABLE item DROP FOREIGN KEY FK_1F1B251E6FAD93B');
         $this->addSql(
-            'ALTER TABLE item CHANGE feed_url feed_url VARCHAR(191) CHARACTER SET utf8mb4 DEFAULT NULL COLLATE `utf8mb4_unicode_ci`'
+            'ALTER TABLE item CHANGE feed_url feed_url VARCHAR(191) DEFAULT NULL'
         );
+        $this->addSql('ALTER TABLE item ADD CONSTRAINT FK_1F1B251E6FAD93B FOREIGN KEY (feed_url) REFERENCES feed (url) ON DELETE CASCADE');
     }
 
     public function isTransactional(): bool
