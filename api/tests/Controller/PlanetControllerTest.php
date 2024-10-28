@@ -2,14 +2,14 @@
 
 namespace App\Tests\Controller;
 
+use App\Controller\PlanetController;
 use App\Entity\Feed;
 use App\Entity\Item;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Component\HttpFoundation\Response;
 use SymfonyDatabaseTest\DatabaseTestCase;
 
-/**
- * @covers \App\Controller\PlanetController
- */
+#[CoversClass(PlanetController::class)]
 class PlanetControllerTest extends DatabaseTestCase
 {
     public function setUp(): void
