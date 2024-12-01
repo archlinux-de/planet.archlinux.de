@@ -21,7 +21,7 @@ class ItemNormalizer implements NormalizerInterface
         $this->normalizer = $normalizer;
     }
 
-    public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         return $data instanceof Item;
     }
@@ -29,7 +29,7 @@ class ItemNormalizer implements NormalizerInterface
     /**
      * @param Item $object
      */
-    public function normalize(mixed $object, string $format = null, array $context = []): array
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
         /** @var array $data */
         $data = $this->normalizer->normalize(

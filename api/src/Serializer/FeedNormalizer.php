@@ -20,7 +20,7 @@ class FeedNormalizer implements NormalizerInterface
     }
 
 
-    public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         return $data instanceof Feed;
     }
@@ -28,7 +28,7 @@ class FeedNormalizer implements NormalizerInterface
     /**
      * @param Feed $object
      */
-    public function normalize(mixed $object, string $format = null, array $context = []): array
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
         /** @var array $data */
         $data = $this->normalizer->normalize(
