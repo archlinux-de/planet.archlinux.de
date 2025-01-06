@@ -49,7 +49,9 @@ class FeedFetcher implements \IteratorAggregate
     private function createFeed(SimplePie $feedReader): Feed
     {
         // @FIXME: Sanitize headers that might not contain actual URLs but preload hints
-        unset($feedReader->data['headers']['link']);
+        if (is_array($feedReader->data['headers'])) {
+            unset($feedReader->data['headers']['link']);
+        }
 
         return (new Feed($feedReader->feed_url))
             ->setDescription($feedReader->get_description())

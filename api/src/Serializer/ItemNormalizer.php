@@ -48,6 +48,7 @@ class ItemNormalizer implements NormalizerInterface
                 ]
             )
         );
+        assert(is_string($data['description']));
         $data['description'] = $this->htmlSanitizer->sanitize($data['description']);
 
         return $data;
