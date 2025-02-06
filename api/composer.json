@@ -19,7 +19,7 @@
         "ext-xmlreader": "*",
         "doctrine/doctrine-bundle": "^2.13.2",
         "doctrine/doctrine-migrations-bundle": "^3.4.1",
-        "doctrine/orm": "^3.3.1",
+        "doctrine/orm": "^3.3.2",
         "simplepie/simplepie": "^1.8.1",
         "symfony/console": "^7.2.1",
         "symfony/dotenv": "^7.2.0",
