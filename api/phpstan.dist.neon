@@ -25,6 +25,3 @@ parameters:
 		-
 			identifier: return.type
 			path: src/Repository
-		-
-			identifier: unset.possiblyHookedProperty
-			path: src/Service/FeedFetcher.php
