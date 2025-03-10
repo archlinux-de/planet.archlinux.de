@@ -13,7 +13,7 @@
     "@vue/compiler-sfc": "^3.5.13",
     "@vueuse/core": "^12.8.2",
     "@vueuse/head": "^2.0.0",
-    "autoprefixer": "^10.4.20",
+    "autoprefixer": "^10.4.21",
     "babel-loader": "^10.0.0",
     "bootstrap": "^5.3.3",
     "compression-webpack-plugin": "^11.1.0",
