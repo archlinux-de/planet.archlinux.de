@@ -37,11 +37,10 @@ class FeedFetcher implements \IteratorAggregate
             $feedReader = $this->feedReaderFactory->createFeedReader($feedUrl);
             $feed = $this->createFeed($feedReader);
 
-            if ($feedReader->get_items() !== null) {
-                foreach ($feedReader->get_items() as $feedReaderItem) {
-                    $feed->addItem($this->createItem($feedReaderItem));
-                }
+            foreach ($feedReader->get_items() as $feedReaderItem) {
+                $feed->addItem($this->createItem($feedReaderItem));
             }
+
             yield $feed;
         }
     }
