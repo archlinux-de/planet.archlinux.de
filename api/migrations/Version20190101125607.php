@@ -19,6 +19,7 @@ final class Version20190101125607 extends AbstractMigration
         $this->addSql('ALTER TABLE item ADD CONSTRAINT FK_1F1B251E6FAD93B FOREIGN KEY (feed_url) REFERENCES feed (url) ON DELETE CASCADE');
     }
 
+    #[\Override]
     public function down(Schema $schema): void
     {
         $this->addSql('ALTER TABLE item DROP FOREIGN KEY FK_1F1B251E6FAD93B');
@@ -26,6 +27,7 @@ final class Version20190101125607 extends AbstractMigration
         $this->addSql('DROP TABLE feed');
     }
 
+    #[\Override]
     public function isTransactional(): bool
     {
         return false;

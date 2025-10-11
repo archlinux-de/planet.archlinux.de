@@ -16,7 +16,7 @@ class FeedFetcher implements \IteratorAggregate
     /**
      * @param string[] $feedUrls
      */
-    public function __construct(private array $feedUrls, private FeedReaderFactory $feedReaderFactory)
+    public function __construct(private readonly array $feedUrls, private readonly FeedReaderFactory $feedReaderFactory)
     {
     }
 
@@ -52,7 +52,7 @@ class FeedFetcher implements \IteratorAggregate
             unset($feedReader->data['headers']['link']);
         }
 
-        return (new Feed($feedReader->feed_url))
+        return new Feed($feedReader->feed_url)
             ->setDescription($feedReader->get_description())
             ->setLastModified(
                 new \DateTime(
@@ -67,7 +67,7 @@ class FeedFetcher implements \IteratorAggregate
 
     private function createItem(SimplePieItem $feedReaderItem): Item
     {
-        return (new Item((string)$feedReaderItem->get_link()))
+        return new Item((string)$feedReaderItem->get_link())
             ->setLastModified(new \DateTime((string)$feedReaderItem->get_date()))
             ->setTitle(html_entity_decode($feedReaderItem->get_title() ?? ''))
             ->setDescription($feedReaderItem->get_description() ?? '')

@@ -8,18 +8,19 @@ use Twig\TwigFilter;
 
 class AppExtension extends AbstractExtension
 {
-    public function __construct(private HtmlSanitizerInterface $htmlSanitizer)
+    public function __construct(private readonly HtmlSanitizerInterface $htmlSanitizer)
     {
     }
 
     /**
      * @return TwigFilter[]
      */
+    #[\Override]
     public function getFilters(): array
     {
         return [
             new TwigFilter('html_entity_decode', 'html_entity_decode'),
-            new TwigFilter('sanitize', [$this->htmlSanitizer, 'sanitize'], ['is_safe' => ['html']])
+            new TwigFilter('sanitize', $this->htmlSanitizer->sanitize(...), ['is_safe' => ['html']])
         ];
     }
 }

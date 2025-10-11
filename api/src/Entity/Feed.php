@@ -30,7 +30,7 @@ class Feed
 
     #[ORM\Column(nullable: true)]
     #[Assert\Length(max: 255)]
-    private ?string $description;
+    private ?string $description = null;
 
     #[ORM\Column(type: "datetime")]
     private \DateTime $lastModified;

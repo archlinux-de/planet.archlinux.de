@@ -16,7 +16,7 @@ class ItemTest extends TestCase
         $author = $this->createMock(Author::class);
         /** @var Feed|MockObject $feed */
         $feed = $this->createMock(Feed::class);
-        $item = (new Item('https://www.archlinux.de/news/item'))
+        $item = new Item('https://www.archlinux.de/news/item')
             ->setLastModified(new \DateTime('2019-01-01'))
             ->setTitle('Item Title')
             ->setDescription('Item Description')

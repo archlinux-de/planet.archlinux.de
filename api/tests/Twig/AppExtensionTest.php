@@ -45,11 +45,6 @@ class AppExtensionTest extends TestCase
         }
     }
 
-    /**
-     * @param AbstractExtension $extension
-     * @param string $filterName
-     * @return callable|null
-     */
     private function getFilterCallableFromExtension(AbstractExtension $extension, string $filterName): ?callable
     {
         /** @var TwigFilter $filter */

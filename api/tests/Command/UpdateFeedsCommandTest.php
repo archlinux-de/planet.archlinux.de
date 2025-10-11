@@ -23,7 +23,6 @@ class UpdateFeedsCommandTest extends KernelTestCase
 {
     public function testCommand(): void
     {
-        $oldItem = new Item('https://localhost/1');
         $oldFeed = new Feed('https://localhost/atom.xml');
 
         $newItem = new Item('https://localhost/2');
@@ -40,7 +39,7 @@ class UpdateFeedsCommandTest extends KernelTestCase
             ->expects($this->atLeastOnce())
             ->method('wrapInTransaction')
             ->willReturnCallback(
-                function (callable $callable) use ($entityManager) {
+                function (callable $callable) use ($entityManager): void {
                     $callable($entityManager);
                 }
             );
@@ -95,7 +94,7 @@ class UpdateFeedsCommandTest extends KernelTestCase
             ->expects($this->atLeastOnce())
             ->method('wrapInTransaction')
             ->willReturnCallback(
-                function (callable $callable) use ($entityManager) {
+                function (callable $callable) use ($entityManager): void {
                     $callable($entityManager);
                 }
             );
@@ -153,7 +152,7 @@ class UpdateFeedsCommandTest extends KernelTestCase
             ->expects($this->atLeastOnce())
             ->method('wrapInTransaction')
             ->willReturnCallback(
-                function (callable $callable) use ($entityManager) {
+                function (callable $callable) use ($entityManager): void {
                     $callable($entityManager);
                 }
             );

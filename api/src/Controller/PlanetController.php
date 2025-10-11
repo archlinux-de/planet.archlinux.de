@@ -12,8 +12,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PlanetController extends AbstractController
 {
-    public function __construct(private ItemRepository $itemRepository, private FeedRepository $feedRepository)
-    {
+    public function __construct(
+        private readonly ItemRepository $itemRepository,
+        private readonly FeedRepository $feedRepository
+    ) {
     }
 
     #[Route(path: '/rss.xml', methods: ['GET'])]

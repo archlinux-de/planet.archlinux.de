@@ -13,7 +13,7 @@ class FeedTest extends TestCase
     {
         /** @var Item|MockObject $item */
         $item = $this->createMock(Item::class);
-        $feed = (new Feed('https://www.archlinux.de/news/feed'))
+        $feed = new Feed('https://www.archlinux.de/news/feed')
             ->setDescription('Arch Linux News')
             ->setLink('https://www.archlinux.de/news')
             ->setTitle('Arch Linux')

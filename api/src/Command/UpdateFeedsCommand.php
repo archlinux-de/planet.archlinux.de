@@ -43,7 +43,7 @@ class UpdateFeedsCommand extends Command
         $this->lock('cron.lock');
 
         $this->entityManager->wrapInTransaction(
-            function (EntityManagerInterface $entityManager) {
+            function (EntityManagerInterface $entityManager): void {
                 foreach ($this->feedRepository->findAllExceptByUrls($this->feedFetcher->getFeedUrls()) as $feed) {
                     $entityManager->remove($feed);
                 }
@@ -60,7 +60,7 @@ class UpdateFeedsCommand extends Command
             }
 
             $this->entityManager->wrapInTransaction(
-                function (EntityManagerInterface $entityManager) use ($feed) {
+                function (EntityManagerInterface $entityManager) use ($feed): void {
                     /** @var Feed|null $persistedFeed */
                     $persistedFeed = $this->feedRepository->find($feed->getUrl());
                     if ($persistedFeed) {

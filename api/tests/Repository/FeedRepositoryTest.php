@@ -10,7 +10,7 @@ class FeedRepositoryTest extends DatabaseTestCase
 {
     public function testFindLatest(): void
     {
-        $feed = (new Feed('https://www.archlinux.de/'))
+        $feed = new Feed('https://www.archlinux.de/')
             ->setTitle('Arch Linux')
             ->setLastModified(new \DateTime())
             ->setLink('https://www.archlinux.de/news/feed');
@@ -29,7 +29,7 @@ class FeedRepositoryTest extends DatabaseTestCase
 
     public function testFindAllExceptByUrlsIfNoUrlsGiven(): void
     {
-        $feed = (new Feed('https://www.archlinux.de/'))
+        $feed = new Feed('https://www.archlinux.de/')
             ->setTitle('Arch Linux')
             ->setLastModified(new \DateTime())
             ->setLink('https://www.archlinux.de/news/feed');
@@ -50,7 +50,7 @@ class FeedRepositoryTest extends DatabaseTestCase
 
     public function testFindAllExceptByUrls(): void
     {
-        $feed = (new Feed('https://www.archlinux.de/'))
+        $feed = new Feed('https://www.archlinux.de/')
             ->setTitle('Arch Linux')
             ->setLastModified(new \DateTime())
             ->setLink('https://www.archlinux.de/news/feed');

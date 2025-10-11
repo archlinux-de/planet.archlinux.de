@@ -16,6 +16,7 @@ final class Version20191217125634 extends AbstractMigration
         $this->addSql('ALTER TABLE item ADD PRIMARY KEY (link)');
     }
 
+    #[\Override]
     public function down(Schema $schema): void
     {
         $this->addSql('ALTER TABLE item DROP PRIMARY KEY');
@@ -25,6 +26,7 @@ final class Version20191217125634 extends AbstractMigration
         $this->addSql('ALTER TABLE item ADD PRIMARY KEY (public_id, feed_url)');
     }
 
+    #[\Override]
     public function isTransactional(): bool
     {
         return false;

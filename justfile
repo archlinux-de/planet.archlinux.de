@@ -81,6 +81,9 @@ phpunit *args:
 phpstan *args:
 	{{PHP-RUN}} php -dmemory_limit=-1 vendor/bin/phpstan {{args}}
 
+rector *args:
+	{{PHP-RUN}} php -dmemory_limit=-1 vendor/bin/rector {{args}}
+
 node *args='-h':
 	{{NODE-RUN}} node {{args}}
 
@@ -104,6 +107,7 @@ test-php:
 	{{PHP-RUN}} bin/console lint:yaml --parse-tags config
 	{{PHP-RUN}} bin/console lint:twig templates
 	{{PHP-RUN}} php -dmemory_limit=-1 vendor/bin/phpstan analyse
+	{{PHP-RUN}} php -dmemory_limit=-1 vendor/bin/rector --dry-run
 	{{PHP-RUN}} vendor/bin/phpunit
 
 test-js:

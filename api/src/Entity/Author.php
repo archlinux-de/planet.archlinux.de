@@ -10,12 +10,12 @@ class Author
 {
     #[ORM\Column(nullable: true)]
     #[Assert\Length(max: 255)]
-    private ?string $name;
+    private ?string $name = null;
 
     #[ORM\Column(nullable: true)]
     #[Assert\Url]
     #[Assert\Length(max: 255)]
-    private ?string $uri;
+    private ?string $uri = null;
 
     public function getName(): ?string
     {

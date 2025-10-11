@@ -12,19 +12,20 @@ use SymfonyDatabaseTest\DatabaseTestCase;
 #[CoversClass(PlanetController::class)]
 class PlanetControllerTest extends DatabaseTestCase
 {
+    #[\Override]
     public function setUp(): void
     {
         parent::setUp();
-        $feed = (new Feed('https://www.archlinux.de/'))
+        $feed = new Feed('https://www.archlinux.de/')
             ->setTitle('Arch Linux')
             ->setLastModified(new \DateTime())
             ->setLink('https://www.archlinux.de/news/feed');
-        $oldItem = (new Item('https://www.archlinux.de/news/1'))
+        $oldItem = new Item('https://www.archlinux.de/news/1')
             ->setTitle('Item Title')
             ->setDescription('Item Description')
             ->setLastModified(new \DateTime('- 2 day'))
             ->setFeed($feed);
-        $newItem = (new Item('https://www.archlinux.de/news/2'))
+        $newItem = new Item('https://www.archlinux.de/news/2')
             ->setTitle('Item Title')
             ->setDescription('Item Description')
             ->setLastModified(new \DateTime('now'))
