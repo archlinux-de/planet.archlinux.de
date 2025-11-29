@@ -75,8 +75,6 @@ when@dev:
         _defaults:
             autowire: true
             autoconfigure: true
-            bind:
-                $environment: '%kernel.environment%'
 
         App\DataFixtures\:
             resource: '../src/DataFixtures/'
@@ -86,8 +84,6 @@ when@test:
         _defaults:
             autowire: true
             autoconfigure: true
-            bind:
-                $environment: '%kernel.environment%'
 
         App\DataFixtures\:
             resource: '../src/DataFixtures/'
