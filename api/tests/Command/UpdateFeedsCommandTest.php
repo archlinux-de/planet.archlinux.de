@@ -63,7 +63,7 @@ class UpdateFeedsCommandTest extends KernelTestCase
         $kernel = self::bootKernel();
         $application = new Application($kernel);
 
-        $application->add(
+        $application->addCommand(
             new UpdateFeedsCommand(
                 $entityManager,
                 $validator,
@@ -121,7 +121,7 @@ class UpdateFeedsCommandTest extends KernelTestCase
         $kernel = self::bootKernel();
         $application = new Application($kernel);
 
-        $application->add(
+        $application->addCommand(
             new UpdateFeedsCommand(
                 $entityManager,
                 $validator,
@@ -176,7 +176,7 @@ class UpdateFeedsCommandTest extends KernelTestCase
         $kernel = self::bootKernel();
         $application = new Application($kernel);
 
-        $application->add(
+        $application->addCommand(
             new UpdateFeedsCommand(
                 $entityManager,
                 $validator,
