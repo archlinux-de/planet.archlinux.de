@@ -72,10 +72,22 @@ services:
 
 when@dev:
     services:
+        _defaults:
+            autowire: true
+            autoconfigure: true
+            bind:
+                $environment: '%kernel.environment%'
+
         App\DataFixtures\:
             resource: '../src/DataFixtures/'
 
 when@test:
     services:
+        _defaults:
+            autowire: true
+            autoconfigure: true
+            bind:
+                $environment: '%kernel.environment%'
+
         App\DataFixtures\:
             resource: '../src/DataFixtures/'
