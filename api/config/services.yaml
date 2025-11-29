@@ -23,6 +23,7 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Request/'
+            - '../src/DataFixtures/'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
@@ -68,3 +69,13 @@ services:
         class: Symfony\Component\HtmlSanitizer\HtmlSanitizer
         bind:
             $config: '@Symfony\Component\HtmlSanitizer\HtmlSanitizerConfig'
+
+when@dev:
+    services:
+        App\DataFixtures\:
+            resource: '../src/DataFixtures/'
+
+when@test:
+    services:
+        App\DataFixtures\:
+            resource: '../src/DataFixtures/'
