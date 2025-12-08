@@ -31,7 +31,7 @@ class UpdateFeedsCommandTest extends KernelTestCase
 
         /** @var FeedRepository|MockObject $feedRepository */
         $feedRepository = $this->createMock(FeedRepository::class);
-        $feedRepository->method('findAllExceptByUrls')->willReturn([$oldFeed]);
+        $feedRepository->expects($this->once())->method('findAllExceptByUrls')->willReturn([$oldFeed]);
 
         /** @var EntityManager|MockObject $entityManager */
         $entityManager = $this->createMock(EntityManager::class);
@@ -48,7 +48,7 @@ class UpdateFeedsCommandTest extends KernelTestCase
 
         /** @var FeedFetcher|MockObject $feedFetcher */
         $feedFetcher = $this->createMock(FeedFetcher::class);
-        $feedFetcher->method('getIterator')->willReturn(new \ArrayIterator([$newFeed]));
+        $feedFetcher->expects($this->once())->method('getIterator')->willReturn(new \ArrayIterator([$newFeed]));
 
         /** @var ValidatorInterface|MockObject $validator */
         $validator = $this->createMock(ValidatorInterface::class);
@@ -86,7 +86,7 @@ class UpdateFeedsCommandTest extends KernelTestCase
 
         /** @var FeedRepository|MockObject $feedRepository */
         $feedRepository = $this->createMock(FeedRepository::class);
-        $feedRepository->method('findAllExceptByUrls')->willReturn([]);
+        $feedRepository->expects($this->once())->method('findAllExceptByUrls')->willReturn([]);
 
         /** @var EntityManager|MockObject $entityManager */
         $entityManager = $this->createMock(EntityManager::class);
@@ -103,14 +103,14 @@ class UpdateFeedsCommandTest extends KernelTestCase
 
         /** @var FeedFetcher|MockObject $feedFetcher */
         $feedFetcher = $this->createMock(FeedFetcher::class);
-        $feedFetcher->method('getIterator')->willReturn(new \ArrayIterator([$newFeed]));
+        $feedFetcher->expects($this->once())->method('getIterator')->willReturn(new \ArrayIterator([$newFeed]));
 
         /** @var ValidatorInterface|MockObject $validator */
         $validator = $this->createMock(ValidatorInterface::class);
         $validator
             ->expects($this->once())
             ->method('validate')
-            ->willReturn(new ConstraintViolationList([$this->createMock(ConstraintViolation::class)]));
+            ->willReturn(new ConstraintViolationList([$this->createStub(ConstraintViolation::class)]));
 
         /** @var LoggerInterface|MockObject $logger */
         $logger = $this->createMock(LoggerInterface::class);
@@ -144,7 +144,7 @@ class UpdateFeedsCommandTest extends KernelTestCase
 
         /** @var FeedRepository|MockObject $feedRepository */
         $feedRepository = $this->createMock(FeedRepository::class);
-        $feedRepository->method('find')->willReturn($feed);
+        $feedRepository->expects($this->once())->method('find')->willReturn($feed);
 
         /** @var EntityManager|MockObject $entityManager */
         $entityManager = $this->createMock(EntityManager::class);
@@ -161,7 +161,7 @@ class UpdateFeedsCommandTest extends KernelTestCase
 
         /** @var FeedFetcher|MockObject $feedFetcher */
         $feedFetcher = $this->createMock(FeedFetcher::class);
-        $feedFetcher->method('getIterator')->willReturn(new \ArrayIterator([$feed]));
+        $feedFetcher->expects($this->once())->method('getIterator')->willReturn(new \ArrayIterator([$feed]));
 
         /** @var ValidatorInterface|MockObject $validator */
         $validator = $this->createMock(ValidatorInterface::class);

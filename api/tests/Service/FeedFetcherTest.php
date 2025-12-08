@@ -74,8 +74,7 @@ class FeedFetcherTest extends TestCase
 
     public function testGetFeedUrls(): void
     {
-        /** @var FeedReaderFactory|MockObject $feedReaderFactory */
-        $feedReaderFactory = $this->createMock(FeedReaderFactory::class);
+        $feedReaderFactory = $this->createStub(FeedReaderFactory::class);
         $feedFetcher = new FeedFetcher(
             ['https://www.archlinux.de/news/feed'],
             $feedReaderFactory

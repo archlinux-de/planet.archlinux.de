@@ -4,15 +4,13 @@ namespace App\Tests\Entity;
 
 use App\Entity\Feed;
 use App\Entity\Item;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class FeedTest extends TestCase
 {
     public function testEntity(): void
     {
-        /** @var Item|MockObject $item */
-        $item = $this->createMock(Item::class);
+        $item = $this->createStub(Item::class);
         $feed = new Feed('https://www.archlinux.de/news/feed')
             ->setDescription('Arch Linux News')
             ->setLink('https://www.archlinux.de/news')

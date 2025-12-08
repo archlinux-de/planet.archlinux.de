@@ -13,7 +13,7 @@ class AppExtensionTest extends TestCase
     public function testHtmlEntityDecodeFilter(): void
     {
         $callable = $this->getFilterCallableFromExtension(
-            new AppExtension($this->createMock(HtmlSanitizerInterface::class)),
+            new AppExtension($this->createStub(HtmlSanitizerInterface::class)),
             'html_entity_decode'
         );
         if (is_callable($callable)) {
