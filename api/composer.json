@@ -27,7 +27,7 @@
         "symfony/flex": "^2.10.0",
         "symfony/framework-bundle": "^7.4.3",
         "symfony/html-sanitizer": "^7.4.0",
-        "symfony/lock": "^7.4.1",
+        "symfony/lock": "^7.4.3",
         "symfony/monolog-bundle": "^4.0.1",
         "symfony/process": "^7.4.3",
         "symfony/property-access": "^7.4.3",
