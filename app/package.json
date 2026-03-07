@@ -14,7 +14,7 @@
     "@vueuse/core": "^14.2.1",
     "@vueuse/head": "^2.0.0",
     "autoprefixer": "^10.4.27",
-    "babel-loader": "^10.0.0",
+    "babel-loader": "^10.1.0",
     "bootstrap": "^5.3.8",
     "compression-webpack-plugin": "^12.0.0",
     "copy-webpack-plugin": "^14.0.0",
