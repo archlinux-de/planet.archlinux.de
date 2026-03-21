@@ -36,8 +36,8 @@ class AppFixtures extends Fixture
                     ->setName($faker->name())
                     ->setUri($faker->url());
 
+                /** @var string[] $paragraphs */
                 $paragraphs = $faker->paragraphs;
-                assert(is_array($paragraphs));
                 $item = new Item($faker->unique()->url())
                     ->setTitle($faker->sentence())
                     ->setLastModified($faker->dateTime(self::MAX_DATETIME))
